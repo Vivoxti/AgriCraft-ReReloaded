@@ -10,20 +10,21 @@ import java.util.List;
 /**
  * Journal page listing every registered soil and the fixed humidity/acidity/nutrients it provides.
  * Built dynamically from the soil registry, so modded soils (compat datapacks) show up automatically.
+ * <p>
+ * The left/right column split is computed by the drawer at render time (based on how many rows
+ * actually fit after the title/intro text), not pre-split here, so no vertical space is wasted.
  */
 public class SoilsPage implements JournalPage {
 
 	public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(AgriApi.MOD_ID, "soils_page");
-	/** Max soils per two-page spread before overflowing onto another SoilsPage. */
-	public static final int LIMIT = 32;
+	/** Safety cap per two-page spread for the outer pagination loop (see JournalItem); the drawer
+	 *  itself decides the real per-column capacity, this is just a conservative upper bound. */
+	public static final int LIMIT = 18;
 
-	private final List<SoilEntry> soilsLeft;
-	private final List<SoilEntry> soilsRight;
+	private final List<SoilEntry> soils;
 
 	public SoilsPage(List<SoilEntry> soils) {
-		int mid = Math.min(soils.size(), (soils.size() + 1) / 2);
-		this.soilsLeft = soils.subList(0, mid);
-		this.soilsRight = soils.subList(mid, soils.size());
+		this.soils = soils;
 	}
 
 	@Override
@@ -31,12 +32,8 @@ public class SoilsPage implements JournalPage {
 		return ID;
 	}
 
-	public List<SoilEntry> getSoilsLeft() {
-		return this.soilsLeft;
-	}
-
-	public List<SoilEntry> getSoilsRight() {
-		return this.soilsRight;
+	public List<SoilEntry> getSoils() {
+		return this.soils;
 	}
 
 	public record SoilEntry(ResourceLocation id, AgriSoil soil) {
