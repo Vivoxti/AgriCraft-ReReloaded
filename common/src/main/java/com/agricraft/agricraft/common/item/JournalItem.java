@@ -124,6 +124,7 @@ public class JournalItem extends Item {
 			plants.add(idTag);
 			tag.put("plants", plants);
 		}
+		journal.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
 	}
 
 	@Override
