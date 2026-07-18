@@ -12,6 +12,7 @@ import com.agricraft.agricraft.common.item.journal.GrowthReqsPage;
 import com.agricraft.agricraft.common.item.journal.IntroductionPage;
 import com.agricraft.agricraft.common.item.journal.MutationsPage;
 import com.agricraft.agricraft.common.item.journal.PlantPage;
+import com.agricraft.agricraft.common.item.journal.SoilsPage;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.ChatFormatting;
@@ -172,6 +173,24 @@ public class JournalItem extends Item {
 			this.pages.add(new IntroductionPage());
 			this.pages.add(new GeneticsPage());
 			this.pages.add(new GrowthReqsPage());
+			List<SoilsPage.SoilEntry> soils = AgriApi.getSoilRegistry()
+					.map(registry -> registry.stream()
+							.map(soil -> new SoilsPage.SoilEntry(registry.getKey(soil), soil))
+							.sorted(Comparator.comparing(entry -> entry.id().toString()))
+							.toList())
+					.orElse(List.of());
+			int soilCount = soils.size();
+			if (soilCount > 0) {
+				int remaining = soilCount;
+				int from = 0;
+				int to = Math.min(remaining, SoilsPage.LIMIT);
+				while (remaining > 0) {
+					this.pages.add(new SoilsPage(soils.subList(from, to)));
+					remaining -= (to - from);
+					from = to;
+					to = from + Math.min(remaining, SoilsPage.LIMIT);
+				}
+			}
 			for (ResourceLocation plant : this.plants) {
 				PlantPage plantPage = new PlantPage(plant, plants);
 				this.pages.add(plantPage);
