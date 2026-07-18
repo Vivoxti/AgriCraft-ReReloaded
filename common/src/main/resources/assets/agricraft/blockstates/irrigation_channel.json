@@ -36,12 +36,8 @@
       "apply": {"model": "agricraft:block/channel/arm", "y": 270, "uvlock": true}
     },
     {
-      "when": {"valve": "open"},
-      "apply": {"model": "agricraft:block/channel/valve_open"}
-    },
-    {
-      "when": {"valve": "closed"},
-      "apply": {"model": "agricraft:block/channel/valve_closed"}
+      "when": {"down": true},
+      "apply": {"model": "agricraft:block/channel/down"}
     }
   ]
 }

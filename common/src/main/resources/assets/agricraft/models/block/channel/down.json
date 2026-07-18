@@ -1,0 +1,21 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "wood": "minecraft:block/oak_planks",
+    "particle": "minecraft:block/oak_planks"
+  },
+  "elements": [
+    {
+      "name": "post",
+      "from": [5, 0, 5],
+      "to": [11, 5, 11],
+      "faces": {
+        "north": {"uv": [5, 11, 11, 16], "texture": "#wood"},
+        "east": {"uv": [5, 11, 11, 16], "texture": "#wood"},
+        "south": {"uv": [5, 11, 11, 16], "texture": "#wood"},
+        "west": {"uv": [5, 11, 11, 16], "texture": "#wood"},
+        "down": {"uv": [5, 5, 11, 11], "texture": "#wood", "cullface": "down"}
+      }
+    }
+  ]
+}

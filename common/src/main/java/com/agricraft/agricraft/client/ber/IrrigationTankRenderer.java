@@ -15,10 +15,21 @@ public class IrrigationTankRenderer extends IrrigationComponentRenderer<Irrigati
 
 	@Override
 	protected void renderWater(IrrigationTankBlockEntity tank, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+		// Draw the surface only in the block that is the actual top of the water column. In a
+		// multi-block-high tank the lower blocks are full and would otherwise each draw their own
+		// translucent surface, which shows through the blocks above. If the tank directly above
+		// still holds water, the surface is up there, not here.
+		if (tank.getLevel() != null
+				&& tank.getLevel().getBlockEntity(tank.getBlockPos().above()) instanceof IrrigationTankBlockEntity above
+				&& above.getContent() > 0) {
+			return;
+		}
 		double height = tank.getMinFluidHeight() + tank.getFillFraction() * (tank.getMaxFluidHeight() - tank.getMinFluidHeight());
-		// avoid z-fighting with the tank walls and the block above
+		// avoid z-fighting with the block above at a completely full tank
 		float y = (float) Math.min(height, 0.999);
-		this.drawWaterSurface(tank, poseStack, buffer, packedLight, packedOverlay, 0.001F, 0.001F, 0.999F, 0.999F, y);
+		// full-block footprint (0..1) so adjacent tanks in a multiblock join with no gap; the tank
+		// walls (opaque) cover the overhang on the outer edges
+		this.drawWaterSurface(tank, poseStack, buffer, packedLight, packedOverlay, 0.0F, 0.0F, 1.0F, 1.0F, y);
 	}
 
 }

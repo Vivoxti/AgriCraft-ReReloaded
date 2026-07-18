@@ -34,10 +34,8 @@ public class SprinklerRenderer implements BlockEntityRenderer<SprinklerBlockEnti
 		poseStack.translate(-0.5, 0, -0.5);
 		TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(IRON_BLOCK);
 		VertexConsumer consumer = buffer.getBuffer(RenderType.solid());
-		// central hub, rotates together with the spray arms (it must not be part of the static
-		// model - a non-rotating hub sitting inside the spinning arms looks like a stray block)
-		this.drawBox(poseStack, consumer, sprite, packedLight, packedOverlay, 5 / 16.0F, 1 / 16.0F, 5 / 16.0F, 11 / 16.0F, 6 / 16.0F, 11 / 16.0F);
-		// two crossing spray arms
+		// two crossing spray arms (no central hub - the static sprinkler head model already
+		// provides the body; a separate hub here just read as a stray cube)
 		this.drawBox(poseStack, consumer, sprite, packedLight, packedOverlay, 1 / 16.0F, 4 / 16.0F, 7 / 16.0F, 15 / 16.0F, 6 / 16.0F, 9 / 16.0F);
 		this.drawBox(poseStack, consumer, sprite, packedLight, packedOverlay, 7 / 16.0F, 4 / 16.0F, 1 / 16.0F, 9 / 16.0F, 6 / 16.0F, 15 / 16.0F);
 		poseStack.popPose();

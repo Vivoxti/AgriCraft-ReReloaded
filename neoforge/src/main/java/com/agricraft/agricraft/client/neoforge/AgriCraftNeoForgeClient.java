@@ -69,6 +69,7 @@ public class AgriCraftNeoForgeClient {
 			ResourceLocation seed = ResourceLocation.parse(entry.getKey().toString().replace("models/weed", "weed").replace(".json", ""));
 			event.register(ModelResourceLocation.standalone(seed));
 		}
+		event.register(ModelResourceLocation.standalone(ResourceLocation.parse("agricraft:block/channel/valve_wheel")));
 		event.register(ModelResourceLocation.standalone(ResourceLocation.parse("agricraft:block/wooden_crop_sticks")));
 		event.register(ModelResourceLocation.standalone(ResourceLocation.parse("agricraft:block/iron_crop_sticks")));
 		event.register(ModelResourceLocation.standalone(ResourceLocation.parse("agricraft:block/obsidian_crop_sticks")));

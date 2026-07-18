@@ -156,20 +156,25 @@ public class SprinklerBlockEntity extends BlockEntity {
 		if (!IrrigationConfig.sprinklerParticles) {
 			return;
 		}
-		// FISHING is the small water-droplet spray used for fishing bobber splashes: it actually
-		// follows the velocity it's given (unlike FALLING_WATER/drip particles, which mostly
-		// ignore it and just drip in place) - but only if the Y velocity passed in is EXACTLY
-		// 0.0 (SplashParticle's constructor discards the whole velocity vector otherwise and
-		// applies its own fixed small upward pop instead).
+		// SplashParticle (SPLASH) follows the velocity it's given only if the Y velocity is EXACTLY
+		// 0.0 - otherwise its constructor discards the whole vector and applies a fixed upward pop.
+		// Emit droplets from partway along each spinning arm (not the center) so they read as water
+		// being flung off the rotating head rather than teleporting around the middle.
 		RandomSource random = level.getRandom();
-		double x = pos.getX() + 0.5;
-		double y = pos.getY() + 4.0 / 16.0;
-		double z = pos.getZ() + 0.5;
+		double cx = pos.getX() + 0.5;
+		double cy = pos.getY() + 5.0 / 16.0;
+		double cz = pos.getZ() + 0.5;
 		for (int i = 0; i < 4; i++) {
 			double alpha = Math.toRadians(this.angle + i * 90.0);
-			double vx = Math.cos(alpha) * 0.3 + (random.nextDouble() - 0.5) * 0.04;
-			double vz = Math.sin(alpha) * 0.3 + (random.nextDouble() - 0.5) * 0.04;
-			level.addParticle(ParticleTypes.FISHING, x, y, z, vx, 0.0, vz);
+			double dirX = Math.cos(alpha);
+			double dirZ = Math.sin(alpha);
+			for (int j = 0; j < 2; j++) {
+				double radius = (5 + j * 2) / 16.0;
+				double px = cx + dirX * radius;
+				double pz = cz + dirZ * radius;
+				double speed = 0.28 + random.nextDouble() * 0.1;
+				level.addParticle(ParticleTypes.SPLASH, px, cy, pz, dirX * speed, 0.0, dirZ * speed);
+			}
 		}
 	}
 

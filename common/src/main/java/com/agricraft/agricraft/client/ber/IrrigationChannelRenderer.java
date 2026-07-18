@@ -2,37 +2,46 @@ package com.agricraft.agricraft.client.ber;
 
 import com.agricraft.agricraft.common.block.IrrigationChannelBlock;
 import com.agricraft.agricraft.common.block.entity.IrrigationChannelBlockEntity;
-import com.agricraft.agricraft.common.block.entity.SprinklerBlockEntity;
+import com.agricraft.agricraft.common.util.PlatformClient;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.state.BlockState;
 import org.joml.Matrix4f;
 
+import java.util.List;
+
 /**
- * Renders the water inside an irrigation channel, extending towards connected sides, plus a
- * connecting post down to a sprinkler attached below (the channel's own model is a shallow trough
- * that does not reach the bottom of its block, so without this there'd be a visible gap between
- * the channel and a sprinkler's thin attachment plate).
+ * Renders the water inside an irrigation channel plus, when a valve is installed, the animated
+ * hand-wheel and the rising/lowering gate that visibly blocks or clears the flow.
  */
 public class IrrigationChannelRenderer extends IrrigationComponentRenderer<IrrigationChannelBlockEntity> {
 
-	private static final ResourceLocation OAK_PLANKS = ResourceLocation.withDefaultNamespace("block/oak_planks");
+	private static final ResourceLocation IRON_BLOCK = ResourceLocation.withDefaultNamespace("block/iron_block");
+	private static final ResourceLocation VALVE_WHEEL_MODEL = ResourceLocation.fromNamespaceAndPath("agricraft", "block/channel/valve_wheel");
+	private static final float U = 1 / 16.0F;
+	private static final RandomSource RANDOM = RandomSource.create();
 
 	public IrrigationChannelRenderer(BlockEntityRendererProvider.Context context) {
 	}
 
 	@Override
 	public void render(IrrigationChannelBlockEntity channel, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-		this.drawSprinklerConnector(channel, poseStack, buffer, packedLight, packedOverlay);
 		super.render(channel, partialTick, poseStack, buffer, packedLight, packedOverlay);
+		if (channel.getBlockState().getValue(IrrigationChannelBlock.VALVE) != IrrigationChannelBlock.Valve.NONE) {
+			this.renderValve(channel, partialTick, poseStack, buffer, packedLight, packedOverlay);
+		}
 	}
 
 	@Override
@@ -57,13 +66,38 @@ public class IrrigationChannelRenderer extends IrrigationComponentRenderer<Irrig
 		}
 	}
 
-	private void drawSprinklerConnector(IrrigationChannelBlockEntity channel, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-		if (channel.getLevel() == null || !(channel.getLevel().getBlockEntity(channel.getBlockPos().below()) instanceof SprinklerBlockEntity)) {
-			return;
+	private void renderValve(IrrigationChannelBlockEntity channel, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+		float f = channel.getValveProgress(partialTick);
+		TextureAtlasSprite iron = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(IRON_BLOCK);
+		VertexConsumer consumer = buffer.getBuffer(RenderType.cutout());
+
+		// gate: sits low in the trough when closed (Y6-10, blocking the flow), rises when opened
+		float minY = Mth.lerp(f, 6, 9) * U;
+		float maxY = Mth.lerp(f, 10, 13) * U;
+		this.drawBox(poseStack, consumer, iron, packedLight, packedOverlay, 6 * U, minY, 6 * U, 10 * U, maxY, 10 * U);
+		// shaft from the gate top up to the hand-wheel
+		this.drawBox(poseStack, consumer, iron, packedLight, packedOverlay, 7 * U, maxY, 7 * U, 9 * U, 15 * U, 9 * U);
+
+		// hand-wheel: the original baked model (correct red штурвал texture), rotating 0->180 as it opens
+		BakedModel wheelModel = PlatformClient.get().getStandaloneModel(VALVE_WHEEL_MODEL);
+		if (wheelModel != null) {
+			poseStack.pushPose();
+			poseStack.translate(0.5, 0, 0.5);
+			poseStack.mulPose(com.mojang.math.Axis.YP.rotationDegrees(Mth.lerp(f, 0, 180)));
+			poseStack.translate(-0.5, 0, -0.5);
+			PoseStack.Pose pose = poseStack.last();
+			for (Direction dir : Direction.values()) {
+				this.renderQuads(pose, consumer, wheelModel.getQuads(null, dir, RANDOM), packedLight, packedOverlay);
+			}
+			this.renderQuads(pose, consumer, wheelModel.getQuads(null, null, RANDOM), packedLight, packedOverlay);
+			poseStack.popPose();
 		}
-		TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(OAK_PLANKS);
-		VertexConsumer consumer = buffer.getBuffer(RenderType.solid());
-		this.drawBox(poseStack, consumer, sprite, packedLight, packedOverlay, 5 / 16.0F, 0.0F, 5 / 16.0F, 11 / 16.0F, 6 / 16.0F, 11 / 16.0F);
+	}
+
+	private void renderQuads(PoseStack.Pose pose, VertexConsumer consumer, List<BakedQuad> quads, int packedLight, int packedOverlay) {
+		for (BakedQuad quad : quads) {
+			consumer.putBulkData(pose, quad, 1.0F, 1.0F, 1.0F, 1.0F, packedLight, packedOverlay);
+		}
 	}
 
 	private void drawBox(PoseStack poseStack, VertexConsumer consumer, TextureAtlasSprite sprite, int light, int overlay,
