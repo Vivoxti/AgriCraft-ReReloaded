@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.21.1-4.0.9 (unreleased)
+
+- ADDED: Irrigation system ported to 1.21.1 (tanks, channels, hollow channels, channel valves, sprinklers), with fluid capability support on NeoForge
+- ADDED: Greenhouses ported to 1.21.1 (greenhouse monitor, season bypass and configurable growth bonus inside greenhouses)
+- ADDED: Decorative grates ported to 1.21.1 (three positions per block, waterlogging, vines, climbable)
+- ADDED: Grass loot modifier ported from the official 1.21 branch (grass has a chance to drop agricraft seeds, NeoForge)
+- ADDED: Re-enabled Mystical Agriculture, Industrial Foregoing and PneumaticCraft: Repressurized compat plugins against their 1.21.1 builds
+- ADDED: Irrigation and greenhouse config categories
+- FIXED: datagen aborting on missing textures of optional compat mods, which left the built jar without plants/soils/mutations data
+- FIXED: maintains_farmland block tag was in the pre-1.21 `tags/blocks` folder and was silently ignored
+
 ## 1.20.1-4.0.6
 
 - ADDED: PNC:R Harvesting Drones support (PiotrO15)

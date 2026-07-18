@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {"item": "minecraft:redstone"},
+    "L": {"item": "minecraft:lapis_lazuli"},
+    "G": {"item": "minecraft:glass_bottle"}
+  },
+  "pattern": [
+    "RL",
+    "GG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agricraft:greenhouse_monitor"
+  }
+}

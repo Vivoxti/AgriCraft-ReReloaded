@@ -3,7 +3,10 @@ package com.agricraft.agricraft.client.neoforge;
 import com.agricraft.agricraft.api.AgriApi;
 import com.agricraft.agricraft.client.AgriCraftClient;
 import com.agricraft.agricraft.client.ber.CropBlockEntityRenderer;
+import com.agricraft.agricraft.client.ber.IrrigationChannelRenderer;
+import com.agricraft.agricraft.client.ber.IrrigationTankRenderer;
 import com.agricraft.agricraft.client.ber.SeedAnalyzerEntityRenderer;
+import com.agricraft.agricraft.client.ber.SprinklerRenderer;
 import com.agricraft.agricraft.client.gui.MagnifyingGlassOverlay;
 import com.agricraft.agricraft.client.gui.SeedAnalyzerScreen;
 import com.agricraft.agricraft.common.config.neoforge.NeoForgeMenuConfig;
@@ -45,6 +48,11 @@ public class AgriCraftNeoForgeClient {
 		PlatformClient.setup(new NeoForgePlatformClient());
 		AgriCraftNeoForgeClient.init();
 		ItemBlockRenderTypes.setRenderLayer(ModBlocks.SEED_ANALYZER.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.IRRIGATION_TANK.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.IRRIGATION_CHANNEL.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.IRRIGATION_CHANNEL_HOLLOW.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.SPRINKLER.get(), RenderType.cutout());
+		ItemBlockRenderTypes.setRenderLayer(ModBlocks.GRATE.get(), RenderType.cutout());
 	}
 
 	@SubscribeEvent
@@ -73,6 +81,17 @@ public class AgriCraftNeoForgeClient {
 	public static void registerBer(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.CROP.get(), CropBlockEntityRenderer::new);
 		event.registerBlockEntityRenderer(ModBlockEntityTypes.SEED_ANALYZER.get(), SeedAnalyzerEntityRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.IRRIGATION_TANK.get(), IrrigationTankRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.IRRIGATION_CHANNEL.get(), IrrigationChannelRenderer::new);
+		event.registerBlockEntityRenderer(ModBlockEntityTypes.SPRINKLER.get(), SprinklerRenderer::new);
+	}
+
+	@SubscribeEvent
+	public static void registerBlockColors(net.neoforged.neoforge.client.event.RegisterColorHandlersEvent.Block event) {
+		event.register((state, level, pos, tintIndex) -> level != null && pos != null
+						? net.minecraft.client.renderer.BiomeColors.getAverageFoliageColor(level, pos)
+						: net.minecraft.world.level.FoliageColor.getDefaultColor(),
+				ModBlocks.GRATE.get());
 	}
 
 	@SubscribeEvent

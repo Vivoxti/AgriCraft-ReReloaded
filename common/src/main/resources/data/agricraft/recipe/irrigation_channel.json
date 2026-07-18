@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "agricraft:irrigation_tank"}
+  ],
+  "result": {
+    "count": 8,
+    "id": "agricraft:irrigation_channel"
+  }
+}

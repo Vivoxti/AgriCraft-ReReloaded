@@ -1,0 +1,112 @@
+{
+  "multipart": [
+    {
+      "when": {"axis": "x", "offset": "near"},
+      "apply": {"model": "agricraft:block/grate/panel_near", "y": 270, "uvlock": false}
+    },
+    {
+      "when": {"axis": "x", "offset": "near", "vines": "front|both"},
+      "apply": {"model": "agricraft:block/grate/vine_near_front", "y": 270, "uvlock": false}
+    },
+    {
+      "when": {"axis": "x", "offset": "near", "vines": "back|both"},
+      "apply": {"model": "agricraft:block/grate/vine_near_back", "y": 270, "uvlock": false}
+    },
+    {
+      "when": {"axis": "x", "offset": "mid"},
+      "apply": {"model": "agricraft:block/grate/panel_mid", "y": 270, "uvlock": false}
+    },
+    {
+      "when": {"axis": "x", "offset": "mid", "vines": "front|both"},
+      "apply": {"model": "agricraft:block/grate/vine_mid_front", "y": 270, "uvlock": false}
+    },
+    {
+      "when": {"axis": "x", "offset": "mid", "vines": "back|both"},
+      "apply": {"model": "agricraft:block/grate/vine_mid_back", "y": 270, "uvlock": false}
+    },
+    {
+      "when": {"axis": "x", "offset": "far"},
+      "apply": {"model": "agricraft:block/grate/panel_far", "y": 270, "uvlock": false}
+    },
+    {
+      "when": {"axis": "x", "offset": "far", "vines": "front|both"},
+      "apply": {"model": "agricraft:block/grate/vine_far_front", "y": 270, "uvlock": false}
+    },
+    {
+      "when": {"axis": "x", "offset": "far", "vines": "back|both"},
+      "apply": {"model": "agricraft:block/grate/vine_far_back", "y": 270, "uvlock": false}
+    },
+    {
+      "when": {"axis": "y", "offset": "near"},
+      "apply": {"model": "agricraft:block/grate/panel_near", "x": 90, "uvlock": false}
+    },
+    {
+      "when": {"axis": "y", "offset": "near", "vines": "front|both"},
+      "apply": {"model": "agricraft:block/grate/vine_near_front", "x": 90, "uvlock": false}
+    },
+    {
+      "when": {"axis": "y", "offset": "near", "vines": "back|both"},
+      "apply": {"model": "agricraft:block/grate/vine_near_back", "x": 90, "uvlock": false}
+    },
+    {
+      "when": {"axis": "y", "offset": "mid"},
+      "apply": {"model": "agricraft:block/grate/panel_mid", "x": 90, "uvlock": false}
+    },
+    {
+      "when": {"axis": "y", "offset": "mid", "vines": "front|both"},
+      "apply": {"model": "agricraft:block/grate/vine_mid_front", "x": 90, "uvlock": false}
+    },
+    {
+      "when": {"axis": "y", "offset": "mid", "vines": "back|both"},
+      "apply": {"model": "agricraft:block/grate/vine_mid_back", "x": 90, "uvlock": false}
+    },
+    {
+      "when": {"axis": "y", "offset": "far"},
+      "apply": {"model": "agricraft:block/grate/panel_far", "x": 90, "uvlock": false}
+    },
+    {
+      "when": {"axis": "y", "offset": "far", "vines": "front|both"},
+      "apply": {"model": "agricraft:block/grate/vine_far_front", "x": 90, "uvlock": false}
+    },
+    {
+      "when": {"axis": "y", "offset": "far", "vines": "back|both"},
+      "apply": {"model": "agricraft:block/grate/vine_far_back", "x": 90, "uvlock": false}
+    },
+    {
+      "when": {"axis": "z", "offset": "near"},
+      "apply": {"model": "agricraft:block/grate/panel_near", "uvlock": false}
+    },
+    {
+      "when": {"axis": "z", "offset": "near", "vines": "front|both"},
+      "apply": {"model": "agricraft:block/grate/vine_near_front", "uvlock": false}
+    },
+    {
+      "when": {"axis": "z", "offset": "near", "vines": "back|both"},
+      "apply": {"model": "agricraft:block/grate/vine_near_back", "uvlock": false}
+    },
+    {
+      "when": {"axis": "z", "offset": "mid"},
+      "apply": {"model": "agricraft:block/grate/panel_mid", "uvlock": false}
+    },
+    {
+      "when": {"axis": "z", "offset": "mid", "vines": "front|both"},
+      "apply": {"model": "agricraft:block/grate/vine_mid_front", "uvlock": false}
+    },
+    {
+      "when": {"axis": "z", "offset": "mid", "vines": "back|both"},
+      "apply": {"model": "agricraft:block/grate/vine_mid_back", "uvlock": false}
+    },
+    {
+      "when": {"axis": "z", "offset": "far"},
+      "apply": {"model": "agricraft:block/grate/panel_far", "uvlock": false}
+    },
+    {
+      "when": {"axis": "z", "offset": "far", "vines": "front|both"},
+      "apply": {"model": "agricraft:block/grate/vine_far_front", "uvlock": false}
+    },
+    {
+      "when": {"axis": "z", "offset": "far", "vines": "back|both"},
+      "apply": {"model": "agricraft:block/grate/vine_far_back", "uvlock": false}
+    }
+  ]
+}

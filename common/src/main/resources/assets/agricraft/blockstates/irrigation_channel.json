@@ -1,0 +1,47 @@
+{
+  "multipart": [
+    {
+      "apply": {"model": "agricraft:block/channel/base"}
+    },
+    {
+      "when": {"north": false},
+      "apply": {"model": "agricraft:block/channel/wall", "uvlock": true}
+    },
+    {
+      "when": {"east": false},
+      "apply": {"model": "agricraft:block/channel/wall", "y": 90, "uvlock": true}
+    },
+    {
+      "when": {"south": false},
+      "apply": {"model": "agricraft:block/channel/wall", "y": 180, "uvlock": true}
+    },
+    {
+      "when": {"west": false},
+      "apply": {"model": "agricraft:block/channel/wall", "y": 270, "uvlock": true}
+    },
+    {
+      "when": {"north": true},
+      "apply": {"model": "agricraft:block/channel/arm", "uvlock": true}
+    },
+    {
+      "when": {"east": true},
+      "apply": {"model": "agricraft:block/channel/arm", "y": 90, "uvlock": true}
+    },
+    {
+      "when": {"south": true},
+      "apply": {"model": "agricraft:block/channel/arm", "y": 180, "uvlock": true}
+    },
+    {
+      "when": {"west": true},
+      "apply": {"model": "agricraft:block/channel/arm", "y": 270, "uvlock": true}
+    },
+    {
+      "when": {"valve": "open"},
+      "apply": {"model": "agricraft:block/channel/valve_open"}
+    },
+    {
+      "when": {"valve": "closed"},
+      "apply": {"model": "agricraft:block/channel/valve_closed"}
+    }
+  ]
+}

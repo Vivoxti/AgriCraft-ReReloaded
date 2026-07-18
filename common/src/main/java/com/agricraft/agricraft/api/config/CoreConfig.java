@@ -99,6 +99,8 @@ public final class CoreConfig {
 	@Comment("Enchantment cost in player levels to enchant the seed bag.")
 	public static int seedBagEnchantCost = 10;
 
-//	public static boolean allowGrassDropResets = false;
+	@ConfigEntry(id = "allow_grass_drop_resets", type = EntryType.BOOLEAN, translation = "config.agricraft.core.allow_grass_drop_resets")
+	@Comment("Set to false to prevent AgriCraft loot modifiers from clearing the default loot dropped by grass")
+	public static boolean allowGrassDropResets = true;
 
 }

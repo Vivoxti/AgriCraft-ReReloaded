@@ -1,0 +1,21 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "wall": "minecraft:block/oak_planks",
+    "particle": "minecraft:block/oak_planks"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 2],
+      "faces": {
+        "north": {"uv": [0, 0, 16, 16], "texture": "#wall"},
+        "south": {"uv": [0, 0, 16, 16], "texture": "#wall"},
+        "up": {"uv": [0, 0, 16, 2], "texture": "#wall"},
+        "down": {"uv": [0, 14, 16, 16], "texture": "#wall"},
+        "west": {"uv": [0, 0, 2, 16], "texture": "#wall"},
+        "east": {"uv": [14, 0, 16, 16], "texture": "#wall"}
+      }
+    }
+  ]
+}

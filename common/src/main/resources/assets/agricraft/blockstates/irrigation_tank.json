@@ -1,0 +1,44 @@
+{
+  "multipart": [
+    {
+      "when": {"down": true},
+      "apply": {"model": "agricraft:block/tank/bottom"}
+    },
+    {
+      "when": {"north": "none"},
+      "apply": {"model": "agricraft:block/tank/wall", "uvlock": true}
+    },
+    {
+      "when": {"east": "none"},
+      "apply": {"model": "agricraft:block/tank/wall", "y": 90, "uvlock": true}
+    },
+    {
+      "when": {"south": "none"},
+      "apply": {"model": "agricraft:block/tank/wall", "y": 180, "uvlock": true}
+    },
+    {
+      "when": {"west": "none"},
+      "apply": {"model": "agricraft:block/tank/wall", "y": 270, "uvlock": true}
+    },
+    {
+      "when": {"north": "channel"},
+      "apply": {"model": "agricraft:block/tank/wall_channel", "uvlock": true}
+    },
+    {
+      "when": {"east": "channel"},
+      "apply": {"model": "agricraft:block/tank/wall_channel", "y": 90, "uvlock": true}
+    },
+    {
+      "when": {"south": "channel"},
+      "apply": {"model": "agricraft:block/tank/wall_channel", "y": 180, "uvlock": true}
+    },
+    {
+      "when": {"west": "channel"},
+      "apply": {"model": "agricraft:block/tank/wall_channel", "y": 270, "uvlock": true}
+    },
+    {
+      "when": {"ladder": true},
+      "apply": {"model": "agricraft:block/tank/ladder"}
+    }
+  ]
+}

@@ -12,6 +12,12 @@ import com.agricraft.agricraft.common.commands.DumpRegistriesCommand;
 import com.agricraft.agricraft.common.commands.GiveSeedCommand;
 import com.agricraft.agricraft.common.handler.DenyBonemeal;
 import com.agricraft.agricraft.common.handler.VanillaSeedConversion;
+import com.agricraft.agricraft.common.greenhouse.Greenhouses;
+import com.agricraft.agricraft.common.neoforge.IrrigationTankFluidHandler;
+import com.agricraft.agricraft.common.neoforge.registry.NeoForgeGlobalLootModifiers;
+import com.agricraft.agricraft.common.registry.ModBlockEntityTypes;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import com.agricraft.agricraft.common.util.Platform;
 import com.agricraft.agricraft.common.util.neoforge.NeoForgePlatform;
 import com.agricraft.agricraft.common.util.neoforge.NeoForgeRegistry;
@@ -46,17 +52,25 @@ public class AgriCraftNeoForge {
 		NeoForgeRegistry.setModBus(bus);
 		Platform.setup(new NeoForgePlatform());
 		AgriCraft.init();
+		NeoForgeGlobalLootModifiers.register(bus);
 		bus.addListener(AgriCraftNeoForge::onCommonSetup);
 		bus.addListener(AgriCraftNeoForge::onRegisterDatapackRegistry);
 		bus.addListener(AgriCraftNeoForge::onAddPackFinders);
+		bus.addListener(AgriCraftNeoForge::onRegisterCapabilities);
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onRegisterCommands);
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onRightClick);
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onRightClickBonemeal);
+		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onNeighborNotify);
 	}
 
 	public static void onCommonSetup(FMLCommonSetupEvent event) {
 		MinecraftPlugin.init();
 //		SereneSeasonPlugin.init();
+	}
+
+	public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntityTypes.IRRIGATION_TANK.get(),
+				(tank, side) -> new IrrigationTankFluidHandler(tank));
 	}
 
 	public static void onRegisterDatapackRegistry(DataPackRegistryEvent.NewRegistry event) {
@@ -82,6 +96,12 @@ public class AgriCraftNeoForge {
 	public static void onRightClickBonemeal(PlayerInteractEvent.RightClickBlock event) {
 		if (DenyBonemeal.denyBonemeal(event.getEntity(), event.getHand(), event.getPos(), event.getLevel())) {
 			event.setCanceled(true);
+		}
+	}
+
+	public static void onNeighborNotify(net.neoforged.neoforge.event.level.BlockEvent.NeighborNotifyEvent event) {
+		if (event.getLevel() instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+			Greenhouses.onBlockChanged(serverLevel, event.getPos(), event.getState());
 		}
 	}
 

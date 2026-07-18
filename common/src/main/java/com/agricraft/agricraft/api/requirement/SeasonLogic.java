@@ -22,9 +22,10 @@ public class SeasonLogic {
 	}
 
 	public AgriSeason getSeason(Level world, BlockPos pos) {
-//		if(this.isGreenHouse(world, pos)) {
-//			return AgriSeason.ANY;
-//		}
+		if (com.agricraft.agricraft.api.config.GreenhouseConfig.ignoresSeasons
+				&& com.agricraft.agricraft.common.greenhouse.Greenhouses.isInGreenhouse(world, pos)) {
+			return AgriSeason.ANY;
+		}
 		return this.getter.apply(world, pos);
 	}
 

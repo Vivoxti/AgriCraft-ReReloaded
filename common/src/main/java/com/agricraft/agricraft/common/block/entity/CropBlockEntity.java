@@ -515,6 +515,9 @@ public class CropBlockEntity extends BlockEntity implements AgriCrop, Magnifying
 	protected double calculateGrowthRate() {
 		int growth = this.genome.getStatGene(AgriStatRegistry.getInstance().growthStat()).getTrait();
 		double soilFactor = this.getSoil().map(AgriSoil::growthModifier).orElse(1.0D);
+		if (com.agricraft.agricraft.common.greenhouse.Greenhouses.isInGreenhouse(this.level, this.getBlockPos())) {
+			soilFactor *= com.agricraft.agricraft.api.config.GreenhouseConfig.growthModifier;
+		}
 		return soilFactor * (this.plant.getGrowthChance(this.growthStage) + growth * this.plant.getBonusGrowthChance(this.growthStage) * CoreConfig.growthMultiplier);
 	}
 

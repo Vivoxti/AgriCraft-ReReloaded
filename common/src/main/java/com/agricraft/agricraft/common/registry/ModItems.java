@@ -2,9 +2,11 @@ package com.agricraft.agricraft.common.registry;
 
 import com.agricraft.agricraft.api.AgriApi;
 import com.agricraft.agricraft.common.block.CropStickVariant;
+import com.agricraft.agricraft.common.item.ChannelValveItem;
 import com.agricraft.agricraft.common.item.ClipperItem;
 import com.agricraft.agricraft.common.item.CropSticksItem;
 import com.agricraft.agricraft.common.item.DebuggerItem;
+import com.agricraft.agricraft.common.item.GreenhouseMonitorItem;
 import com.agricraft.agricraft.common.item.JournalItem;
 import com.agricraft.agricraft.common.item.MagnifyingGlassItem;
 import com.agricraft.agricraft.common.item.RakeItem;
@@ -34,6 +36,13 @@ public class ModItems {
 	public static final PlatformRegistry.Entry<Item> IRON_CROP_STICKS = ITEMS.register("iron_crop_sticks", () -> new CropSticksItem(ModBlocks.CROP.get(), CropStickVariant.IRON));
 	public static final PlatformRegistry.Entry<Item> OBSIDIAN_CROP_STICKS = ITEMS.register("obsidian_crop_sticks", () -> new CropSticksItem(ModBlocks.CROP.get(), CropStickVariant.OBSIDIAN));
 	public static final PlatformRegistry.Entry<Item> SEED_BAG = ITEMS.register("seed_bag", () -> new SeedBagItem(new Item.Properties().stacksTo(1)));
+	public static final PlatformRegistry.Entry<Item> IRRIGATION_TANK = ITEMS.register("irrigation_tank", () -> new BlockItem(ModBlocks.IRRIGATION_TANK.get(), new Item.Properties()));
+	public static final PlatformRegistry.Entry<Item> IRRIGATION_CHANNEL = ITEMS.register("irrigation_channel", () -> new BlockItem(ModBlocks.IRRIGATION_CHANNEL.get(), new Item.Properties()));
+	public static final PlatformRegistry.Entry<Item> IRRIGATION_CHANNEL_HOLLOW = ITEMS.register("irrigation_channel_hollow", () -> new BlockItem(ModBlocks.IRRIGATION_CHANNEL_HOLLOW.get(), new Item.Properties()));
+	public static final PlatformRegistry.Entry<Item> SPRINKLER = ITEMS.register("sprinkler", () -> new BlockItem(ModBlocks.SPRINKLER.get(), new Item.Properties()));
+	public static final PlatformRegistry.Entry<Item> CHANNEL_VALVE = ITEMS.register("channel_valve", () -> new ChannelValveItem(new Item.Properties()));
+	public static final PlatformRegistry.Entry<Item> GRATE = ITEMS.register("grate", () -> new BlockItem(ModBlocks.GRATE.get(), new Item.Properties()));
+	public static final PlatformRegistry.Entry<Item> GREENHOUSE_MONITOR = ITEMS.register("greenhouse_monitor", () -> new GreenhouseMonitorItem(new Item.Properties().stacksTo(1)));
 	public static final PlatformRegistry.Entry<Item> SEED = ITEMS.register("seed", () -> Platform.get().createAgriSeedItem(new Item.Properties()));
 
 	public static final PlatformRegistry.Entry<Item> COAL_PEBBLE = ITEMS.register("coal_pebble", () -> new Item(new Item.Properties()));
@@ -59,6 +68,13 @@ public class ModItems {
 		output.accept(IRON_CROP_STICKS.get());
 		output.accept(OBSIDIAN_CROP_STICKS.get());
 		output.accept(SEED_BAG.get());
+		output.accept(IRRIGATION_TANK.get());
+		output.accept(IRRIGATION_CHANNEL.get());
+		output.accept(IRRIGATION_CHANNEL_HOLLOW.get());
+		output.accept(SPRINKLER.get());
+		output.accept(CHANNEL_VALVE.get());
+		output.accept(GRATE.get());
+		output.accept(GREENHOUSE_MONITOR.get());
 
 		output.accept(COAL_PEBBLE.get());
 		output.accept(COPPER_NUGGET.get());

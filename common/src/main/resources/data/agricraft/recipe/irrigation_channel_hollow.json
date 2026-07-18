@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {"tag": "minecraft:planks"},
+    "C": {"item": "agricraft:irrigation_channel"}
+  },
+  "pattern": [
+    "PPP",
+    "PCP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "agricraft:irrigation_channel_hollow"
+  }
+}

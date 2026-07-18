@@ -27,12 +27,6 @@ sourceSets {
 			srcDirs += project(":neoforge").file("src/generated/resources").absolutePath
 			exclude '.cache'
 		}
-		java {
-			// Exclude third-party mod compat plugins that don't have NeoForge 1.20.6 builds
-			exclude '**/plugin/industrialforegoing/**'
-			exclude '**/plugin/pneumaticcraft/**'
-			exclude '**/plugin/MysticalAgriculturePlugin.java'
-		}
 	}
 }
 
@@ -54,6 +48,13 @@ dependencies {
 	modLocalRuntime("mezz.jei:jei-$minecraft_version-neoforge:$jei_version") { transitive = false }
 
 	modImplementation "curse.maven:jade-324717:$jade_forge_version"
+
+	// Compile-only APIs for optional mod compat plugins (fetched from the Modrinth maven)
+	modCompileOnly("maven.modrinth:mystical-agriculture:8.0.27") { transitive = false }
+	modCompileOnly("maven.modrinth:cucumber:8.0.16") { transitive = false }
+	modCompileOnly("maven.modrinth:industrial-foregoing:1.21-3.6.39") { transitive = false }
+	modCompileOnly("maven.modrinth:titanium:1.21-4.0.45") { transitive = false }
+	modCompileOnly("maven.modrinth:pneumaticcraft-repressurized:8.2.21") { transitive = false }
 }
 
 shadowJar {

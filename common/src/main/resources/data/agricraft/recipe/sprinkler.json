@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "W": {"tag": "minecraft:planks"},
+    "I": {"item": "minecraft:iron_bars"},
+    "B": {"item": "minecraft:bucket"}
+  },
+  "pattern": [
+    " W ",
+    "IBI",
+    " I "
+  ],
+  "result": {
+    "count": 1,
+    "id": "agricraft:sprinkler"
+  }
+}

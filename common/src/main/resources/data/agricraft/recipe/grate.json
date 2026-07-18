@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {"tag": "minecraft:planks"}
+  },
+  "pattern": [
+    "P P",
+    " P ",
+    "P P"
+  ],
+  "result": {
+    "count": 15,
+    "id": "agricraft:grate"
+  }
+}

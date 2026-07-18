@@ -1,0 +1,39 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "wood": "minecraft:block/oak_planks",
+    "particle": "minecraft:block/oak_planks"
+  },
+  "elements": [
+    {
+      "from": [5, 5, 0],
+      "to": [11, 6, 5],
+      "faces": {
+        "west": {"uv": [0, 10, 5, 11], "texture": "#wood"},
+        "east": {"uv": [11, 10, 16, 11], "texture": "#wood"},
+        "up": {"uv": [5, 0, 11, 5], "texture": "#wood"},
+        "down": {"uv": [5, 11, 11, 16], "texture": "#wood"}
+      }
+    },
+    {
+      "from": [5, 6, 0],
+      "to": [6, 11, 5],
+      "faces": {
+        "north": {"uv": [5, 5, 6, 10], "texture": "#wood"},
+        "west": {"uv": [0, 5, 5, 10], "texture": "#wood"},
+        "east": {"uv": [0, 5, 5, 10], "texture": "#wood"},
+        "up": {"uv": [5, 0, 6, 5], "texture": "#wood"}
+      }
+    },
+    {
+      "from": [10, 6, 0],
+      "to": [11, 11, 5],
+      "faces": {
+        "north": {"uv": [10, 5, 11, 10], "texture": "#wood"},
+        "west": {"uv": [0, 5, 5, 10], "texture": "#wood"},
+        "east": {"uv": [0, 5, 5, 10], "texture": "#wood"},
+        "up": {"uv": [10, 0, 11, 5], "texture": "#wood"}
+      }
+    }
+  ]
+}
