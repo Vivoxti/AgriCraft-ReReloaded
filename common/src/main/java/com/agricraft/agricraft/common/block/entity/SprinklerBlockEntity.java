@@ -35,7 +35,8 @@ public class SprinklerBlockEntity extends BlockEntity {
 
 	private int waterBuffer;
 	private int columnCounter = -1;
-	private int intervalCounter;
+	/** Ticks elapsed since the current (or last) irrigation cycle started. */
+	private int cycleTimer;
 
 	/** client-side rotation angle of the sprinkler head, in degrees */
 	public float angle;
@@ -65,13 +66,15 @@ public class SprinklerBlockEntity extends BlockEntity {
 	protected void serverTick(Level level, BlockPos pos, BlockState state) {
 		this.pullWater(level, pos);
 		boolean active = false;
-		if (this.columnCounter < 0) {
-			// waiting for the next irrigation cycle
-			this.intervalCounter++;
-			if (this.intervalCounter >= IrrigationConfig.sprinklerInterval) {
-				this.intervalCounter = 0;
-				this.columnCounter = 0;
-			}
+		// sprinklerInterval is the minimum time between the START of two cycles, not a pause
+		// after a cycle finishes: a full sweep of the working area takes WORK_AREA ticks (with
+		// water available), so as long as the interval is shorter than that (the default), the
+		// timer has already elapsed by the time the sweep completes and the next one starts
+		// immediately, with no visible stop.
+		this.cycleTimer++;
+		if (this.columnCounter < 0 && this.cycleTimer >= IrrigationConfig.sprinklerInterval) {
+			this.columnCounter = 0;
+			this.cycleTimer = 0;
 		}
 		if (this.columnCounter >= 0) {
 			int consumption = this.getConsumptionPerTick();
@@ -142,15 +145,17 @@ public class SprinklerBlockEntity extends BlockEntity {
 		if (!IrrigationConfig.sprinklerParticles) {
 			return;
 		}
+		// SPLASH actually follows the velocity it's given (unlike FALLING_WATER/drip particles,
+		// which mostly ignore it and just drip in place), so it reads as water spraying outwards.
 		RandomSource random = level.getRandom();
 		double x = pos.getX() + 0.5;
-		double y = pos.getY() + 8.0 / 16.0;
+		double y = pos.getY() + 5.0 / 16.0;
 		double z = pos.getZ() + 0.5;
 		for (int i = 0; i < 4; i++) {
 			double alpha = Math.toRadians(this.angle + i * 90.0);
-			double vx = Math.cos(alpha) * 0.25 + (random.nextDouble() - 0.5) * 0.05;
-			double vz = Math.sin(alpha) * 0.25 + (random.nextDouble() - 0.5) * 0.05;
-			level.addParticle(ParticleTypes.FALLING_WATER, x, y, z, vx, -0.1, vz);
+			double vx = Math.cos(alpha) * 0.3 + (random.nextDouble() - 0.5) * 0.04;
+			double vz = Math.sin(alpha) * 0.3 + (random.nextDouble() - 0.5) * 0.04;
+			level.addParticle(ParticleTypes.SPLASH, x, y, z, vx, 0.05, vz);
 		}
 	}
 
@@ -159,7 +164,7 @@ public class SprinklerBlockEntity extends BlockEntity {
 		super.loadAdditional(tag, registries);
 		this.waterBuffer = tag.getInt("water_buffer");
 		this.columnCounter = tag.getInt("column_counter");
-		this.intervalCounter = tag.getInt("interval_counter");
+		this.cycleTimer = tag.getInt("cycle_timer");
 	}
 
 	@Override
@@ -167,7 +172,7 @@ public class SprinklerBlockEntity extends BlockEntity {
 		super.saveAdditional(tag, registries);
 		tag.putInt("water_buffer", this.waterBuffer);
 		tag.putInt("column_counter", this.columnCounter);
-		tag.putInt("interval_counter", this.intervalCounter);
+		tag.putInt("cycle_timer", this.cycleTimer);
 	}
 
 	@NotNull
