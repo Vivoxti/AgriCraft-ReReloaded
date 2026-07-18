@@ -33,6 +33,9 @@ public class SprinklerBlockEntity extends BlockEntity {
 	public static final int WORK_DIAMETER = 2 * WORK_RADIUS + 1;
 	public static final int WORK_AREA = WORK_DIAMETER * WORK_DIAMETER;
 
+	private static final float MAX_ROTATION_SPEED = 9.0F;
+	private static final float ROTATION_ACCELERATION = 0.5F;
+
 	private int waterBuffer;
 	private int columnCounter = -1;
 	/** Ticks elapsed since the current (or last) irrigation cycle started. */
@@ -40,6 +43,8 @@ public class SprinklerBlockEntity extends BlockEntity {
 
 	/** client-side rotation angle of the sprinkler head, in degrees */
 	public float angle;
+	/** client-side rotation speed (degrees/tick), eases towards 0 or {@link #MAX_ROTATION_SPEED} */
+	public float rotationSpeed;
 
 	public SprinklerBlockEntity(BlockPos pos, BlockState state) {
 		super(ModBlockEntityTypes.SPRINKLER.get(), pos, state);
@@ -94,8 +99,14 @@ public class SprinklerBlockEntity extends BlockEntity {
 	}
 
 	protected void clientTick(Level level, BlockPos pos, BlockState state) {
-		if (state.getValue(SprinklerBlock.ACTIVE)) {
-			this.angle = (this.angle + 9.0F) % 360.0F;
+		float target = state.getValue(SprinklerBlock.ACTIVE) ? MAX_ROTATION_SPEED : 0.0F;
+		if (this.rotationSpeed < target) {
+			this.rotationSpeed = Math.min(target, this.rotationSpeed + ROTATION_ACCELERATION);
+		} else if (this.rotationSpeed > target) {
+			this.rotationSpeed = Math.max(target, this.rotationSpeed - ROTATION_ACCELERATION);
+		}
+		if (this.rotationSpeed > 0) {
+			this.angle = (this.angle + this.rotationSpeed) % 360.0F;
 			this.spawnParticles(level, pos);
 		}
 	}
@@ -145,17 +156,20 @@ public class SprinklerBlockEntity extends BlockEntity {
 		if (!IrrigationConfig.sprinklerParticles) {
 			return;
 		}
-		// SPLASH actually follows the velocity it's given (unlike FALLING_WATER/drip particles,
-		// which mostly ignore it and just drip in place), so it reads as water spraying outwards.
+		// FISHING is the small water-droplet spray used for fishing bobber splashes: it actually
+		// follows the velocity it's given (unlike FALLING_WATER/drip particles, which mostly
+		// ignore it and just drip in place) - but only if the Y velocity passed in is EXACTLY
+		// 0.0 (SplashParticle's constructor discards the whole velocity vector otherwise and
+		// applies its own fixed small upward pop instead).
 		RandomSource random = level.getRandom();
 		double x = pos.getX() + 0.5;
-		double y = pos.getY() + 5.0 / 16.0;
+		double y = pos.getY() + 4.0 / 16.0;
 		double z = pos.getZ() + 0.5;
 		for (int i = 0; i < 4; i++) {
 			double alpha = Math.toRadians(this.angle + i * 90.0);
 			double vx = Math.cos(alpha) * 0.3 + (random.nextDouble() - 0.5) * 0.04;
 			double vz = Math.sin(alpha) * 0.3 + (random.nextDouble() - 0.5) * 0.04;
-			level.addParticle(ParticleTypes.SPLASH, x, y, z, vx, 0.05, vz);
+			level.addParticle(ParticleTypes.FISHING, x, y, z, vx, 0.0, vz);
 		}
 	}
 

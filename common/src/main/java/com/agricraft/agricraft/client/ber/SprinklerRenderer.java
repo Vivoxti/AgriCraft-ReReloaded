@@ -1,6 +1,5 @@
 package com.agricraft.agricraft.client.ber;
 
-import com.agricraft.agricraft.common.block.SprinklerBlock;
 import com.agricraft.agricraft.common.block.entity.SprinklerBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -26,17 +25,19 @@ public class SprinklerRenderer implements BlockEntityRenderer<SprinklerBlockEnti
 
 	@Override
 	public void render(SprinklerBlockEntity sprinkler, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-		float angle = sprinkler.angle;
-		if (sprinkler.getBlockState().getValue(SprinklerBlock.ACTIVE)) {
-			angle += 9.0F * partialTick;
-		}
+		// interpolate using the current (eased) rotation speed, not a fixed rate, so the visual
+		// motion between ticks matches the smooth accel/decel happening on the logical side
+		float angle = sprinkler.angle + sprinkler.rotationSpeed * partialTick;
 		poseStack.pushPose();
 		poseStack.translate(0.5, 0, 0.5);
 		poseStack.mulPose(com.mojang.math.Axis.YP.rotationDegrees(angle));
 		poseStack.translate(-0.5, 0, -0.5);
 		TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(IRON_BLOCK);
 		VertexConsumer consumer = buffer.getBuffer(RenderType.solid());
-		// two crossing arms below the body
+		// central hub, rotates together with the spray arms (it must not be part of the static
+		// model - a non-rotating hub sitting inside the spinning arms looks like a stray block)
+		this.drawBox(poseStack, consumer, sprite, packedLight, packedOverlay, 5 / 16.0F, 1 / 16.0F, 5 / 16.0F, 11 / 16.0F, 6 / 16.0F, 11 / 16.0F);
+		// two crossing spray arms
 		this.drawBox(poseStack, consumer, sprite, packedLight, packedOverlay, 1 / 16.0F, 4 / 16.0F, 7 / 16.0F, 15 / 16.0F, 6 / 16.0F, 9 / 16.0F);
 		this.drawBox(poseStack, consumer, sprite, packedLight, packedOverlay, 7 / 16.0F, 4 / 16.0F, 1 / 16.0F, 9 / 16.0F, 6 / 16.0F, 15 / 16.0F);
 		poseStack.popPose();
