@@ -79,6 +79,13 @@ public class CropBlockEntity extends BlockEntity implements AgriCrop, Magnifying
 			if (plant == null && level != null) {
 				this.plant = AgriApi.getPlant(this.plantId, this.level.registryAccess()).orElse(null);
 			}
+		} else {
+			// clear stale data: without this, a client that already had a plant loaded would keep
+			// rendering it forever, since an update tag reporting "no plant" was simply ignored
+			this.genome = null;
+			this.plantId = "";
+			this.plant = null;
+			this.growthStage = null;
 		}
 		boolean hasWeeds = tag.getBoolean("hasWeeds");
 		if (hasWeeds) {
@@ -89,6 +96,12 @@ public class CropBlockEntity extends BlockEntity implements AgriCrop, Magnifying
 			if (weed == null && level != null) {
 				this.weed = AgriApi.getWeed(this.weedId, this.level.registryAccess()).orElse(null);
 			}
+		} else {
+			// same as above: clear stale weed data on an update tag reporting "no weeds", otherwise
+			// a raked-off weed keeps rendering client-side even though the server removed it
+			this.weedId = "";
+			this.weed = null;
+			this.weedGrowthStage = null;
 		}
 	}
 
