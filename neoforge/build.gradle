@@ -55,6 +55,14 @@ dependencies {
 	modCompileOnly("maven.modrinth:industrial-foregoing:1.21-3.6.39") { transitive = false }
 	modCompileOnly("maven.modrinth:titanium:1.21-4.0.45") { transitive = false }
 	modCompileOnly("maven.modrinth:pneumaticcraft-repressurized:8.2.21") { transitive = false }
+
+	// Create (optional) - only needed to compile the built-in Create harvester compat mixin.
+	// Create is an optional runtime dependency; the mixin config is marked required=false so
+	// AgriCraft still loads fine when Create is absent.
+	modCompileOnly("com.simibubi.create:create-$minecraft_version:$create_version:slim") { transitive = false }
+	modCompileOnly("net.createmod.ponder:ponder-neoforge:$ponder_version+mc$minecraft_version")
+	modCompileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-$minecraft_version:$flywheel_version")
+	modCompileOnly("com.tterrag.registrate:Registrate:$registrate_version")
 }
 
 shadowJar {

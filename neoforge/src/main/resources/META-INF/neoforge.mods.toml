@@ -38,3 +38,15 @@ side = "BOTH"
 
 [[mixins]]
 config = "agricraft-common.mixins.json"
+
+# Built-in Create compat (harvester). Only applies when Create is installed; the config is
+# marked required=false so this is a no-op otherwise.
+[[mixins]]
+config = "agricraft-neoforge.mixins.json"
+
+[[dependencies.agricraft]]
+modId="create"
+type="optional"
+versionRange="[6.0.0,6.1.0)"
+ordering="AFTER"
+side="BOTH"

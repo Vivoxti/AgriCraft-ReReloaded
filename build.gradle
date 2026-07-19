@@ -38,6 +38,9 @@ subprojects {
 			}
 		}
 		maven { url = "https://nexus.resourcefulbees.com/repository/maven-public/" }
+		// Create + Ponder + Flywheel (for the built-in Create harvester compat)
+		maven { url = "https://maven.createmod.net" }
+		maven { url = "https://maven.ithundxr.dev/snapshots" }
 		maven { url = "https://maven.neoforged.net/releases/" }
 		maven { url = "https://maven.minecraftforge.net/" }
 		maven { url = "https://maven.architectury.dev//" }
