@@ -4,7 +4,7 @@ Agricultural farming extended.
 
 Original available on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/agricraft) and [Modrinth](https://modrinth.com/mod/agricraft).
 
-Fork available on [CurseForge]([https://www.curseforge.com/minecraft/mc-mods/agricraft](https://www.curseforge.com/minecraft/mc-mods/agricraft-rereloaded/preview))
+Fork available on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/agricraft](https://www.curseforge.com/minecraft/mc-mods/agricraft-rereloaded/preview)
 
 ## Available versions
 
