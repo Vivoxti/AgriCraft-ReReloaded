@@ -38,6 +38,10 @@
     {
       "when": {"down": true},
       "apply": {"model": "agricraft:block/channel/down"}
+    },
+    {
+      "when": {"OR": [{"valve": "open"}, {"valve": "closed"}]},
+      "apply": {"model": "agricraft:block/channel/valve_cage"}
     }
   ]
 }

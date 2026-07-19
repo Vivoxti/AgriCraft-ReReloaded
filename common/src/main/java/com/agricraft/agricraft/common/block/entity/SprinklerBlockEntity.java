@@ -166,8 +166,11 @@ public class SprinklerBlockEntity extends BlockEntity {
 		double cz = pos.getZ() + 0.5;
 		for (int i = 0; i < 4; i++) {
 			double alpha = Math.toRadians(this.angle + i * 90.0);
+			// match the direction the arms actually turn: the renderer spins them with
+			// Axis.YP (JOML rotationAxis around +Y), which maps +X to (cos, -sin) in XZ,
+			// so the droplets must use -sin for Z to fly the same way, not the opposite.
 			double dirX = Math.cos(alpha);
-			double dirZ = Math.sin(alpha);
+			double dirZ = -Math.sin(alpha);
 			for (int j = 0; j < 2; j++) {
 				double radius = (5 + j * 2) / 16.0;
 				double px = cx + dirX * radius;

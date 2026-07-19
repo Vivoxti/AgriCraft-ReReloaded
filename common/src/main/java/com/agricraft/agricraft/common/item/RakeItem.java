@@ -49,16 +49,28 @@ public class RakeItem extends Item {
 				return InteractionResult.PASS;
 			}
 			if (crop.hasWeeds()) {
-				AgriWeed weed = crop.getWeed();
-				AgriGrowthStage stage = crop.getWeedGrowthStage();
-				this.rakeLogic.apply(crop, context.getItemInHand(), context.getPlayer());
-				ArrayList<ItemStack> drops = new ArrayList<>();
-				weed.onRake(stage, drops::add, crop.getLevel().getRandom(), context.getPlayer());
-				drops.forEach(stack -> CropBlock.spawnItem(crop.getLevel(), crop.getBlockPos(), stack));
+				this.rakeCrop(crop, context.getItemInHand(), context.getPlayer());
 				return InteractionResult.SUCCESS;
 			}
 			return InteractionResult.FAIL;
 		}).orElse(InteractionResult.FAIL);
+	}
+
+	/**
+	 * Removes (or, for the wooden rake, reduces) the weed on the crop and drops the raking products.
+	 * Works regardless of the crop's plant/cross-stick state, so a weed can be raked off double crop
+	 * sticks without having to break the sticks first.
+	 */
+	public void rakeCrop(AgriCrop crop, ItemStack stack, @Nullable Player player) {
+		if (!crop.hasWeeds() || crop.getLevel() == null) {
+			return;
+		}
+		AgriWeed weed = crop.getWeed();
+		AgriGrowthStage stage = crop.getWeedGrowthStage();
+		this.rakeLogic.apply(crop, stack, player);
+		ArrayList<ItemStack> drops = new ArrayList<>();
+		weed.onRake(stage, drops::add, crop.getLevel().getRandom(), player);
+		drops.forEach(itemStack -> CropBlock.spawnItem(crop.getLevel(), crop.getBlockPos(), itemStack));
 	}
 
 	@FunctionalInterface

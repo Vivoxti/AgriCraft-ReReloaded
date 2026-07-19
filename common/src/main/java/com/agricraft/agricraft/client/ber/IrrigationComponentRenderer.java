@@ -55,4 +55,41 @@ public abstract class IrrigationComponentRenderer<T extends IrrigationComponentB
 		consumer.addVertex(matrix, maxX, y, minZ).setColor(r, g, b, 0.85F).setUv(u1, v0).setOverlay(packedOverlay).setLight(packedLight).setNormal(0, 1, 0);
 	}
 
+	/**
+	 * Draws a two-sided vertical water quad from (x1,z1) to (x2,z2), between bottomY and topY.
+	 * Used to close the sides of a water body so it does not look transparent/hollow from the side
+	 * when a neighbour holds less water.
+	 */
+	protected void drawWaterSide(IrrigationComponentBlockEntity component, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay,
+	                             float x1, float z1, float x2, float z2, float bottomY, float topY) {
+		if (topY <= bottomY) {
+			return;
+		}
+		TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(WATER_STILL);
+		BlockPos pos = component.getBlockPos();
+		int color = BiomeColors.getAverageWaterColor(component.getLevel(), pos);
+		float r = FastColor.ARGB32.red(color) / 255.0F;
+		float g = FastColor.ARGB32.green(color) / 255.0F;
+		float b = FastColor.ARGB32.blue(color) / 255.0F;
+		VertexConsumer consumer = buffer.getBuffer(RenderType.translucent());
+		Matrix4f matrix = poseStack.last().pose();
+		float len = (float) Math.sqrt((x2 - x1) * (x2 - x1) + (z2 - z1) * (z2 - z1));
+		float u0 = sprite.getU(0);
+		float u1 = sprite.getU(len);
+		float v0 = sprite.getV(bottomY);
+		float v1 = sprite.getV(topY);
+		float nx = z2 - z1;
+		float nz = x1 - x2;
+		// front face
+		consumer.addVertex(matrix, x1, bottomY, z1).setColor(r, g, b, 0.85F).setUv(u0, v0).setOverlay(packedOverlay).setLight(packedLight).setNormal(nx, 0, nz);
+		consumer.addVertex(matrix, x1, topY, z1).setColor(r, g, b, 0.85F).setUv(u0, v1).setOverlay(packedOverlay).setLight(packedLight).setNormal(nx, 0, nz);
+		consumer.addVertex(matrix, x2, topY, z2).setColor(r, g, b, 0.85F).setUv(u1, v1).setOverlay(packedOverlay).setLight(packedLight).setNormal(nx, 0, nz);
+		consumer.addVertex(matrix, x2, bottomY, z2).setColor(r, g, b, 0.85F).setUv(u1, v0).setOverlay(packedOverlay).setLight(packedLight).setNormal(nx, 0, nz);
+		// back face
+		consumer.addVertex(matrix, x2, bottomY, z2).setColor(r, g, b, 0.85F).setUv(u1, v0).setOverlay(packedOverlay).setLight(packedLight).setNormal(-nx, 0, -nz);
+		consumer.addVertex(matrix, x2, topY, z2).setColor(r, g, b, 0.85F).setUv(u1, v1).setOverlay(packedOverlay).setLight(packedLight).setNormal(-nx, 0, -nz);
+		consumer.addVertex(matrix, x1, topY, z1).setColor(r, g, b, 0.85F).setUv(u0, v1).setOverlay(packedOverlay).setLight(packedLight).setNormal(-nx, 0, -nz);
+		consumer.addVertex(matrix, x1, bottomY, z1).setColor(r, g, b, 0.85F).setUv(u0, v0).setOverlay(packedOverlay).setLight(packedLight).setNormal(-nx, 0, -nz);
+	}
+
 }

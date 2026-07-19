@@ -49,21 +49,37 @@ public class IrrigationChannelRenderer extends IrrigationComponentRenderer<Irrig
 		BlockState state = channel.getBlockState();
 		double height = channel.getMinFluidHeight() + channel.getFillFraction() * (channel.getMaxFluidHeight() - channel.getMinFluidHeight());
 		float y = (float) Math.min(height, 10.0 / 16.0 - 0.001);
-		// central trough
+		float bottom = (float) channel.getMinFluidHeight();
+		boolean north = state.getValue(IrrigationChannelBlock.connection(Direction.NORTH));
+		boolean south = state.getValue(IrrigationChannelBlock.connection(Direction.SOUTH));
+		boolean west = state.getValue(IrrigationChannelBlock.connection(Direction.WEST));
+		boolean east = state.getValue(IrrigationChannelBlock.connection(Direction.EAST));
+		// central trough surface
 		this.drawWaterSurface(channel, poseStack, buffer, packedLight, packedOverlay, 6 / 16.0F, 6 / 16.0F, 10 / 16.0F, 10 / 16.0F, y);
-		// connections
-		if (state.getValue(IrrigationChannelBlock.connection(Direction.NORTH))) {
+		// connection surfaces
+		if (north) {
 			this.drawWaterSurface(channel, poseStack, buffer, packedLight, packedOverlay, 6 / 16.0F, 0.0F, 10 / 16.0F, 6 / 16.0F, y);
 		}
-		if (state.getValue(IrrigationChannelBlock.connection(Direction.SOUTH))) {
+		if (south) {
 			this.drawWaterSurface(channel, poseStack, buffer, packedLight, packedOverlay, 6 / 16.0F, 10 / 16.0F, 10 / 16.0F, 1.0F, y);
 		}
-		if (state.getValue(IrrigationChannelBlock.connection(Direction.WEST))) {
+		if (west) {
 			this.drawWaterSurface(channel, poseStack, buffer, packedLight, packedOverlay, 0.0F, 6 / 16.0F, 6 / 16.0F, 10 / 16.0F, y);
 		}
-		if (state.getValue(IrrigationChannelBlock.connection(Direction.EAST))) {
+		if (east) {
 			this.drawWaterSurface(channel, poseStack, buffer, packedLight, packedOverlay, 10 / 16.0F, 6 / 16.0F, 1.0F, 10 / 16.0F, y);
 		}
+		// vertical side faces around the perimeter, so the water is not see-through from the side
+		// when a neighbouring channel holds less water. Each side sits at the block edge if the
+		// channel connects that way, otherwise at the trough wall.
+		float nz = north ? 0.0F : 6 / 16.0F;
+		float sz = south ? 1.0F : 10 / 16.0F;
+		float wx = west ? 0.0F : 6 / 16.0F;
+		float ex = east ? 1.0F : 10 / 16.0F;
+		this.drawWaterSide(channel, poseStack, buffer, packedLight, packedOverlay, 6 / 16.0F, nz, 10 / 16.0F, nz, bottom, y);
+		this.drawWaterSide(channel, poseStack, buffer, packedLight, packedOverlay, 6 / 16.0F, sz, 10 / 16.0F, sz, bottom, y);
+		this.drawWaterSide(channel, poseStack, buffer, packedLight, packedOverlay, wx, 6 / 16.0F, wx, 10 / 16.0F, bottom, y);
+		this.drawWaterSide(channel, poseStack, buffer, packedLight, packedOverlay, ex, 6 / 16.0F, ex, 10 / 16.0F, bottom, y);
 	}
 
 	private void renderValve(IrrigationChannelBlockEntity channel, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {

@@ -1,0 +1,66 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "wood": "minecraft:block/oak_planks",
+    "particle": "minecraft:block/oak_planks"
+  },
+  "elements": [
+    {
+      "name": "cage_north_west",
+      "from": [5, 10, 5],
+      "to": [6, 13, 6],
+      "faces": {
+        "north": {"uv": [10, 3, 11, 6], "texture": "#wood"},
+        "east": {"uv": [10, 3, 11, 6], "texture": "#wood"},
+        "south": {"uv": [5, 3, 6, 6], "texture": "#wood"},
+        "west": {"uv": [5, 3, 6, 6], "texture": "#wood"}
+      }
+    },
+    {
+      "name": "cage_north_east",
+      "from": [10, 10, 5],
+      "to": [11, 13, 6],
+      "faces": {
+        "north": {"uv": [5, 3, 6, 6], "texture": "#wood"},
+        "east": {"uv": [10, 3, 11, 6], "texture": "#wood"},
+        "south": {"uv": [10, 3, 11, 6], "texture": "#wood"},
+        "west": {"uv": [5, 3, 6, 6], "texture": "#wood"}
+      }
+    },
+    {
+      "name": "cage_south_east",
+      "from": [10, 10, 10],
+      "to": [11, 13, 11],
+      "faces": {
+        "north": {"uv": [5, 3, 6, 6], "texture": "#wood"},
+        "east": {"uv": [5, 3, 6, 6], "texture": "#wood"},
+        "south": {"uv": [10, 3, 11, 6], "texture": "#wood"},
+        "west": {"uv": [10, 3, 11, 6], "texture": "#wood"}
+      }
+    },
+    {
+      "name": "cage_south_west",
+      "from": [5, 10, 10],
+      "to": [6, 13, 11],
+      "faces": {
+        "north": {"uv": [10, 3, 11, 6], "texture": "#wood"},
+        "east": {"uv": [5, 3, 6, 6], "texture": "#wood"},
+        "south": {"uv": [5, 3, 6, 6], "texture": "#wood"},
+        "west": {"uv": [10, 3, 11, 6], "texture": "#wood"}
+      }
+    },
+    {
+      "name": "cage_top",
+      "from": [5, 13, 5],
+      "to": [11, 14, 11],
+      "faces": {
+        "north": {"uv": [5, 2, 11, 3], "texture": "#wood"},
+        "east": {"uv": [5, 2, 11, 3], "texture": "#wood"},
+        "south": {"uv": [5, 2, 11, 3], "texture": "#wood"},
+        "west": {"uv": [5, 2, 11, 3], "texture": "#wood"},
+        "up": {"uv": [5, 5, 11, 11], "texture": "#wood"},
+        "down": {"uv": [5, 5, 11, 11], "texture": "#wood"}
+      }
+    }
+  ]
+}

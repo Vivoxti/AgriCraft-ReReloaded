@@ -7,6 +7,7 @@ import com.agricraft.agricraft.api.genetic.AgriGenome;
 import com.agricraft.agricraft.client.ClientUtil;
 import com.agricraft.agricraft.common.block.entity.CropBlockEntity;
 import com.agricraft.agricraft.common.item.AgriSeedItem;
+import com.agricraft.agricraft.common.item.RakeItem;
 import com.agricraft.agricraft.common.item.CropSticksItem;
 import com.agricraft.agricraft.common.registry.ModItems;
 import com.agricraft.agricraft.common.util.Platform;
@@ -297,8 +298,20 @@ public class CropBlock extends Block implements EntityBlock, BonemealableBlock, 
 		if (hand == InteractionHand.OFF_HAND) {
 			return InteractionResult.PASS;
 		}
+		// raking takes priority over everything else: if there is a weed, remove it first (works on
+		// double crop sticks too, without having to break the sticks), and don't fall through to
+		// harvesting / removing the cross sticks
+		if (heldItem.getItem() instanceof RakeItem rake) {
+			if (crop.hasWeeds()) {
+				if (!level.isClientSide()) {
+					rake.rakeCrop(crop, heldItem, player);
+				}
+				return InteractionResult.sidedSuccess(level.isClientSide());
+			}
+			return InteractionResult.PASS;
+		}
 		// TODO: @Ketheroth replace with item tag
-		if (heldItem.is(ModItems.CLIPPER.get()) || heldItem.is(ModItems.IRON_RAKE.get()) || heldItem.is(ModItems.WOODEN_RAKE.get())) {
+		if (heldItem.is(ModItems.CLIPPER.get())) {
 			return InteractionResult.PASS;
 		}
 		if (AgriApi.getFertilizerAdapter(heldItem).isPresent()) {
