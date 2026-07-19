@@ -28,6 +28,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
@@ -50,6 +52,11 @@ public class IrrigationTankBlock extends Block implements EntityBlock {
 	public static final EnumProperty<Connection> WEST = EnumProperty.create("west", Connection.class);
 	public static final BooleanProperty DOWN = BooleanProperty.create("down");
 	public static final BooleanProperty LADDER = BooleanProperty.create("ladder");
+	/** true when this specific block's water surface is above its own vertical midpoint - makes the
+	 *  block report as water for game mechanics (swimming, breathing, the underwater camera overlay),
+	 *  the same way a real water block would, without needing every block to render an interior fluid
+	 *  volume. */
+	public static final BooleanProperty WATER = BooleanProperty.create("water");
 
 	private static final VoxelShape SHAPE_BOTTOM = Block.box(0, 0, 0, 16, 2, 16);
 	private static final VoxelShape SHAPE_NORTH = Block.box(0, 0, 0, 16, 16, 2);
@@ -65,7 +72,8 @@ public class IrrigationTankBlock extends Block implements EntityBlock {
 				.setValue(SOUTH, Connection.NONE)
 				.setValue(WEST, Connection.NONE)
 				.setValue(DOWN, false)
-				.setValue(LADDER, false));
+				.setValue(LADDER, false)
+				.setValue(WATER, false));
 	}
 
 	public static EnumProperty<Connection> connection(Direction direction) {
@@ -80,7 +88,12 @@ public class IrrigationTankBlock extends Block implements EntityBlock {
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		builder.add(NORTH, EAST, SOUTH, WEST, DOWN, LADDER);
+		builder.add(NORTH, EAST, SOUTH, WEST, DOWN, LADDER, WATER);
+	}
+
+	@Override
+	protected FluidState getFluidState(BlockState state) {
+		return state.getValue(WATER) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
 	}
 
 	private static Connection connectionTo(LevelAccessor level, BlockPos pos, Direction side) {

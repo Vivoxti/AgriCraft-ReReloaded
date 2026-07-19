@@ -6,6 +6,7 @@ import com.agricraft.agricraft.common.registry.ModBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -45,6 +46,29 @@ public class IrrigationTankBlockEntity extends IrrigationComponentBlockEntity {
 	@Override
 	public double getMaxFluidHeight() {
 		return MAX_FLUID_HEIGHT;
+	}
+
+	@Override
+	public void setContent(int content) {
+		super.setContent(content);
+		this.updateWaterState();
+	}
+
+	/**
+	 * Keeps the WATER blockstate flag in sync with the fill level: true whenever this block's own
+	 * water surface is above its vertical midpoint. This makes the block report as real water for
+	 * game mechanics (swim physics, breathing, extinguishing fire, the underwater camera overlay)
+	 * exactly like a vanilla water block would when a player's eyes are inside it.
+	 */
+	protected void updateWaterState() {
+		if (this.level == null || this.level.isClientSide) {
+			return;
+		}
+		boolean shouldHaveWater = this.getMinFluidHeight() + this.getFillFraction() * (this.getMaxFluidHeight() - this.getMinFluidHeight()) > 0.5;
+		BlockState state = this.getBlockState();
+		if (state.getValue(IrrigationTankBlock.WATER) != shouldHaveWater) {
+			this.level.setBlock(this.getBlockPos(), state.setValue(IrrigationTankBlock.WATER, shouldHaveWater), Block.UPDATE_CLIENTS);
+		}
 	}
 
 	@Override
