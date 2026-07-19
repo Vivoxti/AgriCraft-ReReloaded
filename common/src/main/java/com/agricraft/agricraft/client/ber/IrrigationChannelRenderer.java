@@ -54,8 +54,12 @@ public class IrrigationChannelRenderer extends IrrigationComponentRenderer<Irrig
 		boolean south = state.getValue(IrrigationChannelBlock.connection(Direction.SOUTH));
 		boolean west = state.getValue(IrrigationChannelBlock.connection(Direction.WEST));
 		boolean east = state.getValue(IrrigationChannelBlock.connection(Direction.EAST));
-		// central trough surface
-		this.drawWaterSurface(channel, poseStack, buffer, packedLight, packedOverlay, 6 / 16.0F, 6 / 16.0F, 10 / 16.0F, 10 / 16.0F, y);
+		// central trough surface: only while the valve (if any) is open/absent - matches the original,
+		// where a closed valve visually blocks the water right where its gate sits, instead of the
+		// water showing through/around the gate
+		if (channel.canTransfer()) {
+			this.drawWaterSurface(channel, poseStack, buffer, packedLight, packedOverlay, 6 / 16.0F, 6 / 16.0F, 10 / 16.0F, 10 / 16.0F, y);
+		}
 		// connection surfaces
 		if (north) {
 			this.drawWaterSurface(channel, poseStack, buffer, packedLight, packedOverlay, 6 / 16.0F, 0.0F, 10 / 16.0F, 6 / 16.0F, y);
