@@ -571,7 +571,9 @@ public class CropBlockEntity extends BlockEntity implements AgriCrop, Magnifying
 				int strength = this.genome.getStrength();
 				AgriGrowthConditionRegistry.getInstance().stream()
 						.filter(condition -> !condition.check(this, this.level, this.getBlockPos(), strength).isFertile())
-						.forEach(condition -> condition.notMetDescription(component ->tooltip.add(Component.literal("  ").append(component))));
+						// the "block" condition is shown last, since its riddle is best read after every other cause of infertility
+						.sorted(Comparator.comparing(condition -> "block".equals(condition.getId()) ? 1 : 0))
+						.forEach(condition -> condition.notMetDescription(this, strength, component -> tooltip.add(Component.literal("  ").append(component))));
 			}
 		} else {
 			tooltip.add(Component.translatable("agricraft.tooltip.magnifying.no_plant"));

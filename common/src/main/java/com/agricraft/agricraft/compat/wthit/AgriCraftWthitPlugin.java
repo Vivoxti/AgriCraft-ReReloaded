@@ -53,7 +53,7 @@ public class AgriCraftWthitPlugin implements IWailaPlugin {
                             int strength = crop.getGenome().getStrength();
                             AgriGrowthConditionRegistry.getInstance().stream()
                                     .filter(condition -> !condition.check(crop, crop.getLevel(), crop.getBlockPos(), strength).isFertile())
-                                    .forEach(condition -> condition.notMetDescription(tooltip::addLine));
+                                    .forEach(condition -> condition.notMetDescription(crop, strength, tooltip::addLine));
                         }
                     }
                 } else {

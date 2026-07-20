@@ -38,11 +38,7 @@ public class IntroductionPageDrawer implements JournalPageDrawer<IntroductionPag
 		dy += 8;
 		dy += this.drawScaledText(guiGraphics, ALPHA_FEATURES, dx, dy, 0.80F);
 		dy += 4;
-		dy += this.drawScaledText(guiGraphics, ALPHA_FEATURES_LIST, dx, dy, 0.70F);
-		dy += 8;
-		dy += this.drawScaledText(guiGraphics, ALPHA_NOT_FEATURES, dx, dy, 0.80F);
-		dy += 4;
-		this.drawScaledText(guiGraphics, ALPHA_NOT_FEATURES_LIST, dx, dy, 0.70F);
+		this.drawScaledText(guiGraphics, ALPHA_FEATURES_LIST, dx, dy, 0.70F);
 	}
 
 	@Override
@@ -65,8 +61,14 @@ public class IntroductionPageDrawer implements JournalPageDrawer<IntroductionPag
 		dy += this.drawScaledText(guiGraphics, PARAGRAPH_3, dx, dy, 0.70F);
 		dy += spacing;
 		dy += spacing;
-		// Final paragraph:
-		this.drawScaledText(guiGraphics, DISCOVERED.plainCopy().append(": " + journalData.getDiscoveredSeeds().size() + " / " + AgriApi.getPlantRegistry().map(IdMap::size).orElse(0)), dx, dy, 0.70F);
+		// Discovered seeds count
+		dy += this.drawScaledText(guiGraphics, DISCOVERED.plainCopy().append(": " + journalData.getDiscoveredSeeds().size() + " / " + AgriApi.getPlantRegistry().map(IdMap::size).orElse(0)), dx, dy, 0.70F);
+		dy += spacing;
+		dy += spacing;
+		// Newly ported features
+		dy += this.drawScaledText(guiGraphics, ALPHA_NOT_FEATURES, dx, dy, 0.80F);
+		dy += 4;
+		this.drawScaledText(guiGraphics, ALPHA_NOT_FEATURES_LIST, dx, dy, 0.70F);
 	}
 
 }

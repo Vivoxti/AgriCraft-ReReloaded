@@ -32,9 +32,13 @@ public interface AgriGrowthCondition<T> {
 
 	/**
 	 * Adds a detailed description of the condition when it is not met to the list.
+	 * The crop and strength are provided so the description can explain <em>why</em> the condition
+	 * is not met (e.g. whether the soil needs more or less of a property, or which block is missing).
 	 *
+	 * @param crop     the crop for which the condition is not met
+	 * @param strength the strength stat of the crop
 	 * @param consumer a consumer accepting the lines of text for a tooltip when the condition is not met.
 	 */
-	void notMetDescription(Consumer<Component> consumer);
+	void notMetDescription(AgriCrop crop, int strength, Consumer<Component> consumer);
 
 }

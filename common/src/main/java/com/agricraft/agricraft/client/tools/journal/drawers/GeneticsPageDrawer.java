@@ -34,14 +34,12 @@ public class GeneticsPageDrawer implements JournalPageDrawer<GeneticsPage> {
 
 	@Override
 	public void drawLeftSheet(GuiGraphics guiGraphics, GeneticsPage page, int pageX, int pageY, JournalData journalData) {
-		Font font = Minecraft.getInstance().font;
 		float scale = 0.7F;
 		float dx = pageX + 6;
 		float dy = pageY + 7 + 10;
 		int spacing = 4;
-		// Title
-		guiGraphics.drawString(font, CROP_BREEDING, (int) dx, (int) dy, 0, false);
-		dy += font.lineHeight;
+		// Title (word-wrapped: some translations are too wide for a single line)
+		dy += this.drawScaledText(guiGraphics, CROP_BREEDING, dx, dy, 1.0F);
 		dy += spacing;
 		// First paragraph
 		dy += this.drawScaledText(guiGraphics, PARAGRAPH_L_1, dx, dy, scale);

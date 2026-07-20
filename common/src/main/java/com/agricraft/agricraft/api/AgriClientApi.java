@@ -54,7 +54,7 @@ public final class AgriClientApi {
 			// will look like <namespace>:crop/<id>_stage<growth_stage> so the file is assets/<namespace>/models/crop/<id>_stage<growth_stage>.json
 			String plant = plantId.replace(":", ":crop/") + "_stage" + stage;
 			BakedModel model = PlatformClient.get().getStandaloneModel(ResourceLocation.parse(plant));
-			if (model == null) {
+			if (isMissing(model)) {
 				// model not found, default to the unknown crop model that should always be present
 				return PlatformClient.get().getStandaloneModel(ResourceLocation.parse(UNKNOWN_PLANT));
 			}
@@ -71,7 +71,7 @@ public final class AgriClientApi {
 			// will look like <namespace>:weed/<id>_stage<growth_stage> so the file is assets/<namespace>/models/weed/<id>_stage<growth_stage>.json
 			String plant = weedId.replace(":", ":weed/") + "_stage" + stage;
 			BakedModel model = PlatformClient.get().getStandaloneModel(ResourceLocation.parse(plant));
-			if (model == null) {
+			if (isMissing(model)) {
 				// model not found, default to the unknown crop model that should always be present
 				return PlatformClient.get().getStandaloneModel(ResourceLocation.parse(UNKNOWN_PLANT));
 			}
@@ -96,6 +96,16 @@ public final class AgriClientApi {
 
 	public static void registerPageDrawer(ResourceLocation id, JournalPageDrawer<?> pageDrawer) {
 		JournalPageDrawers.registerPageDrawer(id, pageDrawer);
+	}
+
+	/**
+	 * On NeoForge, {@link PlatformClient#getStandaloneModel} returns {@code null} for an unregistered
+	 * model id. On Fabric, it goes through the vanilla model manager contract instead, which never
+	 * returns {@code null} and substitutes the built-in missing-model (pink/black checkerboard) instead.
+	 * Both cases must be treated as "not found" so callers fall back to the proper unknown-plant model.
+	 */
+	private static boolean isMissing(BakedModel model) {
+		return model == null || model == Minecraft.getInstance().getModelManager().getMissingModel();
 	}
 
 }

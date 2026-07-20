@@ -40,6 +40,11 @@ public final class CoreConfig {
 	@Comment("Set to true to allow mutations on clone events (spreading from single crop).")
 	public static boolean cloneMutations = false;
 
+	@ConfigEntry(id = "mutation_chance_multiplier", type = EntryType.DOUBLE, translation = "config.agricraft.core.mutation_chance_multiplier")
+	@ConfigOption.Range(min = 0.0, max = 5.0)
+	@Comment("Multiplier applied to a crop's fertility-based chance to be picked as a parent for cross breeding / cloning (e.g. via bone meal on cross crop sticks). 1.0 keeps the base chance unchanged, 1.2 raises it by 20%.")
+	public static double mutationChanceMultiplier = 1.2;
+
 	@ConfigEntry(id = "override_vanilla_farming", type = EntryType.BOOLEAN, translation = "config.agricraft.core.override_vanilla_farming")
 	@Comment("Set to true to override vanilla farming, meaning vanilla seeds will be converted to agricraft seeds on planting.")
 	public static boolean overrideVanillaFarming = true;

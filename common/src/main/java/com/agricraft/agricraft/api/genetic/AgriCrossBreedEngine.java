@@ -125,7 +125,10 @@ public class AgriCrossBreedEngine {
 
 	protected boolean rollFertility(AgriCrop crop, RandomSource random) {
 		AgriStat fertility = AgriStatRegistry.getInstance().fertilityStat();
-		return random.nextInt(fertility.getMax()) < crop.getGenome().getStatGene(AgriStatRegistry.getInstance().fertilityStat()).getTrait();
+		int trait = crop.getGenome().getStatGene(fertility).getTrait();
+		// scale the base fertility-based chance by the configured multiplier, capped at the guaranteed max
+		int boostedTrait = (int) Math.min(fertility.getMax(), Math.round(trait * CoreConfig.mutationChanceMultiplier));
+		return random.nextInt(fertility.getMax()) < boostedTrait;
 	}
 
 	protected <T> AgriGenePair<T> mutateGene(AgriCrop crop, AgriGenePair<T> genePair1, AgriGenePair<T> genePair2, AgriGenome parent1, AgriGenome parent2, RandomSource rand) {

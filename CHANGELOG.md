@@ -1,7 +1,28 @@
 # Changelog
 
-## 1.21.1-4.0.9 (unreleased)
+## 1.21.1-4.0.13 (unreleased)
 
+- ADDED: `mutation_chance_multiplier` config option, scaling the fertility-based base chance for a crop to be picked as a cross-breeding/cloning parent (default 1.2, i.e. +20%)
+
+## 1.21.1-4.0.12
+
+- CHANGED: Seed Analyzer stat labels now keep a 5px safety margin from the panel edge once shrunk to fit
+
+## 1.21.1-4.0.11
+
+- CHANGED: Magnifying glass tooltip max width increased by 30% to fit longer condition messages
+- CHANGED: The "needs a specific block" condition line now always renders last among unmet growth conditions, and its intro line is shown before the block riddle instead of the riddle alone
+- FIXED: Seed Analyzer stat labels (e.g. "Мутативность") overflowing past the GUI panel on longer translations by shrinking them to fit instead
+- FIXED: Journal introduction pages — "Newly Ported Features" moved from page 2 to page 3, to declutter page 2
+- FIXED: Journal "Plant Breeding Genetics" title overflowing on a single line on longer translations; it now wraps
+- FIXED: Mutation page showing a pink/black missing-texture icon for undiscovered parents/results on Fabric instead of the proper unknown-plant icon
+
+## 1.21.1-4.0.10
+
+- ADDED: Magnifying glass now tells you whether a soil property needs to be higher or lower (e.g. "too dry, needs more moisture") instead of a generic mismatch message
+- ADDED: Ore-requiring plants now show a short riddle hinting at the required block instead of a generic "needs a specific block" message
+- ADDED: Line wrapping for the magnifying glass overlay tooltip so longer condition messages no longer run off-screen
+- ADDED: Full Russian (ru_ru) and Ukrainian (uk_ua) translations
 - ADDED: Irrigation system ported to 1.21.1 (tanks, channels, hollow channels, channel valves, sprinklers), with fluid capability support on NeoForge
 - ADDED: Greenhouses ported to 1.21.1 (greenhouse monitor, season bypass and configurable growth bonus inside greenhouses)
 - ADDED: Decorative grates ported to 1.21.1 (three positions per block, waterlogging, vines, climbable)

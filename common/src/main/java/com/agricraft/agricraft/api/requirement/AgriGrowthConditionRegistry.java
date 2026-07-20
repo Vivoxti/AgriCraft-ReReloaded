@@ -17,6 +17,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.biome.Biome;
@@ -55,13 +56,16 @@ public class AgriGrowthConditionRegistry extends AgriRegistry<AgriGrowthConditio
 		super();
 		humidity = new BaseGrowthCondition<>("humidity",
 				(plant, strength, value) -> AgriGrowthConditionRegistry.handleSoilCriterion(strength, value, plant.getGrowthRequirements().soilHumidity()),
-				(level, blockPos) -> AgriApi.getCrop(level, blockPos).flatMap(AgriCrop::getSoil).map(AgriSoil::humidity).orElse(AgriSoilCondition.Humidity.INVALID));
+				(level, blockPos) -> AgriApi.getCrop(level, blockPos).flatMap(AgriCrop::getSoil).map(AgriSoil::humidity).orElse(AgriSoilCondition.Humidity.INVALID))
+				.setDescriber((plant, strength, value, consumer) -> AgriGrowthConditionRegistry.describeSoilCriterion("humidity", strength, value, plant.getGrowthRequirements().soilHumidity(), consumer));
 		acidity = new BaseGrowthCondition<>("acidity",
 				(plant, strength, value) -> AgriGrowthConditionRegistry.handleSoilCriterion(strength, value, plant.getGrowthRequirements().soilAcidity()),
-				(level, blockPos) -> AgriApi.getCrop(level, blockPos).flatMap(AgriCrop::getSoil).map(AgriSoil::acidity).orElse(AgriSoilCondition.Acidity.INVALID));
+				(level, blockPos) -> AgriApi.getCrop(level, blockPos).flatMap(AgriCrop::getSoil).map(AgriSoil::acidity).orElse(AgriSoilCondition.Acidity.INVALID))
+				.setDescriber((plant, strength, value, consumer) -> AgriGrowthConditionRegistry.describeSoilCriterion("acidity", strength, value, plant.getGrowthRequirements().soilAcidity(), consumer));
 		nutrients = new BaseGrowthCondition<>("nutrients",
 				(plant, strength, value) -> AgriGrowthConditionRegistry.handleSoilCriterion(strength, value, plant.getGrowthRequirements().soilNutrients()),
-				(level, blockPos) -> AgriApi.getCrop(level, blockPos).flatMap(AgriCrop::getSoil).map(AgriSoil::nutrients).orElse(AgriSoilCondition.Nutrients.INVALID));
+				(level, blockPos) -> AgriApi.getCrop(level, blockPos).flatMap(AgriCrop::getSoil).map(AgriSoil::nutrients).orElse(AgriSoilCondition.Nutrients.INVALID))
+				.setDescriber((plant, strength, value, consumer) -> AgriGrowthConditionRegistry.describeSoilCriterion("nutrients", strength, value, plant.getGrowthRequirements().soilNutrients(), consumer));
 		light = new BaseGrowthCondition<>("light", (plant, strength, value) -> {
 			AgriRequirement requirement = plant.getGrowthRequirements();
 			int lower = requirement.minLight() - (int) (requirement.lightToleranceFactor() * strength);
@@ -91,7 +95,8 @@ public class AgriGrowthConditionRegistry extends AgriRegistry<AgriGrowthConditio
 				return AgriGrowthResponse.INFERTILE;
 			}
 			return AgriGrowthResponse.FERTILE;
-		}, (level, blockPos) -> level.getBlockState(blockPos.below().below()));
+		}, (level, blockPos) -> level.getBlockState(blockPos.below().below()))
+				.setDescriber((plant, strength, value, consumer) -> AgriGrowthConditionRegistry.describeBlockCriterion(plant.getGrowthRequirements().blockConditions(), strength, consumer));
 		biome = new BaseGrowthCondition<>("biome", (plant, strength, biome) -> {
 			AgriListCondition listCondition = plant.getGrowthRequirements().biomes();
 			if (strength >= listCondition.ignoreFromStrength() || (listCondition.blacklist() && listCondition.isEmpty())) {
@@ -219,9 +224,65 @@ public class AgriGrowthConditionRegistry extends AgriRegistry<AgriGrowthConditio
 		return AgriGrowthResponse.INFERTILE;
 	}
 
+	/**
+	 * Describes an unmet soil criterion, telling the player whether the soil property is too low
+	 * ("more" needed) or too high ("less" needed) with respect to the plant's tolerated range,
+	 * instead of a generic "this property doesn't fit" message.
+	 */
+	private static void describeSoilCriterion(String id, int strength, AgriSoilValue value, AgriSoilCondition<?> condition, Consumer<Component> consumer) {
+		int lower = condition.type().lowerLimit(condition.value().ordinal() - (int) (condition.toleranceFactor() * strength));
+		int upper = condition.type().upperLimit(condition.value().ordinal() + (int) (condition.toleranceFactor() * strength));
+		String suffix = "";
+		if (value.isValid()) {
+			if (value.ordinal() < lower) {
+				suffix = ".more";
+			} else if (value.ordinal() > upper) {
+				suffix = ".less";
+			}
+		}
+		consumer.accept(Component.translatable("agricraft.tooltip.condition." + id + suffix));
+	}
+
+	/**
+	 * Describes an unmet block criterion as a short riddle hinting at the block that must sit under
+	 * the soil. Only the conditions that are actually unmet for the given strength are described, and
+	 * an unknown block falls back to a generic hint.
+	 */
+	private static void describeBlockCriterion(List<AgriBlockCondition> blockConditions, int strength, Consumer<Component> consumer) {
+		if (blockConditions.isEmpty()) {
+			consumer.accept(Component.translatable("agricraft.tooltip.condition.block"));
+			return;
+		}
+		for (AgriBlockCondition blockCondition : blockConditions) {
+			if (strength >= blockCondition.strength()) {
+				// a strong enough plant ignores this requirement, so it is not what is holding growth back
+				continue;
+			}
+			ResourceLocation location = blockCondition.block().id();
+			String path = location.getPath();
+			int slash = path.lastIndexOf('/');
+			String name = slash >= 0 ? path.substring(slash + 1) : path;
+			// state the requirement plainly first, then let the riddle hint at which block it is
+			consumer.accept(Component.translatable("agricraft.tooltip.condition.block"));
+			consumer.accept(Component.translatableWithFallback(
+					"agricraft.tooltip.condition.block.riddle." + name,
+					"A certain block must lie hidden right beneath the soil."));
+		}
+	}
+
 	public interface ResponseGetter<T> {
 
 		AgriGrowthResponse apply(AgriPlant plant, int strength, T value);
+
+	}
+
+	/**
+	 * Produces the tooltip line(s) shown when a condition is not met, with access to the plant, the
+	 * crop strength and the actual value read from the world, so the message can be context-aware.
+	 */
+	public interface NotMetDescriber<T> {
+
+		void describe(AgriPlant plant, int strength, T value, Consumer<Component> consumer);
 
 	}
 
@@ -230,11 +291,19 @@ public class AgriGrowthConditionRegistry extends AgriRegistry<AgriGrowthConditio
 		private final String id;
 		private final ResponseGetter<T> response;
 		private final BiFunction<Level, BlockPos, T> getter;
+		private NotMetDescriber<T> describer;
 
 		public BaseGrowthCondition(String id, ResponseGetter<T> response, BiFunction<Level, BlockPos, T> getter) {
 			this.id = id;
 			this.response = response;
 			this.getter = getter;
+			// default description: a generic per-condition message
+			this.describer = (plant, strength, value, consumer) -> consumer.accept(Component.translatable("agricraft.tooltip.condition." + this.id));
+		}
+
+		public BaseGrowthCondition<T> setDescriber(NotMetDescriber<T> describer) {
+			this.describer = describer;
+			return this;
 		}
 
 		@Override
@@ -253,8 +322,8 @@ public class AgriGrowthConditionRegistry extends AgriRegistry<AgriGrowthConditio
 		}
 
 		@Override
-		public void notMetDescription(Consumer<Component> consumer) {
-			consumer.accept(Component.translatable("agricraft.tooltip.condition." + this.id));
+		public void notMetDescription(AgriCrop crop, int strength, Consumer<Component> consumer) {
+			this.describer.describe(crop.getPlant(), strength, this.getter.apply(crop.getLevel(), crop.getBlockPos()), consumer);
 		}
 
 	}

@@ -12,6 +12,8 @@ import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.inventory.tooltip.TooltipRenderUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.FormattedText;
+import net.minecraft.network.chat.Style;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
@@ -39,6 +41,8 @@ public class MagnifyingGlassOverlay {
 
 	private static final List<Predicate<Player>> allowingPredicates = new ArrayList<>();
 	private static final Set<MagnifyingInspector> inspectors = new HashSet<>();
+	// maximum width (in pixels) a tooltip line may reach before it is wrapped onto the next line
+	private static final int MAX_TOOLTIP_WIDTH = 260;
 	private static int hoverTicks;
 
 	static {
@@ -135,8 +139,21 @@ public class MagnifyingGlassOverlay {
 		int posY = graphics.guiHeight() / 2;// + cfg.overlayOffsetY.get();
 		float fade = Mth.clamp(hoverTicks / 48f, 0, 1);  // goes from 0 to 1 in 48 ticks, then stays at 1
 		posX += (int) (Math.pow(1 - fade, 3) * 8);
+		List<Component> rawTooltip = new ArrayList<>();
+		inspectable.get().addMagnifyingTooltip(rawTooltip, mc.player.isShiftKeyDown());
+
+		// wrap long lines (e.g. condition riddles) so they don't render as a single line running off-screen
 		List<Component> tooltip = new ArrayList<>();
-		inspectable.get().addMagnifyingTooltip(tooltip, mc.player.isShiftKeyDown());
+		for (Component line : rawTooltip) {
+			List<FormattedText> wrapped = mc.font.getSplitter().splitLines(line, MAX_TOOLTIP_WIDTH, Style.EMPTY);
+			if (wrapped.isEmpty()) {
+				tooltip.add(line);
+			} else {
+				for (FormattedText part : wrapped) {
+					tooltip.add(Component.literal(part.getString()));
+				}
+			}
+		}
 
 		if (!tooltip.isEmpty()) {
 			int tooltipHeight = 8;

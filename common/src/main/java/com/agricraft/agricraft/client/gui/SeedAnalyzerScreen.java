@@ -31,6 +31,29 @@ public class SeedAnalyzerScreen extends AbstractContainerScreen<SeedAnalyzerMenu
 		this.geneIndex = 0;
 	}
 
+	// extra breathing room kept clear once text needs shrinking, so it doesn't hug the panel's edge
+	private static final int SCALE_SAFETY_MARGIN = 5;
+
+	/**
+	 * Draws text at 1:1 scale, unless it is wider than {@code maxWidth} (e.g. a longer translation),
+	 * in which case it is shrunk down to leave {@link #SCALE_SAFETY_MARGIN}px free — instead of
+	 * overflowing past the GUI panel or landing flush against its edge.
+	 */
+	private void drawFittedString(GuiGraphics guiGraphics, Component text, int x, int y, int maxWidth) {
+		int width = this.font.width(text);
+		if (width <= maxWidth || width <= 0) {
+			guiGraphics.drawString(this.font, text, x, y, 0, false);
+			return;
+		}
+		int targetWidth = Math.max(1, maxWidth - SCALE_SAFETY_MARGIN);
+		float scale = targetWidth / (float) width;
+		guiGraphics.pose().pushPose();
+		guiGraphics.pose().translate(x, y, 0);
+		guiGraphics.pose().scale(scale, scale, 1);
+		guiGraphics.drawString(this.font, text, 0, 0, 0, false);
+		guiGraphics.pose().popPose();
+	}
+
 	private static boolean hoverUpButton(int startX, int startY, int mouseX, int mouseY) {
 		return startX + 67 <= mouseX && mouseX <= startX + 67 + 9 && startY + 26 <= mouseY && mouseY <= startY + 26 + 9;
 	}
@@ -101,7 +124,8 @@ public class SeedAnalyzerScreen extends AbstractContainerScreen<SeedAnalyzerMenu
 			Component domText = Component.literal("" + pair.getDominant().trait());
 			Component recText = Component.literal("" + pair.getRecessive().trait());
 			int w = this.font.width(domText.getString());
-			guiGraphics.drawString(this.font, geneText, DNA_X + 36, yy, 0, false);
+			int labelMaxWidth = leftPos + this.imageWidth - (DNA_X + 36);
+			drawFittedString(guiGraphics, geneText, DNA_X + 36, yy, labelMaxWidth);
 			guiGraphics.drawString(this.font, domText, DNA_X - w - 1, yy, 0, false);
 			guiGraphics.drawString(this.font, recText, DNA_X + 21, yy, 0, false);
 			yy += this.font.lineHeight + 4;
