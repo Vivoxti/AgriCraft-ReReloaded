@@ -14,6 +14,7 @@ import com.agricraft.agricraft.api.requirement.AgriGrowthResponse;
 import com.agricraft.agricraft.api.stat.AgriStatRegistry;
 import com.agricraft.agricraft.api.tools.magnifying.MagnifyingInspectable;
 import com.agricraft.agricraft.common.block.CropBlock;
+import com.agricraft.agricraft.common.block.CropStickVariant;
 import com.agricraft.agricraft.common.block.CropState;
 import com.agricraft.agricraft.common.block.SimpleFluidloggedBlock;
 import com.agricraft.agricraft.common.registry.ModBlockEntityTypes;
@@ -445,6 +446,21 @@ public class CropBlockEntity extends BlockEntity implements AgriCrop, Magnifying
 					}
 				}
 			}
+	}
+
+	@Override
+	public boolean shouldWeedsActivate() {
+		// the base (plant resistance / 50-50 for bare sticks) roll must pass first, then the crop
+		// sticks' own material can further cut down the chance that actually goes through
+		if (!AgriCrop.super.shouldWeedsActivate()) {
+			return false;
+		}
+		double stickResistance = switch (this.getBlockState().getValue(CropBlock.STICK_VARIANT)) {
+			case IRON -> 0.7; // 30% less likely for weeds to activate
+			case OBSIDIAN -> 0.4; // 60% less likely for weeds to activate
+			case WOODEN -> 1.0;
+		};
+		return stickResistance >= 1.0 || this.level.getRandom().nextDouble() < stickResistance;
 	}
 
 	@Override

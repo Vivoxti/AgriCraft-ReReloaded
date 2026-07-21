@@ -178,6 +178,7 @@
   "agricraft.tooltip.magnifying_glass": "Інструмент для вивчення геному культур та інших речей",
   "agricraft.tooltip.rake": "Інструмент для видалення бур'янів із культур",
   "agricraft.tooltip.trowel": "Інструмент для переміщення культур",
+  "agricraft.tooltip.crop_sticks.weed_resistance": "На %d%% менший шанс появи бур'янів",
   "agricraft.tooltip.bag.empty": "Мішок наразі порожній",
   "agricraft.tooltip.bag.content": "Мішок наразі містить %d ",
   "agricraft.tooltip.bag.sorter": "Мішок наразі сортує за ",

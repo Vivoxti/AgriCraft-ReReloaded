@@ -178,6 +178,7 @@
   "agricraft.tooltip.magnifying_glass": "A tool to inspect the genome of crops and other things",
   "agricraft.tooltip.rake": "A tool to remove weeds from crops",
   "agricraft.tooltip.trowel": "A tool to move crops around",
+  "agricraft.tooltip.crop_sticks.weed_resistance": "%d%% less likely for weeds to take root",
   "agricraft.tooltip.bag.empty": "The bag is currently empty",
   "agricraft.tooltip.bag.content": "The bag currently hold %d ",
   "agricraft.tooltip.bag.sorter": "The bag is currently sorting by ",

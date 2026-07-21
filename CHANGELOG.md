@@ -1,6 +1,14 @@
 # Changelog
 
-## 1.21.1-4.0.13 (unreleased)
+## 1.21.1-4.0.15 (unreleased)
+
+- ADDED: Iron and obsidian crop sticks now resist weeds taking root (30% and 60% less likely respectively), on top of their existing lava fire-resistance; shown as an item tooltip
+
+## 1.21.1-4.0.14
+
+- FIXED: Trowel silently failing to store a picked-up plant's genome/growth stage (and `AgriGenomeProviderItem.setGenome` in general), because the NBT tag mutation was applied to a detached copy that was never written back onto the item stack — the trowel would report success on pickup but say "there is nothing here to plant" afterwards
+
+## 1.21.1-4.0.13
 
 - ADDED: `mutation_chance_multiplier` config option, scaling the fertility-based base chance for a crop to be picked as a cross-breeding/cloning parent (default 1.2, i.e. +20%)
 

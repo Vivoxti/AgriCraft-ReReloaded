@@ -178,6 +178,7 @@
   "agricraft.tooltip.magnifying_glass": "Инструмент для изучения генома культур и других вещей",
   "agricraft.tooltip.rake": "Инструмент для удаления сорняков с культур",
   "agricraft.tooltip.trowel": "Инструмент для перемещения культур",
+  "agricraft.tooltip.crop_sticks.weed_resistance": "На %d%% меньше шанс появления сорняков",
   "agricraft.tooltip.bag.empty": "Мешок сейчас пуст",
   "agricraft.tooltip.bag.content": "Мешок сейчас содержит %d ",
   "agricraft.tooltip.bag.sorter": "Мешок сейчас сортирует по ",

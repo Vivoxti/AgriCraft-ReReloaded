@@ -173,18 +173,19 @@ public class TrowelItem extends Item implements AgriGenomeProviderItem {
 			return;
 		}
 		this.setGenome(stack, genome);
+		// re-read after setGenome, which has already persisted its own tag mutation onto the stack
 		CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 		tag.putInt("growthIndex", stage.index());
 		tag.putInt("growthTotal", stage.total());
+		stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
 	}
 
 	public void removePlant(ItemStack stack) {
 		CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-		if (tag != null) {
-			tag.remove("growthIndex");
-			tag.remove("growthTotal");
-			AgriGenome.removeFromNBT(tag);
-		}
+		tag.remove("growthIndex");
+		tag.remove("growthTotal");
+		AgriGenome.removeFromNBT(tag);
+		stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
 	}
 
 	public boolean hasPlant(ItemStack itemStack) {

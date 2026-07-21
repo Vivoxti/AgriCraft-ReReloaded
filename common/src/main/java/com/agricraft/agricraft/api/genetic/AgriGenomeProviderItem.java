@@ -1,6 +1,7 @@
 package com.agricraft.agricraft.api.genetic;
 
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.ItemStack;
 
@@ -13,7 +14,11 @@ public interface AgriGenomeProviderItem {
 	 * @param genome the new genome of the crop
 	 */
 	default void setGenome(ItemStack stack, AgriGenome genome) {
-		genome.writeToNBT(stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag());
+		// copyTag() hands back a detached copy, so it must be written back onto the stack explicitly,
+		// otherwise the mutation is silently discarded and the stack keeps its old (or no) genome.
+		CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
+		genome.writeToNBT(tag);
+		stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
 	}
 
 	default Optional<AgriGenome> getGenome(ItemStack stack) {
