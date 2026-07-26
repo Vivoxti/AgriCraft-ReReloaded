@@ -3,6 +3,7 @@ package com.agricraft.agricraft.common.handler;
 import com.agricraft.agricraft.api.AgriApi;
 import com.agricraft.agricraft.api.codecs.AgriSeed;
 import com.agricraft.agricraft.api.codecs.AgriSoil;
+import com.agricraft.agricraft.api.config.CompatConfig;
 import com.agricraft.agricraft.api.config.CoreConfig;
 import com.agricraft.agricraft.api.crop.AgriCrop;
 import com.agricraft.agricraft.api.genetic.AgriGenome;
@@ -13,6 +14,7 @@ import com.agricraft.agricraft.common.block.entity.SeedAnalyzerBlockEntity;
 import com.agricraft.agricraft.common.item.AgriSeedItem;
 import com.agricraft.agricraft.common.registry.ModBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -36,6 +38,7 @@ public class VanillaSeedConversion {
 		if (!CoreConfig.overrideVanillaFarming
 				|| heldItem.isEmpty()
 				|| heldItem.getItem() instanceof AgriSeedItem
+				|| !CompatConfig.isCompatibilityEnabled(BuiltInRegistries.ITEM.getKey(heldItem.getItem()).getNamespace())
 				|| AgriApi.getCrop(player.level(), pos).isPresent()) {
 			return InteractionResult.PASS;
 		}

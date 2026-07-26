@@ -174,6 +174,8 @@
   "agricraft.tooltip.condition.dimension": "This plant can not grow in this dimension",
   "agricraft.tooltip.condition.season": "This plant can not grow during the current season",
   "agricraft.tooltip.condition.fluid": "This plant can not grow in the current fluid",
+  "agricraft.tooltip.condition.mystical_agriculture_effective_farmland": "This plant requires %s to grow",
+  "agricraft.tooltip.condition.mystical_agriculture_effective_farmland.unknown": "its tier's effective farmland",
   "agricraft.tooltip.clipper": "A tool to clip flowers or leaves of plants",
   "agricraft.tooltip.magnifying_glass": "A tool to inspect the genome of crops and other things",
   "agricraft.tooltip.rake": "A tool to remove weeds from crops",

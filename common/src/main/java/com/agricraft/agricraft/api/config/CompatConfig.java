@@ -12,6 +12,8 @@ import com.teamresourceful.resourcefulconfig.api.types.options.EntryType;
 @Category("compat")
 public final class CompatConfig {
 
+	public static final String MYSTICAL_AGRICULTURE_MOD_ID = "mysticalagriculture";
+
 	@ConfigEntry(id = "mysticalagriculture", type = EntryType.BOOLEAN, translation = "config.agricraft.compat.mysticalagriculture")
 	@Comment("Set to false to disable compatibility with Mystical Agriculture (in case things break)")
 	public static boolean enableMysticalAgriculture = true;
@@ -24,5 +26,14 @@ public final class CompatConfig {
 	@Comment("If set to true, plant gatherer will be able to harvest AgriCraft crops")
 	public static boolean enableIndustrialForegoing = true;
 
+	/**
+	 * Checks whether AgriCraft compatibility for a mod is enabled.
+	 *
+	 * @param modId the mod namespace
+	 * @return {@code false} when the matching compatibility option is disabled
+	 */
+	public static boolean isCompatibilityEnabled(String modId) {
+		return !MYSTICAL_AGRICULTURE_MOD_ID.equals(modId) || enableMysticalAgriculture;
+	}
 
 }

@@ -4,6 +4,7 @@ import com.agricraft.agricraft.AgriCraft;
 import com.agricraft.agricraft.api.AgriApi;
 import com.agricraft.agricraft.api.codecs.AgriMutation;
 import com.agricraft.agricraft.api.codecs.AgriSoil;
+import com.agricraft.agricraft.api.config.CompatConfig;
 import com.agricraft.agricraft.api.config.CoreConfig;
 import com.agricraft.agricraft.api.fertilizer.AgriFertilizer;
 import com.agricraft.agricraft.api.plant.AgriPlant;
@@ -60,7 +61,7 @@ public class AgriCraftFabric implements ModInitializer {
 		FabricLoader.getInstance().getModContainer("agricraft").ifPresent(agricraft -> {
 			for (ModContainer mod : FabricLoader.getInstance().getAllMods()) {
 				String modid = mod.getMetadata().getId();
-				if (!modid.equals("agricraft") && !modid.equals("minecraft")) {
+				if (!modid.equals("agricraft") && !modid.equals("minecraft") && CompatConfig.isCompatibilityEnabled(modid)) {
 					// deprecated methods are used to avoid using Fabric API internals
 					if (agricraft.findPath("datapacks/"+modid).isPresent()) {
 						ResourceManagerHelper.registerBuiltinResourcePack(ResourceLocation.fromNamespaceAndPath("builtin", "agricraft_datapacks_" + modid), "datapacks/" + modid, agricraft, CoreConfig.enablePacksByDefault);

@@ -4,6 +4,7 @@ import com.agricraft.agricraft.AgriCraft;
 import com.agricraft.agricraft.api.AgriApi;
 import com.agricraft.agricraft.api.codecs.AgriMutation;
 import com.agricraft.agricraft.api.codecs.AgriSoil;
+import com.agricraft.agricraft.api.config.CompatConfig;
 import com.agricraft.agricraft.api.config.CoreConfig;
 import com.agricraft.agricraft.api.fertilizer.AgriFertilizer;
 import com.agricraft.agricraft.api.plant.AgriPlant;
@@ -14,6 +15,7 @@ import com.agricraft.agricraft.common.handler.DenyBonemeal;
 import com.agricraft.agricraft.common.handler.VanillaSeedConversion;
 import com.agricraft.agricraft.common.greenhouse.Greenhouses;
 import com.agricraft.agricraft.common.neoforge.IrrigationTankFluidHandler;
+import com.agricraft.agricraft.common.plugin.MysticalAgricultureCompat;
 import com.agricraft.agricraft.common.neoforge.registry.NeoForgeGlobalLootModifiers;
 import com.agricraft.agricraft.common.registry.ModBlockEntityTypes;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -65,6 +67,9 @@ public class AgriCraftNeoForge {
 
 	public static void onCommonSetup(FMLCommonSetupEvent event) {
 		MinecraftPlugin.init();
+		if (ModList.get().isLoaded(CompatConfig.MYSTICAL_AGRICULTURE_MOD_ID)) {
+			event.enqueueWork(MysticalAgricultureCompat::init);
+		}
 //		SereneSeasonPlugin.init();
 	}
 
@@ -109,7 +114,7 @@ public class AgriCraftNeoForge {
 		if (event.getPackType() == PackType.SERVER_DATA) {
 			for (IModInfo mod : ModList.get().getMods()) {
 				String modId = mod.getModId();
-				if (!modId.equals("minecraft") && !modId.equals("agricraft")) {
+				if (!modId.equals("minecraft") && !modId.equals("agricraft") && CompatConfig.isCompatibilityEnabled(modId)) {
 					addPack("datapacks", modId, PackType.SERVER_DATA, event);
 				}
 			}
@@ -117,7 +122,7 @@ public class AgriCraftNeoForge {
 		if (event.getPackType() == PackType.CLIENT_RESOURCES) {
 			for (IModInfo mod : ModList.get().getMods()) {
 				String modId = mod.getModId();
-				if (!modId.equals("minecraft") && !modId.equals("agricraft")) {
+				if (!modId.equals("minecraft") && !modId.equals("agricraft") && CompatConfig.isCompatibilityEnabled(modId)) {
 					addPack("resourcepacks", modId, PackType.CLIENT_RESOURCES, event);
 				}
 			}
