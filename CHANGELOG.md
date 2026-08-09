@@ -1,6 +1,18 @@
 # Changelog
 
-## 1.21.1-4.0.15 (unreleased)
+## 1.21.1-4.0.16
+
+### Fixed
+
+- Clippers now perform plant clipping instead of triggering the crop's normal right-click harvest. Supported mature flowers once again drop their configured clipping product and return to their initial growth stage.
+- Disabling Mystical Agriculture compatibility now prevents Mystical Agriculture seeds from being converted into AgriCraft seeds on both NeoForge and Fabric.
+
+### Mystical Agriculture compatibility
+
+- Added a dedicated `compat.mysticalagriculture` configuration option.
+- AgriCraft crops now respect Mystical Agriculture's `requiresEffectiveFarmland` setting. When enabled, Mystical Agriculture crops require farmland matching their tier.
+
+## 1.21.1-4.0.15
 
 - ADDED: Iron and obsidian crop sticks now resist weeds taking root (30% and 60% less likely respectively), on top of their existing lava fire-resistance; shown as an item tooltip
 

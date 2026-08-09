@@ -288,6 +288,9 @@ public class CropBlock extends Block implements EntityBlock, BonemealableBlock, 
 			}
 		}
 		if (result == InteractionResult.PASS) {
+			if (heldItem.is(ModItems.CLIPPER.get())) {
+				return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+			}
 			return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 		}
 		return result.consumesAction() ? ItemInteractionResult.sidedSuccess(level.isClientSide()) : ItemInteractionResult.FAIL;
