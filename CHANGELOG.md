@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.21.1-4.0.18
+
+### Added
+
+- Added Simplified Chinese (`zh_cn`) localization for the base mod and all crop translations in the Biomes O' Plenty, Farmer's Delight, Immersive Engineering, Mystical Agriculture, and Pam's HarvestCraft 2 compatibility packs.
+
+### Fixed
+
+- Fixed the Pam's HarvestCraft 2 eggplant seed translation key and duplicated "Seeds" in mustard and sesame seed names.
+
 ## 1.21.1-4.0.17
 
 ### Fixed

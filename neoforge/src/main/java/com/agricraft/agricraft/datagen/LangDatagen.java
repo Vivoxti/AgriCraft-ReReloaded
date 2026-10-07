@@ -174,7 +174,7 @@ public class LangDatagen {
 		lang.add("seed.agricraft.pamhc2crops.cotton", "Cotton Seeds");
 		lang.add("seed.agricraft.pamhc2crops.cranberry", "Cranberry Seeds");
 		lang.add("seed.agricraft.pamhc2crops.cucumber", "Cucumber Seeds");
-		lang.add("seed.agricraft.pamhc2crops.eggseed", "Eggseed Seeds");
+		lang.add("seed.agricraft.pamhc2crops.eggplant", "Eggplant Seeds");
 		lang.add("seed.agricraft.pamhc2crops.elderberry", "Elderberry Seeds");
 		lang.add("seed.agricraft.pamhc2crops.flax", "Flax Seeds");
 		lang.add("seed.agricraft.pamhc2crops.garlic", "Garlic Seeds");
@@ -194,7 +194,7 @@ public class LangDatagen {
 		lang.add("seed.agricraft.pamhc2crops.lettuce", "Lettuce Seeds");
 		lang.add("seed.agricraft.pamhc2crops.millet", "Millet Seeds");
 		lang.add("seed.agricraft.pamhc2crops.mulberry", "Mulberry Seeds");
-		lang.add("seed.agricraft.pamhc2crops.mustardseeds", "Mustard Seeds Seeds");
+		lang.add("seed.agricraft.pamhc2crops.mustardseeds", "Mustard Seeds");
 		lang.add("seed.agricraft.pamhc2crops.oats", "Oats Seeds");
 		lang.add("seed.agricraft.pamhc2crops.okra", "Okra Seeds");
 		lang.add("seed.agricraft.pamhc2crops.onion", "Onion Seeds");
@@ -210,7 +210,7 @@ public class LangDatagen {
 		lang.add("seed.agricraft.pamhc2crops.rutabaga", "Rutabaga Seeds");
 		lang.add("seed.agricraft.pamhc2crops.rye", "Rye Seeds");
 		lang.add("seed.agricraft.pamhc2crops.scallion", "Scallion Seeds");
-		lang.add("seed.agricraft.pamhc2crops.sesameseeds", "Sesame Seeds Seeds");
+		lang.add("seed.agricraft.pamhc2crops.sesameseeds", "Sesame Seeds");
 		lang.add("seed.agricraft.pamhc2crops.sisal", "Sisal Seeds");
 		lang.add("seed.agricraft.pamhc2crops.soybean", "Soybean Seeds");
 		lang.add("seed.agricraft.pamhc2crops.spiceleaf", "Spiceleaf Seeds");
