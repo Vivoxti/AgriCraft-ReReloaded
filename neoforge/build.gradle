@@ -48,6 +48,7 @@ dependencies {
 	modLocalRuntime("mezz.jei:jei-$minecraft_version-neoforge:$jei_version") { transitive = false }
 
 	modImplementation "curse.maven:jade-324717:$jade_forge_version"
+	modCompileOnly("maven.modrinth:the-one-probe:$theoneprobe_version") { transitive = false }
 
 	// Compile-only APIs for optional mod compat plugins (fetched from the Modrinth maven)
 	modCompileOnly("maven.modrinth:mystical-agriculture:8.0.27") { transitive = false }

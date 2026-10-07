@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.21.1-4.0.19
+
+### Added
+
+- Built-in Croptopia compatibility for all 58 farmland crops on NeoForge and Fabric, enabled automatically when Croptopia is installed. Seeds support conversion, analysis, AgriCraft genes, planting, and harvesting using Croptopia's crop models and produce. No new species mutation recipes are included; fruit trees are outside this pack's scope.
+- Optional The One Probe integration on NeoForge. AgriCraft plants, including datapack crops, now show their growth percentage; extended mode also shows species and visible gene stats.
+
 ## 1.21.1-4.0.18
 
 ### Added

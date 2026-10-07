@@ -466,5 +466,7 @@
   "agricraft.datapacks.mysticalagriculture": "Mystical Agriculture extra crops (data)",
   "agricraft.resourcepacks.mysticalagriculture": "Mystical Agriculture extra crops (resources)",
   "agricraft.datapacks.pamhc2crops": "Pam's HarvestCraft 2 - Crops extra crops (data)",
-  "agricraft.resourcepacks.pamhc2crops": "Pam's HarvestCraft 2 - Crops extra crops (resources)"
+  "agricraft.resourcepacks.pamhc2crops": "Pam's HarvestCraft 2 - Crops extra crops (resources)",
+  "agricraft.datapacks.croptopia": "Croptopia extra crops (data)",
+  "agricraft.resourcepacks.croptopia": "Croptopia extra crops (resources)"
 }

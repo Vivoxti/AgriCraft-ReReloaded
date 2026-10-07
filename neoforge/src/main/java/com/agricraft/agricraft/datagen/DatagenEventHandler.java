@@ -86,6 +86,8 @@ public class DatagenEventHandler {
 		if (farmersdelight) {
 			addExtraDataPackProvider("farmersdelight", new RegistrySetBuilder().add(AgriApi.AGRIPLANTS, PlantsDatagen::registerFarmersDelight).add(AgriApi.AGRIMUTATIONS, MutationsDatagen::registerFarmersDelight).add(AgriApi.AGRISOILS, SoilsDatagen::registerFarmersDelight), ModelsDatagen::registerFarmersDelightPlant, ModelsDatagen::registerFarmersDelightSeed, LangDatagen::farmersdelight, event, fileHelper);
 		}
+		addExtraDataPackProvider("croptopia", new RegistrySetBuilder().add(AgriApi.AGRIPLANTS, CroptopiaDatagen::registerPlants),
+				CroptopiaDatagen::registerPlantModels, CroptopiaDatagen::registerSeedModels, CroptopiaDatagen::registerTranslations, event, fileHelper);
 	}
 
 	private static <T extends ModelBuilder<T>> void addProvider(String modid, String folder, Consumer<ModelProvider<T>> consumer, BiFunction<ResourceLocation, ExistingFileHelper, T> builderFromModId, DataGenerator generator, ExistingFileHelper existingFileHelper, boolean includeClient) {

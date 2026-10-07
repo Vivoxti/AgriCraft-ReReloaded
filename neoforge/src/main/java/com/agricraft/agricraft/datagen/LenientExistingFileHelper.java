@@ -17,7 +17,7 @@ import java.util.Set;
 public class LenientExistingFileHelper extends ExistingFileHelper {
 
 	private static final Set<String> EXTERNAL_NAMESPACES = Set.of(
-			"biomesoplenty", "botania", "farmersdelight", "immersiveengineering", "mysticalagriculture", "pamhc2crops"
+			"biomesoplenty", "botania", "croptopia", "farmersdelight", "immersiveengineering", "mysticalagriculture", "pamhc2crops"
 	);
 
 	private final ExistingFileHelper delegate;

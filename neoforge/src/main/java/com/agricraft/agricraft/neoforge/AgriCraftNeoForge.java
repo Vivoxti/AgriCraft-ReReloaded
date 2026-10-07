@@ -16,6 +16,7 @@ import com.agricraft.agricraft.common.handler.VanillaSeedConversion;
 import com.agricraft.agricraft.common.greenhouse.Greenhouses;
 import com.agricraft.agricraft.common.neoforge.IrrigationTankFluidHandler;
 import com.agricraft.agricraft.common.plugin.MysticalAgricultureCompat;
+import com.agricraft.agricraft.compat.theoneprobe.AgriCraftProbePlugin;
 import com.agricraft.agricraft.common.neoforge.registry.NeoForgeGlobalLootModifiers;
 import com.agricraft.agricraft.common.registry.ModBlockEntityTypes;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -34,9 +35,11 @@ import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.InteractionResult;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.InterModComms;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -56,6 +59,7 @@ public class AgriCraftNeoForge {
 		AgriCraft.init();
 		NeoForgeGlobalLootModifiers.register(bus);
 		bus.addListener(AgriCraftNeoForge::onCommonSetup);
+		bus.addListener(AgriCraftNeoForge::onInterModEnqueue);
 		bus.addListener(AgriCraftNeoForge::onRegisterDatapackRegistry);
 		bus.addListener(AgriCraftNeoForge::onAddPackFinders);
 		bus.addListener(AgriCraftNeoForge::onRegisterCapabilities);
@@ -76,6 +80,12 @@ public class AgriCraftNeoForge {
 	public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
 		event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, ModBlockEntityTypes.IRRIGATION_TANK.get(),
 				(tank, side) -> new IrrigationTankFluidHandler(tank));
+	}
+
+	public static void onInterModEnqueue(InterModEnqueueEvent event) {
+		if (ModList.get().isLoaded("theoneprobe")) {
+			InterModComms.sendTo("theoneprobe", "getTheOneProbe", AgriCraftProbePlugin::new);
+		}
 	}
 
 	public static void onRegisterDatapackRegistry(DataPackRegistryEvent.NewRegistry event) {

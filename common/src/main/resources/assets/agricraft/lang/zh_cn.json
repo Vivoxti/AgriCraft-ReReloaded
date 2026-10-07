@@ -957,5 +957,7 @@
   "seed.agricraft.farmersdelight.cabbage": "卷心菜种子",
   "seed.agricraft.farmersdelight.onion": "洋葱",
   "seed.agricraft.farmersdelight.tomato": "番茄种子",
-  "seed.agricraft.farmersdelight.rice": "稻米"
+  "seed.agricraft.farmersdelight.rice": "稻米",
+  "agricraft.datapacks.croptopia": "Croptopia 扩展作物（数据）",
+  "agricraft.resourcepacks.croptopia": "Croptopia 扩展作物（资源）"
 }
