@@ -20,6 +20,8 @@ import com.agricraft.agricraft.compat.theoneprobe.AgriCraftProbePlugin;
 import com.agricraft.agricraft.compat.starfield.StarfieldCompat;
 import com.agricraft.agricraft.common.neoforge.registry.NeoForgeGlobalLootModifiers;
 import com.agricraft.agricraft.common.registry.ModBlockEntityTypes;
+import com.agricraft.agricraft.common.registry.ModItems;
+import net.minecraft.core.registries.Registries;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import com.agricraft.agricraft.common.util.Platform;
@@ -46,6 +48,9 @@ import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
+import net.neoforged.neoforge.registries.datamaps.DataMapsUpdatedEvent;
+import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
+import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 import net.neoforged.neoforgespi.language.IModInfo;
 
 import java.nio.file.Files;
@@ -69,6 +74,7 @@ public class AgriCraftNeoForge {
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onRightClick);
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onRightClickBonemeal);
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onNeighborNotify);
+		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onDataMapsUpdated);
 	}
 
 	public static void onCommonSetup(FMLCommonSetupEvent event) {
@@ -77,6 +83,16 @@ public class AgriCraftNeoForge {
 			event.enqueueWork(MysticalAgricultureCompat::init);
 		}
 //		SereneSeasonPlugin.init();
+	}
+
+	public static void onDataMapsUpdated(DataMapsUpdatedEvent event) {
+		if (event.getCause() != DataMapsUpdatedEvent.UpdateCause.SERVER_RELOAD) {
+			return;
+		}
+		// NeoForge ignores ComposterBlock.COMPOSTABLES. Apply the configured chance
+		// after every data-map load, before the resulting map is synced to clients.
+		event.ifRegistry(Registries.ITEM, registry -> registry.getDataMap(NeoForgeDataMaps.COMPOSTABLES)
+				.put(ModItems.SEED.get().builtInRegistryHolder().key(), new Compostable(CoreConfig.seedCompostValue)));
 	}
 
 	public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {

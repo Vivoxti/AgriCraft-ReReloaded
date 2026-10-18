@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.ComposterBlock;
 public class MinecraftPlugin {
 
 	public static void init() {
-		// add agricraft seeds to the composter
+		// Fabric uses the vanilla map; NeoForge registers its data map on reload.
 		float compostValue = CoreConfig.seedCompostValue;
 		if (compostValue > 0) {
 			ComposterBlock.COMPOSTABLES.put(ModItems.SEED.get(), compostValue);

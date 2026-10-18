@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.21.1-4.0.23
+
+### Fixed
+
+- NeoForge: AgriCraft seeds can be composted again. The compostable data map now uses `seed_compost_value`, including disabling composting at zero, and retains the configured value after a data-pack reload.
+
 ## 1.21.1-4.0.22
 
 ### Fixed
