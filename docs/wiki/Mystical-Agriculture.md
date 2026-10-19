@@ -6,7 +6,7 @@ The packaged compatibility data contains **136 resource-crop definitions**, five
 
 Use the source mod's normal crafting or progression to obtain the initial native seeds. Convert supported seeds through the analyzer and grow them on single AgriCraft sticks. The pack adds **no species mutation recipes**; it does not let wheat mutate directly into diamond seeds or invent resource species.
 
-Every definition sets `cloneable=false`. A single parent cannot spread a clone. **Two mature parents of the same species can still breed offspring and improve genes**, so this restriction does not prohibit all seed multiplication after acquiring two starters. Fertility selection and the ordinary breeding engine still apply.
+Every definition sets `cloneable=false`. By default, a single parent cannot spread a clone. Starting with **4.0.24**, to allow it, set `compat.mysticalagriculture_cloning=true` in `config/agricraft.jsonc` on the server (or in the single-player instance), while keeping `compat.mysticalagriculture=true`. This overrides the cloning flag only for the `mysticalagriculture` namespace; mature-parent selection, Fertility rolls and the configured spread chance still apply. The option defaults to `false` and does not add clipping drops. **Two mature parents of the same species can still breed offspring and improve genes**, so this restriction does not prohibit all seed multiplication after acquiring two starters. Fertility selection and the ordinary breeding engine still apply.
 
 ## Growth and essence balance
 
@@ -15,6 +15,12 @@ Resource crops use base growth chance **0.65**, Growth bonus **0.025**, and rese
 The packaged essence product is a **75% roll for one essence per trial**. Default Gain 1 gives one trial and expected yield 0.75. Gain 9–10 gives four trials and expected yield 3, with possible actual output from 0 to 4. There is no guaranteed four-essence harvest.
 
 The tradeoff is a slower growth roll, no one-parent cloning, and retained access to the source mod's resource progression, while selective breeding improves production once established.
+
+## Clippers
+
+The following clipping protection and separate immature-plant message were added in **4.0.24**.
+
+The packaged crops have no clipping products. Clippers refuse to clip mature crops with “There is nothing worth clipping here.” and preserve their growth. Immature crops instead display “This plant is not mature enough to clip yet.” and also retain their growth. Enabling one-parent cloning does not add clipping products.
 
 ## Essence farmland
 

@@ -260,10 +260,12 @@
   "config.agricraft.compat": "Сумісність з модами",
   "config.agricraft.compat.botania": "Увімкнути сумісність з Botania",
   "config.agricraft.compat.mysticalagriculture": "Увімкнути сумісність з Mystical Agriculture",
+  "config.agricraft.compat.mysticalagriculture_cloning": "Дозволити клонування Mystical Agriculture від однієї рослини",
   "config.agricraft.compat.pneumaticcraft": "Увімкнути сумісність з PneumaticCraft",
   "config.agricraft.compat.industrialforegoing": "Увімкнути сумісність з Industrial Foregoing",
 
   "agricraft.message.clipping_impossible": "Тут нема чого обрізати.",
+  "agricraft.message.clipping_immature": "Ця рослина ще не дозріла для обрізання.",
   "agricraft.message.trowel_weed": "Не можу дотягнутися — спершу треба прибрати бур'яни.",
   "agricraft.message.trowel_plant": "Тут вже є рослина.",
   "agricraft.message.trowel_no_plant": "Тут нема чого забирати.",

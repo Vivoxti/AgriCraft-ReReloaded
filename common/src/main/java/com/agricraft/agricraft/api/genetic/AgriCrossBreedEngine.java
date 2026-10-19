@@ -1,6 +1,7 @@
 package com.agricraft.agricraft.api.genetic;
 
 import com.agricraft.agricraft.api.plant.AgriPlant;
+import com.agricraft.agricraft.api.config.CompatConfig;
 import com.agricraft.agricraft.api.config.CoreConfig;
 import com.agricraft.agricraft.api.crop.AgriCrop;
 import com.agricraft.agricraft.api.stat.AgriStat;
@@ -106,8 +107,11 @@ public class AgriCrossBreedEngine {
 
 	protected boolean doClone(AgriCrop target, AgriCrop parent, RandomSource random) {
 		AgriPlant plant = parent.getPlant();
+		boolean mysticalAgricultureCloning = CompatConfig.enableMysticalAgriculture
+				&& CompatConfig.allowMysticalAgricultureCloning
+				&& parent.getPlantId().startsWith(CompatConfig.MYSTICAL_AGRICULTURE_MOD_ID + ":");
 		// Try spawning a clone if cloning is allowed
-		if (plant.allowsCloning(parent.getGrowthStage())) {
+		if (plant.allowsCloning(parent.getGrowthStage()) || mysticalAgricultureCloning) {
 			// roll for spread chance
 			if (random.nextDouble() < parent.getPlant().getSpreadChance(parent.getGrowthStage())) {
 				AgriGenome clone = this.getCloner().clone(target, parent.getGenome(), random);

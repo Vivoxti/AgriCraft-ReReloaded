@@ -261,10 +261,12 @@
   "config.agricraft.compat.starfield": "Включить совместимость со Starfield Pastoral (NeoForge)",
   "config.agricraft.compat.botania": "Включить совместимость с Botania",
   "config.agricraft.compat.mysticalagriculture": "Включить совместимость с Mystical Agriculture",
+  "config.agricraft.compat.mysticalagriculture_cloning": "Разрешить клонирование Mystical Agriculture от одного растения",
   "config.agricraft.compat.pneumaticcraft": "Включить совместимость с PneumaticCraft",
   "config.agricraft.compat.industrialforegoing": "Включить совместимость с Industrial Foregoing",
 
   "agricraft.message.clipping_impossible": "Здесь нечего обрезать.",
+  "agricraft.message.clipping_immature": "Это растение ещё не созрело для обрезки.",
   "agricraft.message.trowel_weed": "Не могу дотянуться — сначала нужно убрать сорняки.",
   "agricraft.message.trowel_plant": "Здесь уже есть растение.",
   "agricraft.message.trowel_no_plant": "Здесь нечего забирать.",

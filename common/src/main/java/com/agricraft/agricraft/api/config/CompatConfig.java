@@ -23,6 +23,10 @@ public final class CompatConfig {
 	@Comment("Set to false to disable compatibility with Mystical Agriculture (in case things break)")
 	public static boolean enableMysticalAgriculture = true;
 
+	@ConfigEntry(id = "mysticalagriculture_cloning", type = EntryType.BOOLEAN, translation = "config.agricraft.compat.mysticalagriculture_cloning")
+	@Comment("Set to true to allow Mystical Agriculture crops to spread from a single mature parent, overriding their cloneable data flag. Requires Mystical Agriculture compatibility; normal fertility and spread chance rolls still apply.")
+	public static boolean allowMysticalAgricultureCloning = false;
+
 	@ConfigEntry(id = "pneumaticcraft", type = EntryType.BOOLEAN, translation = "config.agricraft.compat.pneumaticcraft")
 	@Comment("If true, harvesting drones will be able to harvest AgriCraft crops")
 	public static boolean enablePneumaticCraft = true;

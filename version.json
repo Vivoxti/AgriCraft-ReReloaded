@@ -1,10 +1,11 @@
 {
   "homepage": "https://github.com/Vivoxti/AgriCraft-ReReloaded/releases",
   "promos": {
-    "1.21.1-latest": "4.0.23",
-    "1.21.1-recommended": "4.0.23"
+    "1.21.1-latest": "4.0.24",
+    "1.21.1-recommended": "4.0.24"
   },
   "1.21.1": {
+    "4.0.24": "Added optional single-parent Mystical Agriculture cloning (disabled by default). Clippers now preserve growth on plants without clipping products and explain when a plant is immature. See CHANGELOG.md.",
     "4.0.23": "Fixed NeoForge seed composting, including the configured compost chance, disabling at zero, hopper insertion and data-pack reloads. See CHANGELOG.md.",
     "4.0.22": "Updated crop-stick artwork and collision shapes, eight revised crafting recipes, and contributor credit for 12lewisFTW. See CHANGELOG.md.",
     "4.0.21": "Updated sprinkler model and texture; fixed offhand clippers triggering ordinary harvesting. See CHANGELOG.md.",

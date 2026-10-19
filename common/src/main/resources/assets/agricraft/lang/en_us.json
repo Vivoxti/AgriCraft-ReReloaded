@@ -263,10 +263,12 @@
   "config.agricraft.compat.starfield": "Enable Starfield Pastoral compatibility (NeoForge)",
   "config.agricraft.compat.botania": "Enable Botania compat",
   "config.agricraft.compat.mysticalagriculture": "Enable Mystical Agriculture compat",
+  "config.agricraft.compat.mysticalagriculture_cloning": "Allow Mystical Agriculture cloning from one parent",
   "config.agricraft.compat.pneumaticcraft": "Enable PneumaticCraft compat",
   "config.agricraft.compat.industrialforegoing": "Enable Industrial Foregoing compat",
 
   "agricraft.message.clipping_impossible": "There is nothing worth clipping here.",
+  "agricraft.message.clipping_immature": "This plant is not mature enough to clip yet.",
   "agricraft.message.trowel_weed": "I can not reach well, I should remove the weeds first.",
   "agricraft.message.trowel_plant": "There already is a plant here.",
   "agricraft.message.trowel_no_plant": "There is nothing here to grab.",

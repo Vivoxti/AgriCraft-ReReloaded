@@ -51,6 +51,7 @@ Ordinary seed bags default to 64 seeds and an enchantment cost of 10 levels. The
 |---|---|---|
 | `compat.starfield` | `true` | Verified Starfield 0.6.3fix1 on NeoForge |
 | `compat.mysticalagriculture` | `true` | Mystical Agriculture activation and NeoForge native farmland checks |
+| `compat.mysticalagriculture_cloning` | `false` | Added in 4.0.24. Allows one-parent cloning for Mystical Agriculture crops when compatibility is enabled; retains maturity, Fertility and spread chance checks |
 | `compat.industrialforegoing` | `true` | NeoForge Plant Gatherer adapter |
 | `compat.pneumaticcraft` | `true` | NeoForge harvesting-drone adapter |
 

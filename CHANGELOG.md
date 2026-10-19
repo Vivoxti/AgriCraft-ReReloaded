@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.21.1-4.0.24
+
+### Added
+
+- Added `compat.mysticalagriculture_cloning` (default `false`) to allow Mystical Agriculture crops to spread from one mature parent when enabled. Normal Fertility selection and spread chance still apply.
+
+### Fixed
+
+- Clippers no longer reset a plant's growth when it has no clipping products. Immature plants now display a separate message explaining that they need to mature first.
+
 ## 1.21.1-4.0.23
 
 ### Fixed
