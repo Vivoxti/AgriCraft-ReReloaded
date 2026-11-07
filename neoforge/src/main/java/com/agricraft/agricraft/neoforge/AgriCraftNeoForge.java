@@ -13,6 +13,8 @@ import com.agricraft.agricraft.common.commands.DumpRegistriesCommand;
 import com.agricraft.agricraft.common.commands.GiveSeedCommand;
 import com.agricraft.agricraft.common.handler.DenyBonemeal;
 import com.agricraft.agricraft.common.handler.VanillaSeedConversion;
+import com.agricraft.agricraft.common.network.SeedBagSorterPayload;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import com.agricraft.agricraft.common.greenhouse.Greenhouses;
 import com.agricraft.agricraft.common.neoforge.IrrigationTankFluidHandler;
 import com.agricraft.agricraft.common.plugin.MysticalAgricultureCompat;
@@ -70,6 +72,7 @@ public class AgriCraftNeoForge {
 		bus.addListener(AgriCraftNeoForge::onRegisterDatapackRegistry);
 		bus.addListener(AgriCraftNeoForge::onAddPackFinders);
 		bus.addListener(AgriCraftNeoForge::onRegisterCapabilities);
+		bus.addListener(AgriCraftNeoForge::onRegisterPayloads);
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onRegisterCommands);
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onRightClick);
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onRightClickBonemeal);
@@ -93,6 +96,11 @@ public class AgriCraftNeoForge {
 		// after every data-map load, before the resulting map is synced to clients.
 		event.ifRegistry(Registries.ITEM, registry -> registry.getDataMap(NeoForgeDataMaps.COMPOSTABLES)
 				.put(ModItems.SEED.get().builtInRegistryHolder().key(), new Compostable(CoreConfig.seedCompostValue)));
+	}
+
+	public static void onRegisterPayloads(RegisterPayloadHandlersEvent event) {
+		event.registrar("1").playToServer(SeedBagSorterPayload.TYPE, SeedBagSorterPayload.CODEC,
+				(payload, context) -> SeedBagSorterPayload.handle(context.player(), payload.delta()));
 	}
 
 	public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {

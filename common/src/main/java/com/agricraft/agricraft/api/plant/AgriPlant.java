@@ -152,6 +152,10 @@ public class AgriPlant {
 		return this.seeds.stream().anyMatch(seed -> seed.isVariant(stack));
 	}
 
+	public List<AgriSeed> getSeeds() {
+		return Collections.unmodifiableList(this.seeds);
+	}
+
 	public AgriSeed getSeed(ItemStack stack) {
 		return this.seeds.stream().filter(seed -> seed.isVariant(stack)).findFirst().orElse(null);
 	}

@@ -16,6 +16,10 @@ FORBIDDEN = (
     "data/agricraft/starfield_probe_catalog.json",
     "data/agricraft/agricraft/mutations/starfield_probe.json",
     "agricraft-save-diagnostics.mixins.json",
+    "seedfoodprobe/",
+    "seedbagprobe/",
+    "cmdprobe/",
+    "devseeds/",
 )
 
 # Loom writes optional @Pseudo targets and @Inject method selectors as slash-separated

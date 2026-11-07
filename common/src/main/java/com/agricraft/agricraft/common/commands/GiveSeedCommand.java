@@ -10,6 +10,7 @@ import com.agricraft.agricraft.api.genetic.AgriGenome;
 import com.agricraft.agricraft.api.stat.AgriStat;
 import com.agricraft.agricraft.api.stat.AgriStatRegistry;
 import com.agricraft.agricraft.common.item.AgriSeedItem;
+import com.agricraft.agricraft.common.util.LangUtils;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -78,7 +79,7 @@ public class GiveSeedCommand {
 		}
 		ItemStack itemStack = AgriSeedItem.toStack(optional.get());
 		if (giveItemStack(itemStack, source.getPlayer(), source.getLevel())) {
-			source.sendSuccess(() -> Component.translatable("agricraft.command.seed_default", plant), true);
+			source.sendSuccess(() -> Component.translatable("agricraft.command.seed_default", LangUtils.plantName(plant.toString())), true);
 			return 1;
 		}
 		return 0;
@@ -96,7 +97,7 @@ public class GiveSeedCommand {
 						.toList());
 		ItemStack itemStack = AgriSeedItem.toStack(genome);
 		if (giveItemStack(itemStack, source.getPlayer(), source.getLevel())) {
-			source.sendSuccess(() -> Component.translatable("agricraft.command.seed_all", plant, value), true);
+			source.sendSuccess(() -> Component.translatable("agricraft.command.seed_all", LangUtils.plantName(plant.toString()), value), true);
 			return 1;
 		}
 		return 0;
@@ -129,7 +130,7 @@ public class GiveSeedCommand {
 		AgriGenome genome = new AgriGenome(new AgriGenePair<>(AgriGeneRegistry.getInstance().getGeneSpecies(), allele), genePairs);
 		ItemStack itemStack = AgriSeedItem.toStack(genome);
 		if (giveItemStack(itemStack, source.getPlayer(), source.getLevel())) {
-			source.sendSuccess(() -> Component.translatable("agricraft.command.seed_distinct", plant, distincts), true);
+			source.sendSuccess(() -> Component.translatable("agricraft.command.seed_distinct", LangUtils.plantName(plant.toString()), distincts), true);
 			return 1;
 		}
 		return 0;

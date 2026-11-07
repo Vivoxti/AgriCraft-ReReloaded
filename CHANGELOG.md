@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.21.1-4.0.25
+
+### Fixed
+
+- AgriCraft seeds can be fed to animals again. They count as their vanilla seed item for animal food and tempt tags: chickens breed on wheat, beetroot, melon, pumpkin and torchflower seeds, parrots can be tamed, and sniffers, pigs, rabbits, foxes, pandas, turtles, camels, striders and hoglins accept their matching seeds. Villagers and recipes still see the AgriCraft seed item.
+- The seed bag stores seeds again instead of deleting them. Inserting, extracting, planting from the bag and changing its sorter are now saved on the bag, and identical seeds share one entry.
+- Sneak + scroll with a seed bag in the main hand changes its sorter again, on both NeoForge and Fabric. The choice is saved on the server and shown in the action bar; all seven sorters are available from the start.
+- `/agricraft_seed` no longer disconnects the player after giving the seed. Its chat reply now uses the plant's name.
+
 ## 1.21.1-4.0.24
 
 ### Added

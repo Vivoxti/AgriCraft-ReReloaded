@@ -43,7 +43,7 @@ Each of `gain`, `growth`, `strength`, `resistance`, `fertility` and `mutativity`
 
 The actual raking option is **`core.raking_drops_items`**. Crop-stick trampling protection does not promise that the underlying farmland itself cannot turn to dirt. These ordinary weed settings do not create weeds on native Starfield crops.
 
-Ordinary seed bags default to 64 seeds and an enchantment cost of 10 levels. The file key is spelled **`core.seed_bag_capactity`** in this release, with that existing spelling. Do not silently substitute `capacity` when editing the file. Native Starfield seeds are not supported as converted seed-bag contents.
+Ordinary seed bags default to 64 seeds and an enchantment cost of 10 levels. The file key is spelled **`core.seed_bag_capactity`** in this release, with that existing spelling. Do not silently substitute `capacity` when editing the file. Native Starfield seeds are not supported as converted seed-bag contents. Hold a seed bag in the main hand, sneak and scroll the mouse wheel to change how its contents are sorted; the bag plants and releases its first seed under the current sorter.
 
 ## Native compatibility switches
 

@@ -1,35 +1,31 @@
 package com.agricraft.agricraft.fabric.mixin;
 
-import com.agricraft.agricraft.common.item.SeedBagItem;
-import com.agricraft.agricraft.common.registry.ModItems;
+import com.agricraft.agricraft.common.network.SeedBagSorterPayload;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Inventory;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MouseHandler.class)
 public class MouseHandlerMixin {
 
-	@Shadow private double accumulatedScrollY;
-
-	@Inject(method = "onScroll(JDD)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;swapPaint(D)V"), cancellable = true)
-	private void onMouseScroll(long windowPointer, double xOffset, double yOffset, CallbackInfo ci) {
-		LocalPlayer player = Minecraft.getInstance().player;
-		if (player == null || !player.isShiftKeyDown() || !player.getItemInHand(InteractionHand.MAIN_HAND).is(ModItems.SEED_BAG.get())) {
-			return;
+	/**
+	 * Sneak + scroll with a seed bag in the main hand changes the bag sorter instead of the hotbar slot.
+	 * The scroll amount is the argument vanilla passes to {@code swapPaint}.
+	 */
+	@WrapWithCondition(method = "onScroll(JDD)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Inventory;swapPaint(D)V"))
+	private boolean agricraft$scrollSeedBag(Inventory inventory, double scroll) {
+		if (!SeedBagSorterPayload.shouldCapture(Minecraft.getInstance().player)) {
+			return true;
 		}
-		ci.cancel();
-		SeedBagItem.changeSorter(player.getItemInHand(InteractionHand.MAIN_HAND), (int) this.accumulatedScrollY);
-		net.minecraft.nbt.CompoundTag tag = player.getItemInHand(InteractionHand.MAIN_HAND).getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA, net.minecraft.world.item.component.CustomData.EMPTY).copyTag();
-		int s = tag.getInt("sorter");
-		String id = SeedBagItem.SORTERS.get(s).getId().toString().replace(":", ".");
-		player.displayClientMessage(Component.translatable("agricraft.tooltip.bag.sorter")
-				.append(Component.translatable("agricraft.tooltip.bag.sorter." + id)), true);
+		int step = SeedBagSorterPayload.stepFromScroll(scroll);
+		if (step != 0) {
+			ClientPlayNetworking.send(new SeedBagSorterPayload(step));
+		}
+		return false;
 	}
+
 }
