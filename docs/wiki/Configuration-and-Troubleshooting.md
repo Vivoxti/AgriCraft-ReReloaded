@@ -54,8 +54,9 @@ Ordinary seed bags default to 64 seeds and an enchantment cost of 10 levels. The
 | `compat.mysticalagriculture_cloning` | `false` | Added in 4.0.24. Allows one-parent cloning for Mystical Agriculture crops when compatibility is enabled; retains maturity, Fertility and spread chance checks |
 | `compat.industrialforegoing` | `true` | NeoForge Plant Gatherer adapter |
 | `compat.pneumaticcraft` | `true` | NeoForge harvesting-drone adapter |
+| `compat.create_harvester_reverts_growth` | `true` | Added in 4.0.26. NeoForge Create harvesters set unripe ordinary crops back one stage; `false` leaves them untouched |
 
-There is no active `compat.create`, `compat.botania` or REI integration switch. A setting's existence alone does not add a loader-specific implementation to Fabric. The separate [irrigation and greenhouse guide](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Soil-Irrigation-and-Greenhouses) documents capacities, actual sprinkler water use and enclosure defaults.
+There is no active `compat.create` on/off switch, `compat.botania` or REI integration switch. A setting's existence alone does not add a loader-specific implementation to Fabric. The separate [irrigation and greenhouse guide](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Soil-Irrigation-and-Greenhouses) documents capacities, actual sprinkler water use and enclosure defaults.
 
 ## Diagnose by symptom
 
@@ -64,7 +65,7 @@ There is no active `compat.create`, `compat.botania` or REI integration switch. 
 | Source seed does not convert | Exact supported seed item, loaded source mod, enabled crop data, analyzer input; BOP flowers may have no native seed input |
 | Compatible crop is missing from a viewer | Loaded plant registry, required native items/addons and viewer plugin; native Starfield is outside ordinary custom categories |
 | Ordinary plant does not grow | Soil, light, weeds and special block/tier requirements; Growth cannot bypass them |
-| Ordinary crops regress under Create | Harvest passes are reaching immature crops; schedule passes for maturity |
+| Ordinary crops regress under Create | Harvest passes are reaching immature crops; schedule passes for maturity or set `compat.create_harvester_reverts_growth` to `false` |
 | Native Starfield has no genes | NeoForge, exact verified Starfield release, `compat.starfield`, restart; inspect with the actual native tool/provider |
 | Native plant has water but no extra immediate stage | Irrigation waters; it does not advance Starfield's daily calendar |
 | Drone harvests but chest is empty | Ground drops, pickup step, delivery/export step, filters and cargo capacity |

@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.21.1-4.0.26
+
+### Added
+
+- Added `compat.create_harvester_reverts_growth` (default `true`, NeoForge with Create). When a Create Mechanical Harvester passes over an AgriCraft crop that is not mature yet, it sets the crop and its weeds back one growth stage, as before. Set the option to `false` to leave unripe crops untouched; mature crops are harvested either way.
+
+### Fixed
+
+- Create harvesters no longer stall in front of crops on crop sticks while `core.crop_sticks_collide` is enabled. Harvesters now move through AgriCraft crop blocks, including empty sticks, without breaking them; players and mobs still collide with the sticks.
+
 ## 1.21.1-4.0.25
 
 ### Fixed

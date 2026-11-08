@@ -266,6 +266,7 @@
   "config.agricraft.compat.mysticalagriculture_cloning": "Allow Mystical Agriculture cloning from one parent",
   "config.agricraft.compat.pneumaticcraft": "Enable PneumaticCraft compat",
   "config.agricraft.compat.industrialforegoing": "Enable Industrial Foregoing compat",
+  "config.agricraft.compat.create_harvester_reverts_growth": "Create harvesters revert growth of unripe crops",
 
   "agricraft.message.clipping_impossible": "There is nothing worth clipping here.",
   "agricraft.message.clipping_immature": "This plant is not mature enough to clip yet.",

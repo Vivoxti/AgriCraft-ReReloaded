@@ -1,15 +1,19 @@
 package com.agricraft.agricraft.mixin.neoforge.create;
 
+import com.agricraft.agricraft.api.config.CompatConfig;
+import com.agricraft.agricraft.common.block.CropBlock;
 import com.agricraft.agricraft.common.block.entity.CropBlockEntity;
 import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
 import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMovementBehaviour;
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Lets Create's harvester actor harvest AgriCraft crops using AgriCraft's own harvesting
@@ -46,11 +50,14 @@ public class HarvesterMovementBehaviourMixin {
 			return;
 		}
 
-		if (!(world.getBlockEntity(pos) instanceof CropBlockEntity crop)) {
+		if (!(world.getBlockState(pos).getBlock() instanceof CropBlock)) {
 			return;
 		}
+		// AgriCraft crop blocks are handled here exclusively: isValidOther() reports them as cuttable
+		// (so harvesters pass through colliding crop sticks), which would otherwise make Create break them.
+		ci.cancel();
 
-		if (!crop.hasPlant()) {
+		if (!(world.getBlockEntity(pos) instanceof CropBlockEntity crop) || !crop.hasPlant()) {
 			return;
 		}
 
@@ -62,11 +69,28 @@ public class HarvesterMovementBehaviourMixin {
 			if (crop.hasWeeds()) {
 				crop.setWeedGrowthStage(crop.getWeed().getInitialGrowthStage());
 			}
-		} else {
+		} else if (CompatConfig.createHarvesterRevertsGrowth) {
 			crop.setGrowthStage(crop.getGrowthStage().getPrevious(crop, world.random));
 			if (crop.hasWeeds()) {
 				crop.setWeedGrowthStage(crop.getWeedGrowthStage().getPrevious(crop, world.random));
 			}
+		}
+	}
+
+	/**
+	 * Create's contraption collider stops a moving contraption when a harvester runs into a block with a collision
+	 * shape that it does not consider harvestable. AgriCraft crop sticks collide (config {@code crop_sticks_collide}),
+	 * so report every AgriCraft crop block as cuttable: harvesters move through it and
+	 * {@link #agricraft$harvest} decides what actually happens to the crop.
+	 */
+	@Inject(
+			method = "isValidOther(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z",
+			at = @At("HEAD"),
+			cancellable = true
+	)
+	private void agricraft$passThroughCropSticks(Level world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
+		if (state.getBlock() instanceof CropBlock) {
+			cir.setReturnValue(true);
 		}
 	}
 }

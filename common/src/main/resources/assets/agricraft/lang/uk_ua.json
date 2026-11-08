@@ -263,6 +263,7 @@
   "config.agricraft.compat.mysticalagriculture_cloning": "Дозволити клонування Mystical Agriculture від однієї рослини",
   "config.agricraft.compat.pneumaticcraft": "Увімкнути сумісність з PneumaticCraft",
   "config.agricraft.compat.industrialforegoing": "Увімкнути сумісність з Industrial Foregoing",
+  "config.agricraft.compat.create_harvester_reverts_growth": "Комбайни Create відкочують ріст незрілих рослин",
 
   "agricraft.message.clipping_impossible": "Тут нема чого обрізати.",
   "agricraft.message.clipping_immature": "Ця рослина ще не дозріла для обрізання.",

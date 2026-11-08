@@ -10,9 +10,13 @@ Plan enough storage and unloading capacity for [Gain 9–10 harvests](https://gi
 
 ## Time passes for mature ordinary crops
 
-For an ordinary AgriCraft crop with a plant, the adapter calls the crop's harvest action. If that action does not harvest, the adapter moves its growth stage back to a previous stage; weeds can also regress. **Repeatedly sweeping immature ordinary AgriCraft plants can delay their growth.** Schedule harvest passes around maturity rather than leaving an early-stage bed under continuous passes.
+For an ordinary AgriCraft crop with a plant, the adapter calls the crop's harvest action. If that action does not harvest, the adapter moves its growth stage back to a previous stage; weeds can also regress. **Repeatedly sweeping immature ordinary AgriCraft plants can delay their growth.** Schedule harvest passes around maturity rather than leaving an early-stage bed under continuous passes, or set `compat.create_harvester_reverts_growth` to `false` (added in 4.0.26) so harvesters leave unripe crops untouched.
 
 This behavior differs from the native Starfield path. Do not infer the same handling for both kinds of crop.
+
+## Crop sticks
+
+Since 4.0.26 harvesters move through AgriCraft crop blocks even when `core.crop_sticks_collide` is enabled, so beds on crop sticks no longer stop a contraption. Empty and cross sticks are passed over without being broken; players and mobs still collide with sticks.
 
 ## Native Starfield fields
 
@@ -24,8 +28,8 @@ Native primary produce gets its source genome and Gain bonus once. No player is 
 
 World-dropped items still need collection before they despawn. Storage should accept full stacks. An external destination that accepts output and then throws an error cannot be safely rolled back into a second unharvested crop. This adapter does not promise recovery of arbitrary failing inventory systems or canceled item drops.
 
-The adapter is built into NeoForge and has no separate `compat.create` switch. Real contraption operation, native output genomes and reload behavior are documented in the [gameplay acceptance report](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/1.21.1/docs/starfield/GAMEPLAY-ACCEPTANCE.md). Converted crops retain their ordinary harvesting rules.
+The adapter is built into NeoForge and has no separate `compat.create` on/off switch; `compat.create_harvester_reverts_growth` only controls what happens to unripe crops. Real contraption operation, native output genomes and reload behavior are documented in the [gameplay acceptance report](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/1.21.1/docs/starfield/GAMEPLAY-ACCEPTANCE.md). Converted crops retain their ordinary harvesting rules.
 
 ## Basis of this guide
 
-Defaults refer to AgriCraft ReReloaded **4.0.20**, Minecraft **1.21.1**. Modpacks can override data and settings. [Harvester behavior](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/neoforge/src/main/java/com/agricraft/agricraft/mixin/neoforge/create/HarvesterMovementBehaviourMixin.java).
+Defaults refer to AgriCraft ReReloaded **4.0.26**, Minecraft **1.21.1**. Modpacks can override data and settings. [Harvester behavior](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/4.0.26/neoforge/src/main/java/com/agricraft/agricraft/mixin/neoforge/create/HarvesterMovementBehaviourMixin.java).

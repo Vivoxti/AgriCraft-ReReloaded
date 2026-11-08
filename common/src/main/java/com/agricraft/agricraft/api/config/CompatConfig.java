@@ -35,6 +35,10 @@ public final class CompatConfig {
 	@Comment("If set to true, plant gatherer will be able to harvest AgriCraft crops")
 	public static boolean enableIndustrialForegoing = true;
 
+	@ConfigEntry(id = "create_harvester_reverts_growth", type = EntryType.BOOLEAN, translation = "config.agricraft.compat.create_harvester_reverts_growth")
+	@Comment("If true, a Create harvester passing over an AgriCraft crop that is not mature yet knocks it (and its weeds) back one growth stage. Set to false to leave unripe crops untouched.")
+	public static boolean createHarvesterRevertsGrowth = true;
+
 	/**
 	 * Checks whether AgriCraft compatibility for a mod is enabled.
 	 *
