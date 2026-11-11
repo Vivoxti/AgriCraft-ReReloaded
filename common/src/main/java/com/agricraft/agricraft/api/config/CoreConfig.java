@@ -16,6 +16,10 @@ public final class CoreConfig {
 	@Comment("Set to false to prevent AgriCraft from enabling its mod compatibility datapacks / resourcepacks by default")
 	public static boolean enablePacksByDefault = true;
 
+	@ConfigEntry(id = "load_default_plants", type = EntryType.BOOLEAN, translation = "config.agricraft.core.load_default_plants")
+	@Comment("Set to false to stop AgriCraft from loading its built-in plants and mutations (vanilla crops and AgriCraft's own resource crops), e.g. for fully custom modpacks. Soils, weeds and fertilizers are kept, and plants/mutations from datapacks (including overrides with the same id) still load. Applies when a world is loaded.")
+	public static boolean loadDefaultPlants = true;
+
 	@ConfigEntry(id = "crop_sticks_prevent_trampling", type = EntryType.BOOLEAN, translation = "config.agricraft.core.crop_sticks_prevent_trampling")
 	@Comment("Set to true to prevent crops with crop sticks from being destroyed when farmland is trampled into dirt")
 	public static boolean cropSticksPreventTrampling = true;

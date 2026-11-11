@@ -211,6 +211,7 @@
 
   "config.agricraft.core": "Основні",
   "config.agricraft.core.register_packs_by_default": "Реєструвати паки сумісності з модами за замовчуванням",
+  "config.agricraft.core.load_default_plants": "Завантажувати вбудовані рослини AgriCraft",
   "config.agricraft.core.crop_sticks_prevent_trampling": "Опори для рослин запобігають витоптуванню",
   "config.agricraft.core.plant_off_crop_sticks": "Посадка поза опорами для рослин",
   "config.agricraft.core.crop_sticks_collide": "Опори для рослин мають колізію",

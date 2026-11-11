@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.21.1-4.0.27
+
+### Added
+
+- Added `core.load_default_plants` (default `true`). Set it to `false` to stop AgriCraft from loading its built-in plants and mutations (vanilla crops and AgriCraft's own resource crops), so modpacks can ship a fully custom crop set from a datapack. Soils, weeds, fertilizers and the mod compatibility packs are unaffected, and datapack files that override a built-in plant id still load. The option is read when a world loads.
+
 ## 1.21.1-4.0.26
 
 ### Added

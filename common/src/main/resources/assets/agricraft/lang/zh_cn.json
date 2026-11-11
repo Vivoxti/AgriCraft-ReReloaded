@@ -202,6 +202,7 @@
   "agricraft.command.seed_distinct": "已给予 %s 作为种子，性状为 %s",
   "config.agricraft.core": "核心",
   "config.agricraft.core.register_packs_by_default": "默认注册模组兼容包",
+  "config.agricraft.core.load_default_plants": "加载 AgriCraft 内置作物",
   "config.agricraft.core.crop_sticks_prevent_trampling": "作物架防止踩踏",
   "config.agricraft.core.plant_off_crop_sticks": "可在作物架之外种植",
   "config.agricraft.core.crop_sticks_collide": "作物架具有碰撞体积",

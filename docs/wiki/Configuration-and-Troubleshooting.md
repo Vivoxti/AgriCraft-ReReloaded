@@ -7,6 +7,7 @@ AgriCraft stores its settings in **`config/agricraft.jsonc`**, using [Resourcefu
 | Setting | Default | Effect |
 |---|---|---|
 | `core.register_packs_by_default` | `true` | Enables automatic compatibility packs when their source mod is present |
+| `core.load_default_plants` | `true` | When false, AgriCraft's built-in plants and mutations (vanilla crops and AgriCraft resource crops) are not loaded; soils, weeds, fertilizers, compatibility packs and datapack plants still load. Applies on world load |
 | `core.override_vanilla_farming` | `true` | Allows the native-seed planting interception/conversion path |
 | `core.converts_seed_only_in_analyzer` | `false` | When override is active, limits that conversion path to the analyzer if set true |
 | `core.plant_off_crop_sticks` | `true` | Allows AgriCraft seeds to be planted outside existing sticks |
