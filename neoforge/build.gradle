@@ -66,6 +66,9 @@ dependencies {
 	modCompileOnly("net.createmod.ponder:ponder-neoforge:$ponder_version+mc$minecraft_version")
 	modCompileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-$minecraft_version:$flywheel_version")
 	modCompileOnly("com.tterrag.registrate:Registrate:$registrate_version")
+	// Create: Integrated Farming (optional) - only needed to compile the Vacuum Harvester compat mixin
+	// (agricraft-cif.mixins.json, applied only when the mod is installed).
+	modCompileOnly("maven.modrinth:create-integrated-farming:$cif_version") { transitive = false }
 }
 
 shadowJar {

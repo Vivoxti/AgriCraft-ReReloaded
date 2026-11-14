@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.21.1-4.0.28
+
+### Added
+
+- Create: Integrated Farming compatibility (NeoForge, Create: Integrated Farming 1.3.0+): the Vacuum Harvester, both placed as a block and mounted on a contraption, now harvests AgriCraft crops, on crop sticks or planted directly. Mature plants give their normal genetic harvest products and return to the species' post-harvest stage; unripe plants, crop sticks and empty sticks are left untouched. Before, the Vacuum Harvester ignored AgriCraft crops entirely.
+
+### Fixed
+
+- Harvesting, clipping or raking no longer crashes the server when a plant or weed product points to an empty item tag (for example a modpack that emptied `#agricraft:nuggets/copper` while unifying nuggets) or to an unknown item. That product is skipped, the rest of the harvest works normally, and AgriCraft logs one warning naming the empty tag.
+
 ## 1.21.1-4.0.27
 
 ### Added

@@ -5,7 +5,6 @@ import com.agricraft.agricraft.api.codecs.AgriRequirement;
 import com.agricraft.agricraft.api.config.CoreConfig;
 import com.agricraft.agricraft.api.crop.AgriCrop;
 import com.agricraft.agricraft.api.crop.AgriGrowthStage;
-import com.agricraft.agricraft.common.util.Platform;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.component.DataComponents;
@@ -16,7 +15,6 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.Item;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.ItemStack;
@@ -98,13 +96,13 @@ public class AgriWeed {
 			if (random.nextDouble() < probability) {
 				this.rakeProducts.stream().filter(product -> product.shouldDrop(random))
 						.forEach(product -> {
-							List<Item> possible = Platform.get().getItemsFromLocation(product.item());
-							Item item = possible.get(random.nextInt(possible.size()));
-							ItemStack itemStack = new ItemStack(item, product.getAmount(random));
-							if (!product.nbt().isEmpty()) {
-								itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().merge(product.nbt());
-							}
-							consumer.accept(itemStack);
+							product.pickItem(random).ifPresent(item -> {
+								ItemStack itemStack = new ItemStack(item, product.getAmount(random));
+								if (!product.nbt().isEmpty()) {
+									itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().merge(product.nbt());
+								}
+								consumer.accept(itemStack);
+							});
 						});
 			}
 		}

@@ -47,6 +47,10 @@ config = "agricraft-neoforge.mixins.json"
 [[mixins]]
 config = "agricraft-starfield.mixins.json"
 
+# Create: Integrated Farming compat (Vacuum Harvester). The config plugin skips it when the mod is absent.
+[[mixins]]
+config = "agricraft-cif.mixins.json"
+
 [[dependencies.agricraft]]
 modId="create"
 type="optional"

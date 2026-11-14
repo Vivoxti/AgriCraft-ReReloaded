@@ -36,7 +36,6 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.Item;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.ItemStack;
@@ -180,13 +179,13 @@ public class AgriPlant {
 		if (growthStage.isMature()) {
 			this.products.stream().filter(product -> product.shouldDrop(random))
 					.forEach(product -> {
-						List<Item> possible = Platform.get().getItemsFromLocation(product.item());
-						Item item = possible.get(random.nextInt(possible.size()));
-						ItemStack itemStack = new ItemStack(item, product.getAmount(random));
-						if (!product.nbt().isEmpty()) {
-							itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().merge(product.nbt());
-						}
-						products.accept(itemStack);
+						product.pickItem(random).ifPresent(item -> {
+							ItemStack itemStack = new ItemStack(item, product.getAmount(random));
+							if (!product.nbt().isEmpty()) {
+								itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().merge(product.nbt());
+							}
+							products.accept(itemStack);
+						});
 					});
 		}
 
@@ -202,13 +201,13 @@ public class AgriPlant {
 		if (growthStage.isMature()) {
 			this.clipProducts.stream().filter(product -> product.shouldDrop(random))
 					.forEach(product -> {
-						List<Item> possible = Platform.get().getItemsFromLocation(product.item());
-						Item item = possible.get(random.nextInt(possible.size()));
-						ItemStack itemStack = new ItemStack(item, product.getAmount(random));
-						if (!product.nbt().isEmpty()) {
-							itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().merge(product.nbt());
-						}
-						products.accept(itemStack);
+						product.pickItem(random).ifPresent(item -> {
+							ItemStack itemStack = new ItemStack(item, product.getAmount(random));
+							if (!product.nbt().isEmpty()) {
+								itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().merge(product.nbt());
+							}
+							products.accept(itemStack);
+						});
 					});
 		}
 	}

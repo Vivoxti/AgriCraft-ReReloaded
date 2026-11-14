@@ -24,6 +24,10 @@ With the supported [Starfield integration](https://github.com/Vivoxti/AgriCraft-
 
 Native primary produce gets its source genome and Gain bonus once. No player is supplied, so automation grants no player farming XP or profession bonus. One-shot crops leave empty attached single sticks; regrowing crops keep their planting and material. Plan native replanting separately for one-shot species.
 
+## Create: Integrated Farming Vacuum Harvester
+
+With [Create: Integrated Farming](https://modrinth.com/mod/create-integrated-farming) 1.3.0 or newer installed, its **Vacuum Harvester** also harvests AgriCraft crops, whether it is placed as a stationary block or mounted on a contraption, and whether the plant grows on crop sticks or straight on farmland. Each suction pulse harvests every mature AgriCraft crop in its area with the same genetic products and post-harvest stage as a Mechanical Harvester. Unlike the Mechanical Harvester it never sets unripe crops back, so `compat.create_harvester_reverts_growth` does not apply; crop sticks and empty sticks are left in place. Supported native Starfield crops use their native harvest route here as well.
+
 ## Capacity and support limits
 
 World-dropped items still need collection before they despawn. Storage should accept full stacks. An external destination that accepts output and then throws an error cannot be safely rolled back into a second unharvested crop. This adapter does not promise recovery of arbitrary failing inventory systems or canceled item drops.

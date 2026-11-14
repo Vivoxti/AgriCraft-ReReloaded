@@ -20,7 +20,7 @@ All six packs are included in both AgriCraft archives. This does **not** make a 
 | Module | AgriCraft implementation | What it adds |
 |---|---|---|
 | [Starfield Pastoral](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Starfield-Pastoral) | NeoForge; exact 0.6.3fix1 | 50 native seed types, inherited genes, tools, irrigation and production heredity; keeps the native calendar |
-| [Create](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Create) | NeoForge | Mechanical Harvester route for ordinary crop blocks and supported native Starfield crops |
+| [Create](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Create) | NeoForge | Mechanical Harvester route for ordinary crop blocks and supported native Starfield crops; Create: Integrated Farming Vacuum Harvester |
 | [Industrial Foregoing](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Industrial-Foregoing) | NeoForge | Plant Gatherer harvesting, with normal machine costs and work rules |
 | [PneumaticCraft](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/PneumaticCraft) | NeoForge | Drone harvest handler; pickup and delivery must be programmed separately |
 

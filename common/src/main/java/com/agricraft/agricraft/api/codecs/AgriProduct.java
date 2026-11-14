@@ -1,13 +1,20 @@
 package com.agricraft.agricraft.api.codecs;
 
+import com.agricraft.agricraft.AgriCraft;
+import com.agricraft.agricraft.common.util.Platform;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public record AgriProduct(ExtraCodecs.TagOrElementLocation item, CompoundTag nbt, int min, int max, double chance,
                           boolean required) {
@@ -36,6 +43,27 @@ public record AgriProduct(ExtraCodecs.TagOrElementLocation item, CompoundTag nbt
 
 	public int getAmount(RandomSource random) {
 		return random.nextIntBetweenInclusive(this.min, this.max);
+	}
+
+	private static final Set<String> WARNED_EMPTY = ConcurrentHashMap.newKeySet();
+
+	/**
+	 * Picks the item this product drops: the item itself, or a random member of the tag.
+	 *
+	 * @return empty when the item or tag resolves to nothing (for example a tag a modpack left empty), in which case
+	 * this product is skipped instead of crashing the harvest
+	 */
+	public Optional<Item> pickItem(RandomSource random) {
+		List<Item> possible = Platform.get().getItemsFromLocation(this.item).stream()
+				.filter(item -> item != null && item != Items.AIR)
+				.toList();
+		if (possible.isEmpty()) {
+			if (WARNED_EMPTY.add(this.item.toString())) {
+				AgriCraft.LOGGER.warn("AgriCraft product '{}' resolves to no items (empty tag or unknown item); it is skipped when harvesting. Check the modpack's tags/datapacks.", this.item);
+			}
+			return Optional.empty();
+		}
+		return Optional.of(possible.get(random.nextInt(possible.size())));
 	}
 
 	public static class Builder {
