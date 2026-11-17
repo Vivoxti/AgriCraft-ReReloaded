@@ -10,7 +10,7 @@ Seeds are identified by species for recipe-viewer comparison. That makes the lis
 
 ## Balance interpretation
 
-Produce lists describe possible output. The ordinary [Gain trial count](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Genes-and-Balance) and each product's chance/range determine a real harvest. Clipping is separate and is not multiplied by the ordinary Gain trial loop. Mutation chance belongs to the recipe evaluation after the breeding engine's checks, not to every world tick.
+Produce lists describe possible output. The ordinary [Gain trial count](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Genes-and-Balance) and each product's chance/range determine a real harvest. Clipping is separate and is not multiplied by the ordinary Gain trial loop; with `core.clipping_uses_gain` enabled, Gain instead raises the chance that a clip yields anything (always at Gain 10). Mutation chance belongs to the recipe evaluation after the breeding engine's checks, not to every world tick.
 
 If an entry is absent, confirm the source mod and crop data are loaded and that any required mutation parents exist. Server datapacks can override the default tables in this wiki.
 

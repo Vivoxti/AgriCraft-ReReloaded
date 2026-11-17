@@ -12,6 +12,7 @@ AgriCraft stores its settings in **`config/agricraft.jsonc`**, using [Resourcefu
 | `core.converts_seed_only_in_analyzer` | `false` | When override is active, limits that conversion path to the analyzer if set true |
 | `core.plant_off_crop_sticks` | `true` | Allows AgriCraft seeds to be planted outside existing sticks |
 | `core.only_mature_seed_drops` | `false` | When true, only mature ordinary crops drop seeds |
+| `core.clipping_uses_gain` | `true` | Added in 4.0.29. Gain raises the clipper's chance to yield: Gain 1 keeps the plant's own clipping chance, Gain 10 always yields at least one item. `false` restores the original AgriCraft behaviour, where Gain does not affect clipping |
 
 Analyzer conversion remains the clearest way to obtain a known AgriCraft seed before planting. A supported native Starfield seed follows the separate native module and retains its item identity; it is not an ordinary conversion-pack seed.
 

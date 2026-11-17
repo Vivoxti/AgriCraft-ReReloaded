@@ -10,7 +10,7 @@ Glowshroom and toadstool are exceptions with native mushroom items registered as
 
 ## Flowers and mushrooms have different jobs
 
-Flower harvests often supply a dye product with a **75% chance for one item per Gain trial**. Clipping can separately return the native decorative flower. A clipping entry of 0–1 at 50% can still return nothing when its chance passes and its quantity is zero. Clipping is one separate roll and does not use the normal Gain trial multiplier.
+Flower harvests often supply a dye product with a **75% chance for one item per Gain trial**. Clipping can separately return the native decorative flower. A clipping entry of 0–1 at 50% can still return nothing when its chance passes and its quantity is zero. Clipping is one separate roll and does not use the normal Gain trial multiplier; with `core.clipping_uses_gain` enabled, Gain gives an empty roll a second chance, up to a guaranteed item at Gain 10.
 
 Mushrooms yield **2–5 mushrooms at 100% per produce trial**. Their requirements use damp, neutral soil, medium-or-lower nutrients and light **0–10** before tolerance, unlike the bright-light flower beds. At Gain 1 this product pattern averages 3.5; Gain 9–10 averages 14.
 

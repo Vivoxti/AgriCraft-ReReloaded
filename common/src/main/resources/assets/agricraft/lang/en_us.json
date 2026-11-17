@@ -228,6 +228,7 @@
   "config.agricraft.core.seed_compost_value": "Seed compost value",
   "config.agricraft.core.disable_fertilizer_weeds": "Disable fertilizer weed growth",
   "config.agricraft.core.allow_grass_drop_resets": "Allow grass drop resets",
+  "config.agricraft.core.clipping_uses_gain": "Gain stat improves clipping",
   "config.agricraft.irrigation": "Irrigation",
   "config.agricraft.irrigation.tank_capacity": "Tank capacity (mB)",
   "config.agricraft.irrigation.channel_capacity": "Channel capacity (mB)",

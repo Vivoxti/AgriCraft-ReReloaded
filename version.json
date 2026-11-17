@@ -1,10 +1,11 @@
 {
   "homepage": "https://github.com/Vivoxti/AgriCraft-ReReloaded/releases",
   "promos": {
-    "1.21.1-latest": "4.0.28",
-    "1.21.1-recommended": "4.0.28"
+    "1.21.1-latest": "4.0.29",
+    "1.21.1-recommended": "4.0.29"
   },
   "1.21.1": {
+    "4.0.29": "The Gain stat now raises the Plant Clipper's chance to yield (always at Gain 10); new option core.clipping_uses_gain restores the original behaviour. See CHANGELOG.md.",
     "4.0.28": "Create: Integrated Farming Vacuum Harvester now harvests AgriCraft crops; fixed a crash when a harvest product points to an empty item tag. See CHANGELOG.md.",
     "4.0.27": "Added core.load_default_plants to turn off AgriCraft's built-in plants and mutations for fully custom modpacks. See CHANGELOG.md.",
     "4.0.26": "Create harvesters now pass through crops on colliding crop sticks; added compat.create_harvester_reverts_growth to stop harvesters from setting back unripe crops. See CHANGELOG.md.",

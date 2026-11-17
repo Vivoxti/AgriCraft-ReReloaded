@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.21.1-4.0.29
+
+### Changed
+
+- The Gain stat now improves the Plant Clipper ([#8](https://github.com/Vivoxti/AgriCraft-ReReloaded/issues/8)). When a clipping roll yields nothing, Gain gives it a second chance of `(Gain − 1) / 9`: Gain 1 keeps the plant's own chance (about 25% for vanilla flowers), Gain 4 gives 50%, Gain 7 gives 75% and Gain 10 always yields at least one item. The crop still returns to its first stage after every clip. Controlled by the new `core.clipping_uses_gain` option (default `true`); set it to `false` for the original AgriCraft behaviour, where Gain does not affect clipping.
+
 ## 1.21.1-4.0.28
 
 ### Added

@@ -21,7 +21,14 @@ Ordinary harvests perform `floor((Gain + 3) / 3)` independent produce trials. Ea
 | 6–8 | 3 |
 | 9–10 | 4 |
 
-For a product with chance `p` and quantity `a` through `b`, expected output is `trials × p × (a + b) / 2`. This is a long-run average, not a guaranteed individual harvest. A crop may reset its growth stage even if every product roll fails. Clipping uses its separate product list once; it does not receive this Gain trial multiplier.
+For a product with chance `p` and quantity `a` through `b`, expected output is `trials × p × (a + b) / 2`. This is a long-run average, not a guaranteed individual harvest. A crop may reset its growth stage even if every product roll fails. Clipping uses its separate product list once; it does not receive this Gain trial multiplier. Instead, with `core.clipping_uses_gain` enabled (the default), Gain gives an empty clipping roll a second chance of `(Gain − 1) / 9`: Gain 1 keeps the plant's own chance (about 25% for vanilla flowers), Gain 10 always yields at least one item.
+
+| Gain | Vanilla flower clipping chance |
+|---|---|
+| 1 | 25% |
+| 4 | 50% |
+| 7 | 75% |
+| 10 | 100% |
 
 Croptopia's guaranteed 1–3 produce gives an average of 2 at Gain 1 and 8 at Gain 10. Mystical Agriculture's 75% roll for one essence gives an average of 0.75 and 3 respectively. Reaching Gain 9 already unlocks four trials; a 10/10 genome remains useful for reliable inheritance.
 

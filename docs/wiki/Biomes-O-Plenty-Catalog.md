@@ -38,7 +38,7 @@ Ranges and chances are **per produce trial**. [Gain](https://github.com/Vivoxti/
 
 ## Clipping outputs
 
-One clipping operation uses the separate clipping list once; ordinary Gain trials do not multiply it. A zero minimum means a successful chance roll can still give no item.
+One clipping operation uses the separate clipping list once; ordinary Gain trials do not multiply it. A zero minimum means a successful chance roll can still give no item. With `core.clipping_uses_gain` enabled, Gain gives an empty roll a second chance: Gain 10 always yields at least one item.
 
 | Species | Clipping output |
 |---|---|

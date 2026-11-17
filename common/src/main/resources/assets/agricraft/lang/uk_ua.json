@@ -226,6 +226,7 @@
   "config.agricraft.core.seed_compost_value": "Цінність насіння для компосту",
   "config.agricraft.core.disable_fertilizer_weeds": "Вимкнути ріст бур'янів від добрив",
   "config.agricraft.core.allow_grass_drop_resets": "Дозволити скидання випадання з трави",
+  "config.agricraft.core.clipping_uses_gain": "Врожайність підвищує шанс зрізання",
   "config.agricraft.irrigation": "Зрошення",
   "config.agricraft.irrigation.tank_capacity": "Обсяг бака (мВ)",
   "config.agricraft.irrigation.channel_capacity": "Обсяг каналу (мВ)",

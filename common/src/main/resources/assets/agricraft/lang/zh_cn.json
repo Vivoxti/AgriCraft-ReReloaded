@@ -217,6 +217,7 @@
   "config.agricraft.core.seed_compost_value": "种子堆肥值",
   "config.agricraft.core.disable_fertilizer_weeds": "禁用肥料杂草生长",
   "config.agricraft.core.allow_grass_drop_resets": "允许重置草方块掉落",
+  "config.agricraft.core.clipping_uses_gain": "产量提高剪取几率",
   "config.agricraft.irrigation": "灌溉",
   "config.agricraft.irrigation.tank_capacity": "水箱容量（mB）",
   "config.agricraft.irrigation.channel_capacity": "管道容量（mB）",

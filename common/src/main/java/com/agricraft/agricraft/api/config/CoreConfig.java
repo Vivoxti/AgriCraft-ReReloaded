@@ -91,6 +91,10 @@ public final class CoreConfig {
 	@Comment("Set to false if you wish to disable drops from raking weeds.")
 	public static boolean rakingDropsItems = true;
 
+	@ConfigEntry(id = "clipping_uses_gain", type = EntryType.BOOLEAN, translation = "config.agricraft.core.clipping_uses_gain")
+	@Comment("Set to false to make clipping ignore the Gain stat (original AgriCraft behaviour). When true, a clipping roll that yields nothing gets a second chance that grows with Gain: Gain 1 keeps the plant's normal chance, Gain 10 always yields at least one item.")
+	public static boolean clippingUsesGain = true;
+
 	@ConfigEntry(id = "seed_compost_value", type = EntryType.FLOAT, translation = "config.agricraft.core.seed_compost_value")
 	@ConfigOption.Range(min = 0.0, max = 1.0)
 	@Comment("Defines the seed compost value, if set to zero, seeds will not be compostable")

@@ -1,6 +1,7 @@
 package com.agricraft.agricraft.api.plant;
 
 import com.agricraft.agricraft.api.codecs.AgriParticleEffect;
+import com.agricraft.agricraft.api.config.CoreConfig;
 import com.agricraft.agricraft.api.codecs.AgriProduct;
 import com.agricraft.agricraft.api.codecs.AgriRequirement;
 import com.agricraft.agricraft.api.codecs.AgriSeed;
@@ -24,6 +25,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.component.CustomData;
@@ -198,18 +200,33 @@ public class AgriPlant {
 	}
 
 	public void getClipProducts(Consumer<ItemStack> products, ItemStack clipper, AgriGrowthStage growthStage, AgriGenome genome, RandomSource random) {
-		if (growthStage.isMature()) {
-			this.clipProducts.stream().filter(product -> product.shouldDrop(random))
-					.forEach(product -> {
-						product.pickItem(random).ifPresent(item -> {
-							ItemStack itemStack = new ItemStack(item, product.getAmount(random));
-							if (!product.nbt().isEmpty()) {
-								itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().merge(product.nbt());
-							}
-							products.accept(itemStack);
-						});
-					});
+		if (!growthStage.isMature()) {
+			return;
 		}
+		double gainBonus = CoreConfig.clippingUsesGain && genome != null ? clippingGainBonus(genome.getGain()) : 0.0;
+		for (AgriProduct product : this.clipProducts) {
+			int amount = product.shouldDrop(random) ? product.getAmount(random) : 0;
+			// Gain gives an empty roll a second chance: 0 at Gain 1 (plant's own chance), 1 at Gain 10 (always at least one item).
+			if (amount <= 0 && product.max() > 0 && gainBonus > 0 && random.nextDouble() < gainBonus) {
+				amount = random.nextIntBetweenInclusive(Math.max(1, product.min()), product.max());
+			}
+			if (amount <= 0) {
+				continue;
+			}
+			int count = amount;
+			product.pickItem(random).ifPresent(item -> {
+				ItemStack itemStack = new ItemStack(item, count);
+				if (!product.nbt().isEmpty()) {
+					itemStack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().merge(product.nbt());
+				}
+				products.accept(itemStack);
+			});
+		}
+	}
+
+	/** Extra chance for an empty clipping roll to yield: linear from 0 at Gain 1 to 1 at Gain 10. */
+	public static double clippingGainBonus(int gain) {
+		return Mth.clamp((gain - 1) / 9.0, 0.0, 1.0);
 	}
 
 	public boolean allowsCloning(AgriGrowthStage growthStage) {

@@ -226,6 +226,7 @@
   "config.agricraft.core.seed_compost_value": "Ценность семян для компоста",
   "config.agricraft.core.disable_fertilizer_weeds": "Отключить рост сорняков от удобрений",
   "config.agricraft.core.allow_grass_drop_resets": "Разрешить сброс выпадения из травы",
+  "config.agricraft.core.clipping_uses_gain": "Урожайность повышает шанс срезки",
   "config.agricraft.irrigation": "Орошение",
   "config.agricraft.irrigation.tank_capacity": "Объём бака (мВ)",
   "config.agricraft.irrigation.channel_capacity": "Объём канала (мВ)",
