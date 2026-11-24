@@ -65,4 +65,4 @@ See the [50-species native catalog](https://github.com/Vivoxti/AgriCraft-ReReloa
 
 ## Basis of this guide
 
-Defaults refer to AgriCraft ReReloaded **4.0.20**, Minecraft **1.21.1**. Modpacks can override data and settings. [Native gene effects](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/neoforge/src/main/java/com/agricraft/agricraft/compat/starfield/StarfieldGeneEffects.java) · [Version activation](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/neoforge/src/main/java/com/agricraft/agricraft/compat/starfield/StarfieldCompat.java).
+Defaults refer to AgriCraft ReReloaded **4.0.30**, Minecraft **1.21.1**. Modpacks can override data and settings. [Native gene effects](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/neoforge/src/main/java/com/agricraft/agricraft/compat/starfield/StarfieldGeneEffects.java) · [Version activation](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/neoforge/src/main/java/com/agricraft/agricraft/compat/starfield/StarfieldCompat.java).

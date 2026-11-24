@@ -36,4 +36,4 @@ The adapter is built into NeoForge and has no separate `compat.create` on/off sw
 
 ## Basis of this guide
 
-Defaults refer to AgriCraft ReReloaded **4.0.26**, Minecraft **1.21.1**. Modpacks can override data and settings. [Harvester behavior](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/4.0.26/neoforge/src/main/java/com/agricraft/agricraft/mixin/neoforge/create/HarvesterMovementBehaviourMixin.java).
+Defaults refer to AgriCraft ReReloaded **4.0.30**, Minecraft **1.21.1**. Modpacks can override data and settings. [Harvester behavior](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/4.0.26/neoforge/src/main/java/com/agricraft/agricraft/mixin/neoforge/create/HarvesterMovementBehaviourMixin.java).

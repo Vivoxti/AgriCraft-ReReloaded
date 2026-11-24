@@ -23,7 +23,7 @@ Connect a water tank to irrigation channels and hang a sprinkler directly below 
 | `irrigation.sprinkler_growth_chance` | 0.2 | Ordinary eligible plants may receive a growth tick on a pass |
 | `irrigation.sprinkler_interval` | 40 ticks | Minimum interval between sweep starts |
 
-The water-consumption setting is labelled mB/second, but release 4.0.20 calculates each active tick as `max(1, floor(setting / 20))` for positive settings. At the default 10, that is **1 mB per active tick**, or about **20 mB/second** at 20 TPS while continuously sweeping. A value at or below zero consumes no water. Size your water supply using this actual behavior.
+The water-consumption setting is labelled mB/second, but the mod (4.0.20 through 4.0.30) calculates each active tick as `max(1, floor(setting / 20))` for positive settings. At the default 10, that is **1 mB per active tick**, or about **20 mB/second** at 20 TPS while continuously sweeping. A value at or below zero consumes no water. Size your water supply using this actual behavior.
 
 The sprinkler processes one column per active tick, so a full supplied sweep takes 49 ticks. The 40-tick default interval is measured between starts; it is not an additional pause after every sweep. Normal eligible plants can receive the 20% growth-tick roll when visited, followed by their own growth rules. It does not guarantee a growth stage on every pass.
 
@@ -33,7 +33,7 @@ For native Starfield crops the special irrigation path waters eligible native so
 
 Default greenhouse settings are a block limit of **1024**, minimum glass fraction of **0.4** in the ceiling, `greenhouse.ignores_seasons=true`, and `greenhouse.growth_modifier=1.05`. Once recognized, an ordinary crop receives the configured 5% growth-roll modifier; the seasonal check can be ignored. This does not remove soil, light or other requirements.
 
-The Serene Seasons and Fabric Seasons adapters do not currently enforce external seasonal restrictions, so the seasonal option does not provide an extra calendar benefit from those mods in 4.0.20. An AgriCraft enclosure also does not become a native Starfield greenhouse: Starfield's own location and season rules decide that.
+The Serene Seasons and Fabric Seasons adapters do not currently enforce external seasonal restrictions, so the seasonal option does not provide an extra calendar benefit from those mods as of 4.0.30. An AgriCraft enclosure also does not become a native Starfield greenhouse: Starfield's own location and season rules decide that.
 
 ## When a farm stalls
 
@@ -41,4 +41,4 @@ Check the actual soil and light, available water, channel connection, obstructio
 
 ## Basis of this guide
 
-Defaults refer to AgriCraft ReReloaded **4.0.20**, Minecraft **1.21.1**. Modpacks can override data and settings. [Sprinkler behavior](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/common/block/entity/SprinklerBlockEntity.java) · [Irrigation defaults](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/IrrigationConfig.java) · [Greenhouse defaults](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/GreenhouseConfig.java).
+Defaults refer to AgriCraft ReReloaded **4.0.30**, Minecraft **1.21.1**. Modpacks can override data and settings. [Sprinkler behavior](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/common/block/entity/SprinklerBlockEntity.java) · [Irrigation defaults](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/IrrigationConfig.java) · [Greenhouse defaults](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/GreenhouseConfig.java).

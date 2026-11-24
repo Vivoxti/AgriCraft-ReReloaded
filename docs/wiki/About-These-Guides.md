@@ -1,10 +1,10 @@
 # Version scope and evidence
 
-These English player guides describe **AgriCraft ReReloaded 4.0.20** for **Minecraft 1.21.1**. They explain observable farming behavior and its tradeoffs rather than promise features from unfinished adapters or transfer every source-mod mechanic to converted plants.
+These English player guides describe **AgriCraft ReReloaded 4.0.30** for **Minecraft 1.21.1**. They were first written for 4.0.20; features added since then name the release that introduced them, and each release's own verification is in [docs/releases](https://github.com/Vivoxti/AgriCraft-ReReloaded/tree/1.21.1/docs/releases). They explain observable farming behavior and its tradeoffs rather than promise features from unfinished adapters or transfer every source-mod mechanic to converted plants.
 
 ## How the numbers were checked
 
-All six built-in conversion packs were extracted from the released NeoForge and Fabric JARs. Their plants, mutations, soils and fertilizers were compared and found identical. The catalogs come from those shipped records, including product quantities/chances and the exact mutation parent IDs.
+All six built-in conversion packs were extracted from the released 4.0.20 NeoForge and Fabric JARs; their crop data has not changed since. Their plants, mutations, soils and fertilizers were compared and found identical. The catalogs come from those shipped records, including product quantities/chances and the exact mutation parent IDs.
 
 Harvest, growth, parent selection, allele mutation and native Starfield formulas were checked against the release source. Where a descriptive comment differs from the executable calculation, these guides use the calculation. In particular, ordinary Gain uses multiple trials, Mutativity uses integer division in its direction roll, and default positive sprinkler consumption is rounded up to one mB per active tick.
 
@@ -12,7 +12,7 @@ Starfield's native inventory comes from the verified 0.6.3fix1 catalog. Native p
 
 ## What verification does and does not mean
 
-The [release verification](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/1.21.1/docs/releases/4.0.20-VALIDATION.md) records the required automated checks and release artifact validation. The [gameplay acceptance report](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/1.21.1/docs/starfield/GAMEPLAY-ACCEPTANCE.md) records actual client interaction, native machine operation, a full harvesting/pickup/export drone route and save/reload evidence. The [completion report](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/1.21.1/docs/starfield/ACCEPTANCE.md) provides further integration scope.
+The [4.0.20 release verification](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/1.21.1/docs/releases/4.0.20-VALIDATION.md) records the required automated checks and release artifact validation. The [gameplay acceptance report](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/1.21.1/docs/starfield/GAMEPLAY-ACCEPTANCE.md) records actual client interaction, native machine operation, a full harvesting/pickup/export drone route and save/reload evidence. The [completion report](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/1.21.1/docs/starfield/ACCEPTANCE.md) provides further integration scope.
 
 An archived crop definition is not proof that every source mod exists on both loaders. A registered recipe/HUD plugin is not a claim of a separate complete gameplay run for every loader/mod version. Native Starfield activation is limited to the exact verified release. These distinctions are reflected in the [Compatibility Overview](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Compatibility-Overview).
 

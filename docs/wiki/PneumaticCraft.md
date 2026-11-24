@@ -31,4 +31,4 @@ If a drone harvests but delivers nothing, first inspect the ground output and pi
 
 ## Basis of this guide
 
-Defaults refer to AgriCraft ReReloaded **4.0.20**, Minecraft **1.21.1**. Modpacks can override data and settings. [Drone harvest adapter](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/neoforge/src/main/java/com/agricraft/agricraft/common/plugin/pneumaticcraft/AgriCraftHarvestHandler.java).
+Defaults refer to AgriCraft ReReloaded **4.0.30**, Minecraft **1.21.1**. Modpacks can override data and settings. [Drone harvest adapter](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/neoforge/src/main/java/com/agricraft/agricraft/common/plugin/pneumaticcraft/AgriCraftHarvestHandler.java).

@@ -1,6 +1,6 @@
 # Crop packs and seed conversion
 
-AgriCraft 4.0.20 includes six compatibility crop packs in **both** release archives. Their data was compared between the NeoForge and Fabric JARs and is identical. This describes pack availability, not a promise that every source mod has a release for both loaders. You still need a compatible version of the source mod and any relevant addons.
+AgriCraft includes six compatibility crop packs in **both** release archives (checked in 4.0.20; the pack data is unchanged through 4.0.30). Their data was compared between the NeoForge and Fabric JARs and is identical. This describes pack availability, not a promise that every source mod has a release for both loaders. You still need a compatible version of the source mod and any relevant addons.
 
 | Pack | Crop definitions | Species mutation recipes | New soils | Fertilizers |
 |---|---:|---:|---:|---:|
@@ -21,6 +21,10 @@ Converted plants use AgriCraft's eight-stage growth, soil requirements, gene inh
 
 The exact seed item matters. Farmer's Delight rice uses `farmersdelight:rice`; Croptopia mostly uses singular `*_seed` IDs, with `vanilla_seeds` as an exception. Most BOP flowers have no convertible seed item; obtain their genetic seeds through mutation recipes.
 
+## Fully custom crop sets
+
+Since 4.0.27 a modpack can turn off AgriCraft's built-in plants and mutations (vanilla crops and AgriCraft's own resource crops) with `core.load_default_plants=false` and ship its own crop set as a datapack. Soils, weeds, fertilizers and the compatibility packs still load, and a datapack file that reuses a built-in plant's id still loads. The option applies when a world loads. See [Configuration and Troubleshooting](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Configuration-and-Troubleshooting).
+
 ## Breeding and mutation recipes
 
 Single-parent cloning and two-parent breeding are different operations. A pack with no species mutation recipes can still support same-species stat breeding. An entry with recipe chance 50% means a 50% species-recipe evaluation **after** parent selection and other checks; it is not a 50% chance per world tick.
@@ -31,4 +35,4 @@ Recipes can depend on plants from another pack. If a parent species is unavailab
 
 Automatic compatibility pack registration is enabled by `core.register_packs_by_default=true` when the corresponding source mod is present. The crop data and its resource models must both be available. Custom datapacks can override these defaults, so server-specific documentation takes precedence over the tables here.
 
-Some definitions contain season tags. In 4.0.20 the [Serene Seasons](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Serene-Seasons) and [Fabric Seasons](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Fabric-Seasons) adapters report unrestricted seasons. Do not treat the authored tags as an active external-calendar restriction. Native Starfield has its own functioning seasonal model and is not one of these conversion packs.
+Some definitions contain season tags. As of 4.0.30 the [Serene Seasons](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Serene-Seasons) and [Fabric Seasons](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Fabric-Seasons) adapters report unrestricted seasons. Do not treat the authored tags as an active external-calendar restriction. Native Starfield has its own functioning seasonal model and is not one of these conversion packs.

@@ -1,6 +1,6 @@
-# REI: no dedicated AgriCraft recipe plugin in 4.0.20
+# REI: no dedicated AgriCraft recipe plugin
 
-**AgriCraft 4.0.20 has no implemented dedicated REI crop-information plugin.** Commented dependency references in the project are not a working recipe-viewer module.
+**AgriCraft (through 4.0.30) has no implemented dedicated REI crop-information plugin.** Commented dependency references in the project are not a working recipe-viewer module.
 
 ## Information you can rely on
 

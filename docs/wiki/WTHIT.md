@@ -10,7 +10,7 @@ Use the HUD to inspect a live ordinary AgriCraft crop, and a recipe viewer for t
 
 ## Native Starfield limitation
 
-WTHIT has **no dedicated native Starfield inspection provider** in AgriCraft 4.0.20. Its ordinary CropBlock provider does not extend itself to every native crop block. For native genes, daily phases and conditional watered-day progress use [Jade](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Jade), [The One Probe](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/The-One-Probe) on NeoForge, or the magnifying glass.
+WTHIT has **no dedicated native Starfield inspection provider** in AgriCraft (through 4.0.30). Its ordinary CropBlock provider does not extend itself to every native crop block. For native genes, daily phases and conditional watered-day progress use [Jade](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Jade), [The One Probe](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/The-One-Probe) on NeoForge, or the magnifying glass.
 
 This distinction preserves accurate information: native Starfield uses a calendar rather than the ordinary growth stages. It should not be assigned a made-up generic growth percentage by assuming all compatible crops share the same engine.
 
@@ -18,4 +18,4 @@ If ordinary crop details are absent, check that WTHIT's server/client requiremen
 
 ## Basis of this guide
 
-Defaults refer to AgriCraft ReReloaded **4.0.20**, Minecraft **1.21.1**. Modpacks can override data and settings. [WTHIT provider](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/compat/wthit/AgriCraftWthitPlugin.java).
+Defaults refer to AgriCraft ReReloaded **4.0.30**, Minecraft **1.21.1**. Modpacks can override data and settings. [WTHIT provider](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/compat/wthit/AgriCraftWthitPlugin.java).

@@ -1,6 +1,6 @@
 # Pam's HarvestCraft 2 Crops crop catalog
 
-Pack reference for AgriCraft ReReloaded **4.0.20**, Minecraft **1.21.1**. Read [Pam's HarvestCraft 2 Crops gameplay guide](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Pams-HarvestCraft-2-Crops) first. These tables list packaged data; only species with their required source items installed are usable. Custom datapacks may change the values.
+Pack reference for AgriCraft ReReloaded **4.0.30**, Minecraft **1.21.1**. Read [Pam's HarvestCraft 2 Crops gameplay guide](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Pams-HarvestCraft-2-Crops) first. These tables list packaged data; only species with their required source items installed are usable. Custom datapacks may change the values.
 
 Ranges and chances are **per produce trial**. [Gain](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Genes-and-Balance) determines the number of ordinary harvest trials. Environmental values are the authored targets **before Strength tolerance**. Season tags are not listed as active restrictions because the external season adapters are unrestricted in this release. Stage numbers are zero-based; all listed plants have eight stages.
 
@@ -312,4 +312,4 @@ A raw recipe chance is evaluated after the breeding engine selects parents. It i
 | `pamhc2crops:yucca` | `pamhc2crops:aloe` | `pamhc2crops:agave` | 50% |
 | `pamhc2crops:zucchini` | `minecraft:pumpkin` | `pamhc2crops:cucumber` | 50% |
 
-Data basis: the matching pack inside both [4.0.20 release JARs](https://github.com/Vivoxti/AgriCraft-ReReloaded/releases/tag/4.0.20). The archive comparison covered plants, mutations, soils and fertilizers.
+Data basis: the matching pack inside both [4.0.20 release JARs](https://github.com/Vivoxti/AgriCraft-ReReloaded/releases/tag/4.0.20). The archive comparison covered plants, mutations, soils and fertilizers. This data is unchanged through 4.0.30.

@@ -1,6 +1,6 @@
 # Starfield native crop catalog
 
-All **50 supported native seed types** for Starfield Pastoral **0.6.3fix1**, NeoForge, with AgriCraft **4.0.20**. Read [Starfield Pastoral](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Starfield-Pastoral) for gene bonuses and the distinction between native and converted crops.
+All **50 supported native seed types** for Starfield Pastoral **0.6.3fix1**, NeoForge, with AgriCraft **4.0.20 or newer**. Read [Starfield Pastoral](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Starfield-Pastoral) for gene bonuses and the distinction between native and converted crops.
 
 Phase sequences and regrowth below are **native baseline days**, before fertilizer, professions and AgriCraft Growth. Apply Growth's rounding to each eligible duration. Successful watered days and native access rules determine progress; summing phase numbers is not an unconditional real-time forecast. Fall is Starfield's autumn season. Native greenhouse and special seasonal exceptions can affect the listed normal seasons.
 

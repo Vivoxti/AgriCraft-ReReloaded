@@ -1,6 +1,6 @@
 # Croptopia crop catalog
 
-Pack reference for AgriCraft ReReloaded **4.0.20**, Minecraft **1.21.1**. Read [Croptopia gameplay guide](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Croptopia) first. These tables list packaged data; only species with their required source items installed are usable. Custom datapacks may change the values.
+Pack reference for AgriCraft ReReloaded **4.0.30**, Minecraft **1.21.1**. Read [Croptopia gameplay guide](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Croptopia) first. These tables list packaged data; only species with their required source items installed are usable. Custom datapacks may change the values.
 
 Ranges and chances are **per produce trial**. [Gain](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Genes-and-Balance) determines the number of ordinary harvest trials. Environmental values are the authored targets **before Strength tolerance**. Season tags are not listed as active restrictions because the external season adapters are unrestricted in this release. Stage numbers are zero-based; all listed plants have eight stages.
 
@@ -134,4 +134,4 @@ Ranges and chances are **per produce trial**. [Gain](https://github.com/Vivoxti/
 
 This pack supplies no new species mutation recipes. See the gameplay guide for same-species breeding and cloning rules.
 
-Data basis: the matching pack inside both [4.0.20 release JARs](https://github.com/Vivoxti/AgriCraft-ReReloaded/releases/tag/4.0.20). The archive comparison covered plants, mutations, soils and fertilizers.
+Data basis: the matching pack inside both [4.0.20 release JARs](https://github.com/Vivoxti/AgriCraft-ReReloaded/releases/tag/4.0.20). The archive comparison covered plants, mutations, soils and fertilizers. This data is unchanged through 4.0.30.

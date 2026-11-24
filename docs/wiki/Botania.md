@@ -1,6 +1,6 @@
-# Botania: no shipped crop compatibility pack in 4.0.20
+# Botania: no shipped crop compatibility pack
 
-**Botania has no active dedicated crop compatibility pack in the 4.0.20 release archives.** Legacy translation labels and a data-generation helper are present in the project, but they do not establish a shipped, enabled farming module.
+**Botania has no active dedicated crop compatibility pack in the release archives (4.0.20 through 4.0.30).** Legacy translation labels and a data-generation helper are present in the project, but they do not establish a shipped, enabled farming module.
 
 ## Avoid a misleading progression promise
 
@@ -14,4 +14,4 @@ A separately supplied custom datapack or addon may implement Botania crops. Its 
 
 ## Basis of this guide
 
-Defaults refer to AgriCraft ReReloaded **4.0.20**, Minecraft **1.21.1**. Modpacks can override data and settings. [Active compatibility settings](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/CompatConfig.java).
+Defaults refer to AgriCraft ReReloaded **4.0.30**, Minecraft **1.21.1**. Modpacks can override data and settings. [Active compatibility settings](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/CompatConfig.java).

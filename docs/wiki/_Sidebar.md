@@ -8,6 +8,7 @@
 - [Getting Started](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Getting-Started)
 - [Genes and Balance](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Genes-and-Balance)
 - [Soil Irrigation and Greenhouses](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Soil-Irrigation-and-Greenhouses)
+- [Crops in Water, Lava and Other Fluids](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Fluid-Crops)
 - [Crop Packs and Seed Conversion](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Crop-Packs-and-Seed-Conversion)
 - [Configuration and Troubleshooting](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Configuration-and-Troubleshooting)
 

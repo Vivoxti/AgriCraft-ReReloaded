@@ -1,6 +1,6 @@
 # Farmer's Delight crop catalog
 
-Pack reference for AgriCraft ReReloaded **4.0.20**, Minecraft **1.21.1**. Read [Farmer's Delight gameplay guide](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Farmers-Delight) first. These tables list packaged data; only species with their required source items installed are usable. Custom datapacks may change the values.
+Pack reference for AgriCraft ReReloaded **4.0.30**, Minecraft **1.21.1**. Read [Farmer's Delight gameplay guide](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Farmers-Delight) first. These tables list packaged data; only species with their required source items installed are usable. Custom datapacks may change the values.
 
 Ranges and chances are **per produce trial**. [Gain](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Genes-and-Balance) determines the number of ordinary harvest trials. Environmental values are the authored targets **before Strength tolerance**. Season tags are not listed as active restrictions because the external season adapters are unrestricted in this release. Stage numbers are zero-based; all listed plants have eight stages.
 
@@ -33,4 +33,4 @@ A raw recipe chance is evaluated after the breeding engine selects parents. It i
 | `farmersdelight:rice` | `minecraft:seagrass` | `minecraft:wheat` | 50% |
 | `farmersdelight:tomato` | `minecraft:wheat` | `minecraft:beetroot` | 50% |
 
-Data basis: the matching pack inside both [4.0.20 release JARs](https://github.com/Vivoxti/AgriCraft-ReReloaded/releases/tag/4.0.20). The archive comparison covered plants, mutations, soils and fertilizers.
+Data basis: the matching pack inside both [4.0.20 release JARs](https://github.com/Vivoxti/AgriCraft-ReReloaded/releases/tag/4.0.20). The archive comparison covered plants, mutations, soils and fertilizers. This data is unchanged through 4.0.30.

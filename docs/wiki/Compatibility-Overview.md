@@ -1,6 +1,6 @@
 # Compatibility overview
 
-This is the player index for **AgriCraft ReReloaded 4.0.20**, Minecraft **1.21.1**. Each module page describes the farming loop, balance, practical setup and support limits. Defaults can be changed by a server's datapacks and configuration.
+This is the player index for **AgriCraft ReReloaded 4.0.30**, Minecraft **1.21.1**. Each module page describes the farming loop, balance, practical setup and support limits. Defaults can be changed by a server's datapacks and configuration.
 
 ## Crop conversion packs
 
@@ -40,7 +40,7 @@ Plugin inclusion and entrypoints are supported by archive/source inspection. The
 
 ## Settings and current limitations
 
-| Module | Status in 4.0.20 |
+| Module | Status in 4.0.30 |
 |---|---|
 | [Resourceful Config](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Resourceful-Config) | Required on both loaders; supplies AgriCraft configuration |
 | [Mod Menu](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Mod-Menu) | Optional Fabric entry into the settings screen |

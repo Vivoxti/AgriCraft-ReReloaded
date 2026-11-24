@@ -1,6 +1,6 @@
 # AgriCraft ReReloaded player wiki
 
-Welcome to the English player guide for **AgriCraft ReReloaded 4.0.20**, Minecraft **1.21.1**. Find a mod, plan its farm, compare gene bonuses and check the exact support limits for your loader.
+Welcome to the English player guide for **AgriCraft ReReloaded 4.0.30**, Minecraft **1.21.1**. Find a mod, plan its farm, compare gene bonuses and check the exact support limits for your loader.
 
 ## Start here
 
@@ -8,6 +8,7 @@ Welcome to the English player guide for **AgriCraft ReReloaded 4.0.20**, Minecra
 - [Compatibility Overview](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Compatibility-Overview): every compatibility module and its platform/status
 - [Genes and Balance](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Genes-and-Balance): ordinary crop genetics, harvest trials, growth and weeds
 - [Soil Irrigation and Greenhouses](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Soil-Irrigation-and-Greenhouses): conditions, water supply and enclosures
+- [Crops in Water, Lava and Other Fluids](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Fluid-Crops): submerged crop sticks and fluids from other mods
 - [Configuration and Troubleshooting](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Configuration-and-Troubleshooting): defaults and practical diagnosis
 
 ## Find your crop mod
@@ -36,4 +37,4 @@ The current [Serene Seasons](https://github.com/Vivoxti/AgriCraft-ReReloaded/wik
 
 Read [About These Guides](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/About-These-Guides) for sources and verification scope. Server datapacks and settings can change default balances.
 
-[Download 4.0.20](https://github.com/Vivoxti/AgriCraft-ReReloaded/releases/tag/4.0.20) · [Repository documentation](https://github.com/Vivoxti/AgriCraft-ReReloaded/tree/1.21.1/docs) · [Report an issue](https://github.com/Vivoxti/AgriCraft-ReReloaded/issues)
+[Download the latest release](https://github.com/Vivoxti/AgriCraft-ReReloaded/releases/latest) · [Changelog](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/1.21.1/CHANGELOG.md) · [Repository documentation](https://github.com/Vivoxti/AgriCraft-ReReloaded/tree/1.21.1/docs) · [Report an issue](https://github.com/Vivoxti/AgriCraft-ReReloaded/issues)

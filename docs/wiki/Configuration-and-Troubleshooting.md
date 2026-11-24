@@ -1,6 +1,6 @@
 # Configuration and troubleshooting
 
-AgriCraft stores its settings in **`config/agricraft.jsonc`**, using [Resourceful Config](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Resourceful-Config). Names below are `category.entry` paths into that file, not command names. Defaults refer to **4.0.20**; a server or modpack may intentionally change them. Restart after changes to integration activation, stat bounds or automatic pack registration.
+AgriCraft stores its settings in **`config/agricraft.jsonc`**, using [Resourceful Config](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Resourceful-Config). Names below are `category.entry` paths into that file, not command names. Defaults refer to **4.0.30**; a server or modpack may intentionally change them. Restart after changes to integration activation, stat bounds or automatic pack registration.
 
 ## Crop activation and conversion
 
@@ -43,8 +43,11 @@ Each of `gain`, `growth`, `strength`, `resistance`, `fertility` and `mutativity`
 | `core.crop_sticks_prevent_trampling` | `true` |
 | `core.crop_sticks_collide` | `true` |
 | `core.fluidloggable_fluids` | `[]` |
+| `core.seed_compost_value` | `0.3` |
 
-Since 4.0.30 crop sticks can be submerged in other mods' fluids, not only water and lava. List the fluid ids in **`core.fluidloggable_fluids`** (for example `["somemod:quicksilver"]`), pour a bucket of that fluid into the crop sticks and require it in a plant's `fluid_condition`. The list is read at game start, so changes need a restart, and the server and every client must use the same list: a client with a different list is disconnected with a message naming both lists. Each listed fluid adds 816 crop block states. Removing a fluid later leaves crops that held it dry.
+Since 4.0.30 crop sticks can be submerged in other mods' fluids, not only water and lava. List the fluid ids in **`core.fluidloggable_fluids`** (for example `["somemod:quicksilver"]`), pour a bucket of that fluid into the crop sticks and require it in a plant's `fluid_condition`. The list is read at game start, so changes need a restart, and the server and every client must use the same list: a client with a different list is disconnected with a message naming both lists. Each listed fluid adds 816 crop block states. Removing a fluid later leaves crops that held it dry. See [Crops in water, lava and other fluids](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Fluid-Crops) for a full example.
+
+`core.seed_compost_value` is the chance that one AgriCraft seed adds a layer to a composter; `0` makes seeds non-compostable.
 
 The actual raking option is **`core.raking_drops_items`**. Crop-stick trampling protection does not promise that the underlying farmland itself cannot turn to dirt. These ordinary weed settings do not create weeds on native Starfield crops.
 
@@ -63,6 +66,17 @@ Ordinary seed bags default to 64 seeds and an enchantment cost of 10 levels. The
 
 There is no active `compat.create` on/off switch, `compat.botania` or REI integration switch. A setting's existence alone does not add a loader-specific implementation to Fabric. The separate [irrigation and greenhouse guide](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Soil-Irrigation-and-Greenhouses) documents capacities, actual sprinkler water use and enclosure defaults.
 
+## Commands
+
+Both commands need operator permission (level 2).
+
+| Command | Effect |
+|---|---|
+| `/agricraft_seed <plant>` | Gives a seed of that plant with every stat at 1, e.g. `/agricraft_seed minecraft:wheat` |
+| `/agricraft_seed <plant> all <1-10>` | Gives a seed with every stat at the given value |
+| `/agricraft_seed <plant> distinct <values>` | Gives a seed with separate stat values joined by `-`, in the order fertility, gain, growth, mutativity, resistance, strength, e.g. `distinct 5-10-8-1-1-3`; missing values are 1 |
+| `/agricraft_dump <plants\|soils\|mutations\|fertilizers\|complexities>` | Prints the loaded ids of that registry to the game console output, useful when writing datapacks |
+
 ## Diagnose by symptom
 
 | Symptom | Check first |
@@ -76,9 +90,12 @@ There is no active `compat.create` on/off switch, `compat.botania` or REI integr
 | Drone harvests but chest is empty | Ground drops, pickup step, delivery/export step, filters and cargo capacity |
 | Gatherer ignores a crop | Maturity, range, power, storage, compatibility switch and native access gates |
 | Seasonal tags appear ineffective | Serene Seasons/Fabric Seasons adapters are unrestricted in this release |
+| A harvest is missing one product and the log warns about an empty tag | A datapack or unification mod emptied that item tag (for example `#agricraft:nuggets/copper`). Since 4.0.28 the product is skipped instead of crashing; put an item back into the tag or override the plant |
+| A plant in submerged crop sticks withers | Its requirement doesn't match the fluid around it; see [Crops in water, lava and other fluids](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Fluid-Crops) |
+| JEI's **+** button says a seed is missing | Update to 4.0.30 or newer; older versions didn't match AgriCraft seeds to "any seed" recipe slots |
 
 Back up the world before changing installed mods or native integration versions. If reporting a problem, include AgriCraft/source-mod versions, loader, relevant settings, the exact crop/item, the action taken and what happened. For native plants, include the season, soil/location and whether it was a tall crop, forage or giant. Logs help distinguish missing data from an actual harvest failure.
 
 ## Basis of this guide
 
-Defaults refer to AgriCraft ReReloaded **4.0.20**, Minecraft **1.21.1**. Modpacks can override data and settings. [Core defaults](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/CoreConfig.java) · [Compatibility switches](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/CompatConfig.java) · [Stat options](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/StatsConfig.java).
+Defaults refer to AgriCraft ReReloaded **4.0.30**, Minecraft **1.21.1**. Modpacks can override data and settings. [Core defaults](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/CoreConfig.java) · [Compatibility switches](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/CompatConfig.java) · [Stat options](https://github.com/Vivoxti/AgriCraft-ReReloaded/blob/6d6935f09e749923566ff0de3d0c76e0da5b3c4c/common/src/main/java/com/agricraft/agricraft/api/config/StatsConfig.java).
