@@ -19,6 +19,10 @@ AgriCraft seeds are distinguished by **species**, not enumerated as every possib
 
 Use [Genes and Balance](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Genes-and-Balance) to interpret the produce amounts and chances: ordinary Gain performs multiple independent trials. A displayed product is not a promise of exactly that amount from every harvest. Likewise, raw mutation chance is evaluated after parent selection.
 
+## Filling crafting recipes
+
+Since 4.0.30 JEI's recipe transfer (the **+** button) uses AgriCraft seeds for recipes that accept any seed, such as the Journal or other mods' recipes with `#c:seeds`. JEI shows such a slot as a plain seed; any AgriCraft seed in your inventory fills it, whatever its plant or stats. Looking up a seed's recipes still shows only that plant's recipes.
+
 ## Native and converted plants
 
 The custom categories describe the ordinary AgriCraft plant registry. Native [Starfield crops](https://github.com/Vivoxti/AgriCraft-ReReloaded/wiki/Starfield-Pastoral) are deliberately kept as native items and blocks rather than inserted as fake converted seeds or fictional mutation ingredients. Use the native catalog and inspection tools for their daily phases and gene effects. Other mods' JEI plugins may separately document their native crafting or production recipes.

@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.21.1-4.0.30
+
+### Added
+
+- Crop sticks can be submerged in fluids from other mods, not only water and lava. List the fluid ids in the new `core.fluidloggable_fluids` option (for example `["somemod:quicksilver"]`), pour a bucket of that fluid into the crop sticks, and require it in a plant's `fluid_condition`, so a magical crop can grow only in quicksilver. The list is read at game start, so changes need a restart, and the server and clients must use the same list: a client with a different list is disconnected with a message naming both lists. Each listed fluid adds 816 crop block states. With the list empty (the default) the crop block is unchanged. Removing a fluid from the list later leaves crops that held it dry.
+
+### Fixed
+
+- A plant that requires a fluid no longer counts as fertile while standing in lava; it burns, as in the original AgriCraft.
+- A bucket poured into crop sticks that already hold a fluid is no longer emptied into nothing; it pours next to them. A bucket of a fluid the crop sticks can't hold also pours next to them instead of breaking them.
+- A Create open-ended pipe drains crop sticks submerged in lava (or an extra fluid) instead of pulling from them endlessly.
+- JEI's recipe transfer ("+" button) now uses AgriCraft seeds for recipes that take any seed, such as the Journal or other recipes with `#c:seeds`. Before, JEI reported the seed as missing even with AgriCraft seeds in the inventory. Looking up a seed's recipes in JEI still shows only that plant's recipes.
+
 ## 1.21.1-4.0.29
 
 ### Changed

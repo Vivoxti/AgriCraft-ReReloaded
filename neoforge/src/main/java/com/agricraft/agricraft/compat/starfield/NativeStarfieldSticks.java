@@ -2,7 +2,7 @@ package com.agricraft.agricraft.compat.starfield;
 
 import com.agricraft.agricraft.common.block.CropBlock;
 import com.agricraft.agricraft.common.block.CropStickVariant;
-import com.agricraft.agricraft.common.block.SimpleFluidloggedBlock;
+import com.agricraft.agricraft.common.block.CropFluids;
 import com.agricraft.agricraft.common.block.entity.CropBlockEntity;
 import com.stardew.craft.block.crop.StardewCropBlock;
 import net.minecraft.core.BlockPos;
@@ -66,7 +66,7 @@ final class NativeStarfieldSticks {
         if (!allowed(context, level, root) || crop.hasPlant() || crop.hasWeeds() || crop.isCrossCropSticks()
                 || !crop.hasCropSticks()) return Optional.of(InteractionResult.FAIL);
         var old = level.getBlockState(root);
-        if (old.getValue(SimpleFluidloggedBlock.WATERLOGGED) || old.getValue(SimpleFluidloggedBlock.LAVALOGGED))
+        if (CropFluids.isFluidlogged(old))
             return Optional.of(InteractionResult.FAIL);
         var species = StarfieldCompat.seed(stack).orElseThrow();
         if (!StarfieldPlantData.get(level).writable(GlobalPos.of(level.dimension(), root))

@@ -51,6 +51,10 @@ config = "agricraft-starfield.mixins.json"
 [[mixins]]
 config = "agricraft-cif.mixins.json"
 
+# JEI compat (recipe transfer accepts any plant's seed for seed tag slots). The config plugin skips it when JEI is absent.
+[[mixins]]
+config = "agricraft-jei.mixins.json"
+
 [[dependencies.agricraft]]
 modId="create"
 type="optional"

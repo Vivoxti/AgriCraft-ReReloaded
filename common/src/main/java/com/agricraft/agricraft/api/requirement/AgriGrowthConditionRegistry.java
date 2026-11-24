@@ -155,7 +155,8 @@ public class AgriGrowthConditionRegistry extends AgriRegistry<AgriGrowthConditio
 					Set<String> list = fluid.getValues().entrySet().stream().map(StateHolder.PROPERTY_ENTRY_TO_STRING_FUNCTION).collect(Collectors.toSet());
 					return list.containsAll(fluidCondition.states()) ? AgriGrowthResponse.FERTILE : AgriGrowthResponse.LETHAL;
 				}
-				return fluid.is(Fluids.LAVA) ? AgriGrowthResponse.FERTILE : AgriGrowthResponse.LETHAL;
+				// as in the original AgriCraft: lava burns any plant that does not require it
+				return fluid.is(Fluids.LAVA) ? AgriGrowthResponse.KILL_IT_WITH_FIRE : AgriGrowthResponse.LETHAL;
 			}
 		}, Level::getFluidState);
 

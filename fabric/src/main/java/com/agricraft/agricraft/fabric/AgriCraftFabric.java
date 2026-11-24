@@ -13,7 +13,9 @@ import com.agricraft.agricraft.common.commands.DumpRegistriesCommand;
 import com.agricraft.agricraft.common.commands.GiveSeedCommand;
 import com.agricraft.agricraft.common.handler.DenyBonemeal;
 import com.agricraft.agricraft.common.handler.VanillaSeedConversion;
+import com.agricraft.agricraft.common.network.CropFluidsPayload;
 import com.agricraft.agricraft.common.network.SeedBagSorterPayload;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import com.agricraft.agricraft.common.plugin.FabricSeasonPlugin;
@@ -48,6 +50,12 @@ public class AgriCraftFabric implements ModInitializer {
 		ServerLifecycleEvents.SERVER_STARTING.register(server -> cachedServer = server);
 		PayloadTypeRegistry.playC2S().register(SeedBagSorterPayload.TYPE, SeedBagSorterPayload.CODEC);
 		ServerPlayNetworking.registerGlobalReceiver(SeedBagSorterPayload.TYPE, (payload, context) -> SeedBagSorterPayload.handle(context.player(), payload.delta()));
+		PayloadTypeRegistry.playS2C().register(CropFluidsPayload.TYPE, CropFluidsPayload.CODEC);
+		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+			if (ServerPlayNetworking.canSend(handler, CropFluidsPayload.TYPE)) {
+				sender.sendPacket(CropFluidsPayload.fromConfig());
+			}
+		});
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			GiveSeedCommand.register(dispatcher, registryAccess);
 			DumpRegistriesCommand.register(dispatcher, registryAccess);

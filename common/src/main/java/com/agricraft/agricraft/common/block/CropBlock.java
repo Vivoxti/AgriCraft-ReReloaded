@@ -40,6 +40,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
@@ -97,8 +98,7 @@ public class CropBlock extends Block implements EntityBlock, BonemealableBlock, 
 				.forceSolidOff()
 				.lightLevel(blockState -> blockState.getValue(LIGHT))
 				.sound(SoundType.CROP));
-		this.registerDefaultState(this.stateDefinition.any().setValue(SimpleFluidloggedBlock.LAVALOGGED, false)
-				.setValue(SimpleFluidloggedBlock.WATERLOGGED, false)
+		this.registerDefaultState(CropFluids.withoutFluid(this.stateDefinition.any())
 				.setValue(STICK_VARIANT, CropStickVariant.WOODEN)
 				.setValue(CROP_STATE, CropState.SINGLE_STICKS)
 				.setValue(LIGHT, 0));
@@ -160,6 +160,8 @@ public class CropBlock extends Block implements EntityBlock, BonemealableBlock, 
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(SimpleFluidloggedBlock.LAVALOGGED);
 		builder.add(SimpleFluidloggedBlock.WATERLOGGED);
+		// extra configured fluids, only present when the config lists any
+		CropFluids.property().ifPresent(builder::add);
 		builder.add(STICK_VARIANT);
 		builder.add(CROP_STATE);
 		builder.add(LIGHT);
@@ -197,10 +199,12 @@ public class CropBlock extends Block implements EntityBlock, BonemealableBlock, 
 	@Override
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
 		BlockState state = this.defaultBlockState();
-		if (context.getLevel().getFluidState(context.getClickedPos()).is(Fluids.LAVA)) {
-			state = state.setValue(SimpleFluidloggedBlock.LAVALOGGED, true);
-		} else if (context.getLevel().getFluidState(context.getClickedPos()).is(Fluids.WATER)) {
-			state = state.setValue(SimpleFluidloggedBlock.WATERLOGGED, true);
+		FluidState placedIn = context.getLevel().getFluidState(context.getClickedPos());
+		if (placedIn.isSource()) {
+			BlockState submerged = CropFluids.withFluid(state, placedIn.getType());
+			if (submerged != null) {
+				state = submerged;
+			}
 		}
 		ItemStack stack = context.getItemInHand();
 		if (stack.getItem() instanceof CropSticksItem) {
@@ -225,13 +229,16 @@ public class CropBlock extends Block implements EntityBlock, BonemealableBlock, 
 	@Override
 	@NotNull
 	public FluidState getFluidState(BlockState pState) {
-		if (pState.getValue(SimpleFluidloggedBlock.LAVALOGGED)) {
-			return Fluids.LAVA.getSource(false);
-		}
-		if (pState.getValue(SimpleFluidloggedBlock.WATERLOGGED)) {
-			return Fluids.WATER.getSource(false);
-		}
-		return super.getFluidState(pState);
+		return CropFluids.getFluidState(pState);
+	}
+
+	/**
+	 * Only buckets ask this. Crop sticks are not solid, so by default any bucket the sticks don't take (another fluid
+	 * while one is in, or an unlisted fluid) would break them and take their place; instead it pours next to them.
+	 */
+	@Override
+	public boolean canBeReplaced(BlockState state, Fluid fluid) {
+		return false;
 	}
 
 	@Override
@@ -399,19 +406,13 @@ public class CropBlock extends Block implements EntityBlock, BonemealableBlock, 
 
 	@Override
 	public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-		if (state.getValue(SimpleFluidloggedBlock.LAVALOGGED)) {
-			level.scheduleTick(pos, Fluids.LAVA, Fluids.LAVA.getTickDelay(level));
-		} else if (state.getValue(SimpleFluidloggedBlock.WATERLOGGED)) {
-			level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+		FluidState fluid = CropFluids.getFluidState(state);
+		if (!fluid.isEmpty()) {
+			level.scheduleTick(pos, fluid.getType(), fluid.getType().getTickDelay(level));
 		}
 		if (!state.canSurvive(level, pos)) {
 			this.spawnDestroyParticles(level, state, pos);
-			if (state.getValue(SimpleFluidloggedBlock.LAVALOGGED)) {
-				return Fluids.LAVA.defaultFluidState().createLegacyBlock();
-			} else if (state.getValue(SimpleFluidloggedBlock.WATERLOGGED)) {
-				return Fluids.WATER.defaultFluidState().createLegacyBlock();
-			}
-			return Blocks.AIR.defaultBlockState();
+			return fluid.isEmpty() ? Blocks.AIR.defaultBlockState() : fluid.createLegacyBlock();
 		}
 		return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
 	}

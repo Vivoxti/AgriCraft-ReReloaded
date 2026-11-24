@@ -14,7 +14,9 @@ import com.agricraft.agricraft.common.registry.ModMenus;
 import com.agricraft.agricraft.common.util.LangUtils;
 import com.agricraft.agricraft.common.util.PlatformClient;
 import com.agricraft.agricraft.common.util.fabric.FabricPlatformClient;
+import com.agricraft.agricraft.common.network.CropFluidsPayload;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.model.loading.v1.ModelLoadingPlugin;
@@ -56,6 +58,8 @@ public class AgriCraftFabricClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		PlatformClient.setup(new FabricPlatformClient());
 		AgriCraftClient.init();
+		ClientPlayNetworking.registerGlobalReceiver(CropFluidsPayload.TYPE, (payload, context) ->
+				CropFluidsPayload.handleOnClient(payload.names(), reason -> context.player().connection.getConnection().disconnect(reason)));
 		BuiltinItemRendererRegistry.INSTANCE.register(ModItems.SEED.get(), AgriSeedBEWLR.INSTANCE::renderByItem);
 		ModelLoadingPlugin.register(pluginContext -> {
 			pluginContext.addModels(SprinklerRenderer.BLADES_MODEL);

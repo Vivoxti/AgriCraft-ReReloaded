@@ -1,5 +1,6 @@
 package com.agricraft.agricraft.fabric.mixin;
 
+import com.agricraft.agricraft.common.block.CropFluids;
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -20,7 +21,7 @@ public class BucketItemMixin {
     @Expression("this.content == WATER")
     @ModifyExpressionValue(method = "use", at = @At("MIXINEXTRAS:EXPRESSION"))
     private boolean use(boolean original) {
-        return original || this.content == Fluids.LAVA;
+        return original || this.content == Fluids.LAVA || CropFluids.isExtraFluid(this.content);
     }
 
     @Definition(id = "content", field = "Lnet/minecraft/world/item/BucketItem;content:Lnet/minecraft/world/level/material/Fluid;")
@@ -28,6 +29,6 @@ public class BucketItemMixin {
     @Expression("this.content == WATER")
     @ModifyExpressionValue(method = "emptyContents", at = @At("MIXINEXTRAS:EXPRESSION"))
     private boolean emptyContents(boolean original) {
-        return original || this.content == Fluids.LAVA;
+        return original || this.content == Fluids.LAVA || CropFluids.isExtraFluid(this.content);
     }
 }

@@ -214,6 +214,8 @@
   "config.agricraft.core": "Core",
   "config.agricraft.core.register_packs_by_default": "Register mod compatibility packs by default",
   "config.agricraft.core.load_default_plants": "Load built-in AgriCraft plants",
+  "config.agricraft.core.fluidloggable_fluids": "Fluids crop sticks can be submerged in",
+  "agricraft.disconnect.fluidloggable_fluids_mismatch": "AgriCraft: this client's \"fluidloggable_fluids\" config does not match the server.\nServer: %s\nClient: %s\nCopy the server's list into config/agricraft.jsonc and restart the game.",
   "config.agricraft.core.crop_sticks_prevent_trampling": "Crop sticks prevent trampling",
   "config.agricraft.core.plant_off_crop_sticks": "Plant outside crop sticks",
   "config.agricraft.core.crop_sticks_collide": "Crop sticks collide",

@@ -20,6 +20,10 @@ public final class CoreConfig {
 	@Comment("Set to false to stop AgriCraft from loading its built-in plants and mutations (vanilla crops and AgriCraft's own resource crops), e.g. for fully custom modpacks. Soils, weeds and fertilizers are kept, and plants/mutations from datapacks (including overrides with the same id) still load. Applies when a world is loaded.")
 	public static boolean loadDefaultPlants = true;
 
+	@ConfigEntry(id = "fluidloggable_fluids", type = EntryType.STRING, translation = "config.agricraft.core.fluidloggable_fluids")
+	@Comment("Extra fluids (besides water and lava) that crop sticks can be submerged in, as fluid ids, e.g. [\"somemod:quicksilver\"]. Pour a bucket of the fluid into the crop sticks, then require it in a plant with \"fluid_condition\". Read once at game start: changes need a restart, and the server and every client must use the same list. Keep it short: each fluid adds 816 crop block states.")
+	public static String[] fluidloggableFluids = {};
+
 	@ConfigEntry(id = "crop_sticks_prevent_trampling", type = EntryType.BOOLEAN, translation = "config.agricraft.core.crop_sticks_prevent_trampling")
 	@Comment("Set to true to prevent crops with crop sticks from being destroyed when farmland is trampled into dirt")
 	public static boolean cropSticksPreventTrampling = true;

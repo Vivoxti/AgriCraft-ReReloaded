@@ -13,7 +13,11 @@ import com.agricraft.agricraft.common.commands.DumpRegistriesCommand;
 import com.agricraft.agricraft.common.commands.GiveSeedCommand;
 import com.agricraft.agricraft.common.handler.DenyBonemeal;
 import com.agricraft.agricraft.common.handler.VanillaSeedConversion;
+import com.agricraft.agricraft.common.network.CropFluidsPayload;
 import com.agricraft.agricraft.common.network.SeedBagSorterPayload;
+import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import com.agricraft.agricraft.common.greenhouse.Greenhouses;
 import com.agricraft.agricraft.common.neoforge.IrrigationTankFluidHandler;
@@ -78,6 +82,7 @@ public class AgriCraftNeoForge {
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onRightClickBonemeal);
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onNeighborNotify);
 		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onDataMapsUpdated);
+		NeoForge.EVENT_BUS.addListener(AgriCraftNeoForge::onPlayerLoggedIn);
 	}
 
 	public static void onCommonSetup(FMLCommonSetupEvent event) {
@@ -101,6 +106,15 @@ public class AgriCraftNeoForge {
 	public static void onRegisterPayloads(RegisterPayloadHandlersEvent event) {
 		event.registrar("1").playToServer(SeedBagSorterPayload.TYPE, SeedBagSorterPayload.CODEC,
 				(payload, context) -> SeedBagSorterPayload.handle(context.player(), payload.delta()));
+		// optional so that clients from before this check can still join a server with an empty list
+		event.registrar("1").optional().playToClient(CropFluidsPayload.TYPE, CropFluidsPayload.CODEC,
+				(payload, context) -> CropFluidsPayload.handleOnClient(payload.names(), context::disconnect));
+	}
+
+	public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+		if (event.getEntity() instanceof ServerPlayer player && player.connection.hasChannel(CropFluidsPayload.TYPE)) {
+			PacketDistributor.sendToPlayer(player, CropFluidsPayload.fromConfig());
+		}
 	}
 
 	public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {

@@ -13,7 +13,7 @@ import com.agricraft.agricraft.api.plant.AgriPlant;
 import com.agricraft.agricraft.api.plant.AgriWeed;
 import com.agricraft.agricraft.api.requirement.AgriGrowthResponse;
 import com.agricraft.agricraft.common.block.CropBlock;
-import com.agricraft.agricraft.common.block.SimpleFluidloggedBlock;
+import com.agricraft.agricraft.common.block.CropFluids;
 import com.agricraft.agricraft.common.block.entity.CropBlockEntity;
 import com.stardew.craft.block.crop.StardewCropBlock;
 import com.stardew.craft.block.terrain.TerrainSoils;
@@ -134,7 +134,7 @@ public final class NativeStarfieldBreeding implements ExternalCrossBreedingSuppo
                 || !state.canSurvive(level, root) || !level.hasChunkAt(root.above())
                 || level.isOutsideBuildHeight(root) || species.get().twoParts() && level.isOutsideBuildHeight(root.above())
                 || !target.isCrossCropSticks() || target.hasPlant() || target.hasWeeds()
-                || old.getValue(SimpleFluidloggedBlock.WATERLOGGED) || old.getValue(SimpleFluidloggedBlock.LAVALOGGED)
+                || CropFluids.isFluidlogged(old)
                 || species.get().twoParts() && !level.getBlockState(root.above()).isAir()) return false;
         var tag = new CompoundTag(); genome.writeToNBT(tag); StarfieldGenomes.validate(tag, type);
         var seed = new ItemStack(BuiltInRegistries.ITEM.get(species.get().seed()));

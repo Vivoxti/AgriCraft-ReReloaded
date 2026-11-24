@@ -4,7 +4,8 @@
 	"package": "com.agricraft.agricraft.mixin.neoforge.create",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"HarvesterMovementBehaviourMixin"
+		"HarvesterMovementBehaviourMixin",
+		"OpenEndedPipeMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

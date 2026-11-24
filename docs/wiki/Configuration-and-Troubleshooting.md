@@ -42,6 +42,9 @@ Each of `gain`, `growth`, `strength`, `resistance`, `fertility` and `mutativity`
 | `core.raking_drops_items` | `true` |
 | `core.crop_sticks_prevent_trampling` | `true` |
 | `core.crop_sticks_collide` | `true` |
+| `core.fluidloggable_fluids` | `[]` |
+
+Since 4.0.30 crop sticks can be submerged in other mods' fluids, not only water and lava. List the fluid ids in **`core.fluidloggable_fluids`** (for example `["somemod:quicksilver"]`), pour a bucket of that fluid into the crop sticks and require it in a plant's `fluid_condition`. The list is read at game start, so changes need a restart, and the server and every client must use the same list: a client with a different list is disconnected with a message naming both lists. Each listed fluid adds 816 crop block states. Removing a fluid later leaves crops that held it dry.
 
 The actual raking option is **`core.raking_drops_items`**. Crop-stick trampling protection does not promise that the underlying farmland itself cannot turn to dirt. These ordinary weed settings do not create weeds on native Starfield crops.
 

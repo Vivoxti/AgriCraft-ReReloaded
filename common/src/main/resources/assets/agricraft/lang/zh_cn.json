@@ -203,6 +203,8 @@
   "config.agricraft.core": "核心",
   "config.agricraft.core.register_packs_by_default": "默认注册模组兼容包",
   "config.agricraft.core.load_default_plants": "加载 AgriCraft 内置作物",
+  "config.agricraft.core.fluidloggable_fluids": "作物架可浸没的流体",
+  "agricraft.disconnect.fluidloggable_fluids_mismatch": "AgriCraft：客户端配置中的 \"fluidloggable_fluids\" 与服务器不一致。\n服务器：%s\n客户端：%s\n请将服务器的列表复制到 config/agricraft.jsonc 并重启游戏。",
   "config.agricraft.core.crop_sticks_prevent_trampling": "作物架防止踩踏",
   "config.agricraft.core.plant_off_crop_sticks": "可在作物架之外种植",
   "config.agricraft.core.crop_sticks_collide": "作物架具有碰撞体积",
